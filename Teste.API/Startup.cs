@@ -18,20 +18,21 @@ namespace Teste.API
     public class Startup
     {
 
+        public IConfiguration Configuration { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder().AddJsonFile("config.json");
             Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var conn = Configuration.GetConnectionString("TesteDB");
-            services.AddDbContext<TestContext>(option => option.UseSqlServer(conn, m => m.MigrationsAssembly("Teste.Infra.Data")));
+            var conn = Configuration.GetConnectionString("ZZTest");
+            services.AddDbContext<TestContext>(option => option.UseLazyLoadingProxies()
+                                                .UseSqlServer(conn, m => m.MigrationsAssembly("Teste.Infra.Data")));
             services.AddMvcCore();
         }
 

@@ -9370,11 +9370,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.API/Teste.API.csproj",
+      "projectUniqueName": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.API/Teste.API.csproj",
       "projectName": "Teste.API",
-      "projectPath": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.API/Teste.API.csproj",
+      "projectPath": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.API/Teste.API.csproj",
       "packagesPath": "/Users/renato_zane90/.nuget/packages/",
-      "outputPath": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.API/obj",
+      "outputPath": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.API/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -9391,11 +9391,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Domain/Teste.Domain.csproj": {
-              "projectPath": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Domain/Teste.Domain.csproj"
+            "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Domain/Teste.Domain.csproj": {
+              "projectPath": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Domain/Teste.Domain.csproj"
             },
-            "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Infra.Data/Teste.Infra.Data.csproj": {
-              "projectPath": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Infra.Data/Teste.Infra.Data.csproj"
+            "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Infra.Data/Teste.Infra.Data.csproj": {
+              "projectPath": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Infra.Data/Teste.Infra.Data.csproj"
             }
           }
         }

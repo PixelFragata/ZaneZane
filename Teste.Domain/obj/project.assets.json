@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Domain/Teste.Domain.csproj",
+      "projectUniqueName": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Domain/Teste.Domain.csproj",
       "projectName": "Teste.Domain",
-      "projectPath": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Domain/Teste.Domain.csproj",
+      "projectPath": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Domain/Teste.Domain.csproj",
       "packagesPath": "/Users/renato_zane90/.nuget/packages/",
-      "outputPath": "/Users/renato_zane90/Documents/Estudos/MigrationsTest/Teste.Domain/obj",
+      "outputPath": "/Users/renato_zane90/Documents/Fragata/ZaneZane/Teste.Domain/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

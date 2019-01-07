@@ -1,0 +1,14 @@
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Infra.Data.deps.json
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Infra.Data.runtimeconfig.json
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Infra.Data.runtimeconfig.dev.json
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Infra.Data.dll
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Infra.Data.pdb
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Domain.dll
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/bin/Debug/netcoreapp2.1/Teste.Domain.pdb
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.csprojAssemblyReference.cache
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.csproj.CoreCompileInputs.cache
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.AssemblyInfoInputs.cache
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.AssemblyInfo.cs
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.csproj.CopyComplete
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.dll
+/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Infra.Data/obj/Debug/netcoreapp2.1/Teste.Infra.Data.pdb

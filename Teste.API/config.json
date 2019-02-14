@@ -1,5 +1,0 @@
-﻿{
-  "ConnectionStrings": {
-    "ZZTest": "Server=dbfragata.cmcait8irl6a.us-east-2.rds.amazonaws.com,1433;Database=ZZTest;User Id=melchior;Password=Otiagoehfoda"
-  }
-}

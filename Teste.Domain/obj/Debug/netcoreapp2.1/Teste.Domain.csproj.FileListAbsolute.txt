@@ -1,9 +1,0 @@
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/bin/Debug/netcoreapp2.1/Teste.Domain.deps.json
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/bin/Debug/netcoreapp2.1/Teste.Domain.dll
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/bin/Debug/netcoreapp2.1/Teste.Domain.pdb
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/obj/Debug/netcoreapp2.1/Teste.Domain.csprojAssemblyReference.cache
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/obj/Debug/netcoreapp2.1/Teste.Domain.csproj.CoreCompileInputs.cache
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/obj/Debug/netcoreapp2.1/Teste.Domain.AssemblyInfoInputs.cache
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/obj/Debug/netcoreapp2.1/Teste.Domain.AssemblyInfo.cs
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/obj/Debug/netcoreapp2.1/Teste.Domain.dll
-/Users/renato_zane90/Documents/Estudos/TesteEFCore/Teste.Domain/obj/Debug/netcoreapp2.1/Teste.Domain.pdb

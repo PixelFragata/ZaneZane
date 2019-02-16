@@ -1,0 +1,14 @@
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.deps.json
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.csprojAssemblyReference.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.csproj.CoreCompileInputs.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.AssemblyInfoInputs.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.AssemblyInfo.cs
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.runtimeconfig.json
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.runtimeconfig.dev.json
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Domain.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\bin\Debug\netcoreapp2.2\ZZ_ERP.Domain.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.csproj.CopyComplete
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.Data\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.pdb

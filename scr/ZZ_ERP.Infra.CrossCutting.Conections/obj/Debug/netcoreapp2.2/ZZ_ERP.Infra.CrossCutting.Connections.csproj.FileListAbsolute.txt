@@ -1,0 +1,9 @@
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.deps.json
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.csproj.CoreCompileInputs.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.AssemblyInfoInputs.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.AssemblyInfo.cs
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.csprojAssemblyReference.cache

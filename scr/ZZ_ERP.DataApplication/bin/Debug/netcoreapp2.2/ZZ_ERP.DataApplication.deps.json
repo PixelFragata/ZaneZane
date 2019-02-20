@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "11848e2f6b07e715d8a11369afca26533442a5b0"
+    "signature": "0cdeff6d444d60fac11c9d0d499a1460b02adf07"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,6 +9,7 @@
       "ZZ_ERP.DataApplication/1.0.0": {
         "dependencies": {
           "ZZ_ERP.Domain": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
           "ZZ_ERP.Infra.Data": "1.0.0"
         },
         "runtime": {
@@ -507,6 +508,14 @@
           }
         }
       },
+      "Newtonsoft.Json/12.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.1.22727"
+          }
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -866,13 +875,22 @@
           "ZZ_ERP.Domain.dll": {}
         }
       },
+      "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "runtime": {
+          "ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
+        }
+      },
       "ZZ_ERP.Infra.Data/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.2",
           "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
-          "ZZ_ERP.Domain": "1.0.0"
+          "ZZ_ERP.Domain": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0"
         },
         "runtime": {
           "ZZ_ERP.Infra.Data.dll": {}
@@ -1173,6 +1191,13 @@
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/12.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
+      "path": "newtonsoft.json/12.0.1",
+      "hashPath": "newtonsoft.json.12.0.1.nupkg.sha512"
+    },
     "Remotion.Linq/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -1468,6 +1493,11 @@
       "hashPath": "system.threading.tasks.4.0.11.nupkg.sha512"
     },
     "ZZ_ERP.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

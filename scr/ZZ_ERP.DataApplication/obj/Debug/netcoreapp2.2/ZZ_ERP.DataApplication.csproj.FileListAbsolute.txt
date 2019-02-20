@@ -14,3 +14,5 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.DataApplication\bin\Debug\netcoreapp2.2\ZZ_ERP.Do
 C:\Fragata\ZaneZane\scr\ZZ_ERP.DataApplication\obj\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.csproj.CopyComplete
 C:\Fragata\ZaneZane\scr\ZZ_ERP.DataApplication\obj\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.DataApplication\obj\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.DataApplication\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.DataApplication\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb

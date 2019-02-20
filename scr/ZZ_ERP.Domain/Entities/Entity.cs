@@ -13,6 +13,6 @@ namespace ZZ_ERP.Domain.Entities
 
         public long Id { get; protected set; }
 
-        public bool IsActive { get; protected set; }
+        public bool IsActive { get; set; }
     }
 }

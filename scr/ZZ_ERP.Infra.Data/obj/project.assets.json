@@ -785,6 +785,15 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Newtonsoft.Json/12.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1353,6 +1362,20 @@
         },
         "runtime": {
           "bin/placeholder/ZZ_ERP.Domain.dll": {}
+        }
+      },
+      "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "NETStandard.Library": "2.0.3",
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
         }
       }
     }
@@ -2498,6 +2521,45 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/12.0.1": {
+      "sha512": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
+      "type": "package",
+      "path": "newtonsoft.json/12.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.pdb",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.pdb",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.pdb",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.pdb",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.pdb",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.pdb",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.pdb",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.pdb",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.pdb",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec"
       ]
     },
     "Remotion.Linq/2.2.0": {
@@ -4519,6 +4581,11 @@
       "type": "project",
       "path": "../ZZ_ERP.Domain/ZZ_ERP.Domain.csproj",
       "msbuildProject": "../ZZ_ERP.Domain/ZZ_ERP.Domain.csproj"
+    },
+    "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
+      "type": "project",
+      "path": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj",
+      "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4529,7 +4596,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.2.2",
       "Microsoft.EntityFrameworkCore.Tools >= 2.2.2",
       "Microsoft.NETCore.App >= 2.2.0",
-      "ZZ_ERP.Domain >= 1.0.0"
+      "ZZ_ERP.Domain >= 1.0.0",
+      "ZZ_ERP.Infra.CrossCutting.Connections >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4564,6 +4632,9 @@
           "projectReferences": {
             "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj": {
               "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj"
+            },
+            "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj": {
+              "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj"
             }
           }
         }

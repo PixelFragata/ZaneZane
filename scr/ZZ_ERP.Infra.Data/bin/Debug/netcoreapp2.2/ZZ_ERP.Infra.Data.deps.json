@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "6edb90c778126c6edf181b8192d7f539ded6eaf0"
+    "signature": "013e41b3a67a84137977fae34826223a853e9e7b"
   },
   "compilationOptions": {},
   "targets": {
@@ -13,7 +13,8 @@
           "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
           "Microsoft.EntityFrameworkCore.Tools": "2.2.2",
-          "ZZ_ERP.Domain": "1.0.0"
+          "ZZ_ERP.Domain": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0"
         },
         "runtime": {
           "ZZ_ERP.Infra.Data.dll": {}
@@ -529,6 +530,14 @@
           }
         }
       },
+      "Newtonsoft.Json/12.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.1.22727"
+          }
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -887,6 +896,14 @@
         "runtime": {
           "ZZ_ERP.Domain.dll": {}
         }
+      },
+      "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "runtime": {
+          "ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
+        }
       }
     }
   },
@@ -1204,6 +1221,13 @@
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/12.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
+      "path": "newtonsoft.json/12.0.1",
+      "hashPath": "newtonsoft.json.12.0.1.nupkg.sha512"
+    },
     "Remotion.Linq/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -1499,6 +1523,11 @@
       "hashPath": "system.threading.tasks.4.0.11.nupkg.sha512"
     },
     "ZZ_ERP.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

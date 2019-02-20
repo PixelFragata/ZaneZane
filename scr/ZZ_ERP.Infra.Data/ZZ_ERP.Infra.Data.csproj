@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZZ_ERP.Domain\ZZ_ERP.Domain.csproj" />
+    <ProjectReference Include="..\ZZ_ERP.Infra.CrossCutting.Conections\ZZ_ERP.Infra.CrossCutting.Connections.csproj" />
   </ItemGroup>
 
 </Project>

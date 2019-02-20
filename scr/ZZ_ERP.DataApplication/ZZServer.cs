@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 
 namespace ZZ_ERP.DataApplication
@@ -37,7 +38,7 @@ namespace ZZ_ERP.DataApplication
         private async Task StartServer()
         {
 
-            ServerConn = new TcpListener(IPAddress.Parse(_ip), _port);
+            ServerConn = new TcpListener(IPAddress.Parse(AdressPool.ZZ_EF_APK.Ip), AdressPool.ZZ_EF_APK.Port);
             ServerConn.Start();
 
             while (true)

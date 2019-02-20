@@ -51,6 +51,10 @@
         }
       },
       "ZZ_ERP.API/1.0.0": {
+        "dependencies": {
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
+        },
         "runtime": {
           "ZZ_ERP.API.dll": {}
         }
@@ -77,6 +81,11 @@
         },
         "runtime": {
           "ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
+        }
+      },
+      "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+        "runtime": {
+          "ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
         }
       },
       "ZZ_ERP.Infra.Data/1.0.0": {
@@ -168,6 +177,11 @@
       "sha512": ""
     },
     "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

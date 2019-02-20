@@ -18,6 +18,7 @@ namespace ZZ_ERP.DataApplication
         {
             Console.WriteLine("Hello World!");
 
+            Run();
             //using (var context = new ZZContext())
             //{
             //    var tipos = context.TipoServicos.ToList();

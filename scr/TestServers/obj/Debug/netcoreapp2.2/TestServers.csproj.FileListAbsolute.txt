@@ -20,3 +20,5 @@ C:\Fragata\ZaneZane\scr\TestServers\obj\Debug\netcoreapp2.2\TestServers.Assembly
 C:\Fragata\ZaneZane\scr\TestServers\obj\Debug\netcoreapp2.2\TestServers.csproj.CopyComplete
 C:\Fragata\ZaneZane\scr\TestServers\obj\Debug\netcoreapp2.2\TestServers.dll
 C:\Fragata\ZaneZane\scr\TestServers\obj\Debug\netcoreapp2.2\TestServers.pdb
+C:\Fragata\ZaneZane\scr\TestServers\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.dll
+C:\Fragata\ZaneZane\scr\TestServers\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.pdb

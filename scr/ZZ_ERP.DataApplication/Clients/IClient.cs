@@ -17,8 +17,8 @@ namespace ZZ_ERP.DataApplication.Clients
         /// Login do cliente, passando a instancia do PartyRoster e a conecção.
         /// </summary>
         /// <param name="manager">Instance.</param>
-        /// <param name="connect">Connect.</param>
-        public abstract Task Login(ZZClientManager manager, ServerConnection connect);
+        /// <param name="connection">Connect.</param>
+        public abstract Task Login(ZZClientManager manager, ServerConnection connection);
 
         /// <summary>
         /// Logout do cliente, retirando o cliente da lista de usuarios logados.

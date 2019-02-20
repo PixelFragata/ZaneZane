@@ -12,14 +12,8 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.API\obj\Debug\netcoreapp2.2\ZZ_ERP.API.RazorTarge
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\obj\Debug\netcoreapp2.2\ZZ_ERP.API.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\obj\Debug\netcoreapp2.2\ZZ_ERP.API.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\obj\Debug\netcoreapp2.2\ZZ_ERP.API.csprojAssemblyReference.cache
-C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.dll
-C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Domain.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.dll
-C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.dll
-C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.pdb
-C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Domain.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb
-C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\obj\Debug\netcoreapp2.2\ZZ_ERP.API.csproj.CopyComplete
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.pdb

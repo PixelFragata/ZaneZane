@@ -9,10 +9,10 @@ namespace ZZ_ERP.DataApplication.Clients
 {
     public class UserClient : IClient
     {
-        public override async Task Login(ZZClientManager manager, ServerConnection connect)
+        public override async Task Login(ZZClientManager manager, ServerConnection connection)
         {
             Manager = manager;
-            Connection = connect;
+            Connection = connection;
         }
 
         public override async Task Logout()

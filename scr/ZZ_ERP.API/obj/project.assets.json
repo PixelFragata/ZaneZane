@@ -4478,6 +4478,16 @@
           "bin/placeholder/ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
         }
       },
+      "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        }
+      },
       "ZZ_ERP.Infra.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -12145,6 +12155,11 @@
       "path": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj",
       "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj"
     },
+    "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+      "type": "project",
+      "path": "../ZZ_ERP.Infra.CrossCutting.DTO/ZZ_ERP.Infra.CrossCutting.DTO.csproj",
+      "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.DTO/ZZ_ERP.Infra.CrossCutting.DTO.csproj"
+    },
     "ZZ_ERP.Infra.Data/1.0.0": {
       "type": "project",
       "path": "../ZZ_ERP.Infra.Data/ZZ_ERP.Infra.Data.csproj",
@@ -12156,7 +12171,9 @@
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
-      "ZZ_ERP.DataApplication >= 1.0.0"
+      "ZZ_ERP.DataApplication >= 1.0.0",
+      "ZZ_ERP.Infra.CrossCutting.Connections >= 1.0.0",
+      "ZZ_ERP.Infra.CrossCutting.DTO >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12191,6 +12208,12 @@
           "projectReferences": {
             "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.DataApplication\\ZZ_ERP.DataApplication.csproj": {
               "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.DataApplication\\ZZ_ERP.DataApplication.csproj"
+            },
+            "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj": {
+              "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj"
+            },
+            "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj": {
+              "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj"
             }
           }
         }

@@ -6,10 +6,9 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Timers;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
-using ZZ_ERP.Infra.CrossCutting.Connections.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 
-namespace MongoRepository.Connections
+namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
 {
     public class ServerConnection: IDisposable
     {

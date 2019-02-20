@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using MongoRepository.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
+using ZZ_ERP.Infra.CrossCutting.Connections.Connections;
 
 namespace ZZ_ERP.DataApplication.Clients
 {

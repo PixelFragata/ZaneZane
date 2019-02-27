@@ -26,13 +26,12 @@ namespace ZZ_ERP.DataApplication
             DelegateAction del = new DelegateAction();
             del.act = ProcessLogin;
             connection = new ServerConnection(_tcpClient, this);
-            ConsoleEx.WriteLine("Client conectado");
-
-
             connection.PutDelegate(del);
+            ConsoleEx.WriteLine("Client conectado");
+             
         }
 
-        public async void ProcessLogin(Object[] server, Object[] local)
+        public void ProcessLogin(Object[] server, Object[] local)
         {
             var dataJson = SerializerAsync.DeserializeJson<Command>(server[0].ToString()).Result;
             try
@@ -46,18 +45,17 @@ namespace ZZ_ERP.DataApplication
                             ConsoleEx.WriteLine("Oi Controller fofo *3* ");
                             _client = new ControllerClient();
                             MyId = ServerCommands.IsController;
-                            await _client.Login(this, connection);
+                            _client.Login(this, connection);
                         }
                         else if (dataJson.Cmd.Equals(ServerCommands.IsUser))
                         {
                             ConsoleEx.WriteLine("Oi Cli fofo *3* ");
                             _client = new UserClient();
-                            MyId = dataJson.Cmd;
-                            await _client.Login(this, connection);
+                            _client.Login(this, connection);
                         }
                         else
                         {
-                            await _client.Command(dataJson);
+                            _client.Command(dataJson);
                         }
 
                     }

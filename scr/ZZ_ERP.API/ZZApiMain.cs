@@ -43,7 +43,7 @@ namespace ZZ_ERP.API
                 del.act = ReturnServer;
 
                 Zz.PutDelegate(del);
-
+                Thread.Sleep(1000);
                 Zz.WriteServer(new Command {Cmd = ServerCommands.IsController});
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace ZZ_ERP.API
                 .UseStartup<Startup>();
 
 
-        public static async void ReturnServer(Object[] server, Object[] local)
+        public static void ReturnServer(Object[] server, Object[] local)
         {
             var dataJson = SerializerAsync.DeserializeJson<Command>(server[0].ToString()).Result;
             try

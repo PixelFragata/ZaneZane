@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ZZ_ERP.Domain.Entities;
+using ZZ_ERP.Infra.Data.Identity;
 
 namespace ZZ_ERP.Infra.Data.Contexts
 {
-    public class ZZContext : DbContext
+    public class ZZContext : IdentityDbContext<UserAccount>
     {
 
         public DbSet<TipoServico> TipoServicos { get; set; }

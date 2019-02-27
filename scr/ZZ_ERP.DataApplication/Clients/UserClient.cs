@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
+using ZZ_ERP.Infra.CrossCutting.Connections.Commons; 
 using ZZ_ERP.Infra.CrossCutting.Connections.Connections;
+using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 
 namespace ZZ_ERP.DataApplication.Clients
 {
@@ -22,7 +23,25 @@ namespace ZZ_ERP.DataApplication.Clients
 
         public override async Task Command(Command command)
         {
-
+            try
+            {
+                if (Manager != null && Connection != null)
+                {
+                    if (command.Cmd != null)
+                    {
+                        if (command.Cmd.Equals(ServerCommands.Login))
+                        {
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError("Erro ao receber command do client " ,e);
+                throw;
+            }
+            
         }
     }
 }

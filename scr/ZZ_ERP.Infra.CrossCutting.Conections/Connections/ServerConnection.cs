@@ -305,62 +305,52 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
         /// <returns></returns>
         public async Task WriteServer(Command cmd)
         {
-            if(cmd.Id.Equals(""))
+            if(string.IsNullOrEmpty(cmd.Id))
             {
-                cmd.Id = "All";
+                cmd.Id = ServerCommands.BroadCastId;
             }
 
-            string cmdSend = await SerializerAsync.SerializeJson(cmd);
+            var cmdSend = await SerializerAsync.SerializeJson(cmd);
             _bufferWrite.Enqueue(cmdSend);
         }
         
         public async Task WriteServer(string id, string command, string json)
 		{
-            if(id.Equals(""))
+            if(string.IsNullOrEmpty(id))
             {
-                id = "All";
+                id = ServerCommands.BroadCastId;
             }
 
-            Command cmd = new Command();
-            cmd.Id = id;
-            cmd.Cmd = command;
-            cmd.Json = json;
+            var cmd = new Command {Id = id, Cmd = command, Json = json};
 
-            string cmdSend = await SerializerAsync.SerializeJson(cmd);
+            var cmdSend = await SerializerAsync.SerializeJson(cmd);
 		    _bufferWrite.Enqueue(cmdSend);
 
 		}
         
         public async Task WriteServer(string id, long playerId, string command, string json)
         {
-            if(id.Equals(""))
+            if(string.IsNullOrEmpty(id))
             {
-                id = "All";
+                id = ServerCommands.BroadCastId;
             }
 
-            Command cmd = new Command();
-            cmd.Id = id;
-            cmd.EntityId = playerId;
-            cmd.Cmd = command;
-            cmd.Json = json;
+            var cmd = new Command {Id = id, EntityId = playerId, Cmd = command, Json = json};
 
-            string cmdSend = await SerializerAsync.SerializeJson(cmd);
+            var cmdSend = await SerializerAsync.SerializeJson(cmd);
 		    _bufferWrite.Enqueue(cmdSend);
 		}
 
         public async Task WriteServer(DelegateAction del, string id, string command, string json)
         {
-            if(id.Equals(""))
+            if(string.IsNullOrEmpty(id))
             {
-                id = "All";
+                id = ServerCommands.BroadCastId;
             }
 
-            Command cmd = new Command();
-            cmd.Id = id;
-            cmd.Cmd = command;
-            cmd.Json = json;
+            var cmd = new Command {Id = id, Cmd = command, Json = json};
 
-            string cmdSend = await SerializerAsync.SerializeJson(cmd);
+            var cmdSend = await SerializerAsync.SerializeJson(cmd);
             if (!_srvsCmdsBuffer.ContainsKey(id))
             {
                 _srvsCmdsBuffer.Add(id, del);
@@ -371,7 +361,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
         
         public async Task WriteServer(DelegateAction del, Command cmd)
         {
-            string cmdSend = await SerializerAsync.SerializeJson(cmd);
+            var cmdSend = await SerializerAsync.SerializeJson(cmd);
             
             if (!_srvsCmdsBuffer.ContainsKey(cmd.Id))
             {
@@ -389,7 +379,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
             }
         }
 
-        /// <summary>
+        /// <summary> 
         /// Le do socket e armazena no buffer
         /// </summary>
         /// <param name="source"></param>

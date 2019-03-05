@@ -16,7 +16,6 @@ namespace ZZ_ERP.Infra.Data.Config
             {
                 builder.HasKey(p => p.Id);
                 builder.Property(p => p.Descricao).HasMaxLength(Int32.MaxValue).IsRequired();
-                builder.Property(p => p.Valor).IsRequired();
             }
             catch (Exception e)
             {

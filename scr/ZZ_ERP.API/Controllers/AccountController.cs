@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
@@ -21,6 +22,7 @@ namespace ZZ_ERP.API.Controllers
         public AccountController(IAuthentication authentication)
         {
             _authentication = authentication;
+            
         }
 
         
@@ -29,6 +31,8 @@ namespace ZZ_ERP.API.Controllers
         {
             if (await _authentication.Authenticate(dto.Username, dto.Password))
             {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                await ZZApiMain.AddUserConnection(userId);
                 return true;
             }
             return false;

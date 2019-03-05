@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ZZ_ERP.DataApplication\ZZ_ERP.DataApplication.csproj" />
     <ProjectReference Include="..\ZZ_ERP.Infra.CrossCutting.DTO\ZZ_ERP.Infra.CrossCutting.DTO.csproj" />
     <ProjectReference Include="..\ZZ_ERP.Infra.Data\ZZ_ERP.Infra.Data.csproj" />
   </ItemGroup>

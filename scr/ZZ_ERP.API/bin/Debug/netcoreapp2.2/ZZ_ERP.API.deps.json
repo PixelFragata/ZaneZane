@@ -347,6 +347,19 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "ZZ_ERP.DataApplication/1.0.0": {
+        "dependencies": {
+          "ZZ_ERP.Domain": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
+          "ZZ_ERP.Infra.Data": "1.0.0"
+        },
+        "runtime": {
+          "ZZ_ERP.DataApplication.dll": {}
+        },
+        "compile": {
+          "ZZ_ERP.DataApplication.dll": {}
+        }
+      },
       "ZZ_ERP.DependencyInjection/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
@@ -356,6 +369,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
+          "ZZ_ERP.DataApplication": "1.0.0",
           "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0",
           "ZZ_ERP.Infra.Data": "1.0.0"
         },
@@ -3454,6 +3468,11 @@
       "sha512": "sha512-Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
+    },
+    "ZZ_ERP.DataApplication/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "ZZ_ERP.DependencyInjection/1.0.0": {
       "type": "project",

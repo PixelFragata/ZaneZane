@@ -50,6 +50,7 @@ namespace ZZ_ERP.DataApplication
                         else if (dataJson.Cmd.Equals(ServerCommands.IsUser))
                         {
                             ConsoleEx.WriteLine("Oi Cli fofo *3* ");
+                            MyId = SerializerAsync.DeserializeJson<string>(dataJson.Json).Result;
                             _client = new UserClient();
                             _client.Login(this, connection);
                         }

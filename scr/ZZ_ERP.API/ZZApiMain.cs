@@ -8,9 +8,11 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using ZZ_ERP.API.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.Connections.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
+using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 
 namespace ZZ_ERP.API
 {
@@ -20,20 +22,10 @@ namespace ZZ_ERP.API
         public static ServerConnection Zz;
         public static long Id;
         public static string Error;
+        public static Dictionary<string,IConnectionManager> UsersConnections { get; private set; } 
 
         public static void Main(string[] args)
         {
-
-            var timestamp = DateTime.Now.ToString("ddMMyyyyHHmmssfff");
-            Console.WriteLine("====================================");
-            Console.WriteLine("====================================");
-            Console.WriteLine("||||||||||Welcome to ZZ API|||||||||");
-            Console.WriteLine("====================================");
-            Console.WriteLine("====================================");
-            Console.WriteLine("Time :  " + timestamp);
-
-            
-            
 
             Thread.Sleep(1000);
             try
@@ -85,6 +77,12 @@ namespace ZZ_ERP.API
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public static async Task AddUserConnection(string userId)
+        {
+            var conn = new ConnectionManager(userId);
+            UsersConnections.Add(userId,conn);
         }
     }
 }

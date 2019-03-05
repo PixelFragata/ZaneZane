@@ -23,3 +23,5 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.DependencyInjection.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Domain.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.Data.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.API\bin\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.pdb

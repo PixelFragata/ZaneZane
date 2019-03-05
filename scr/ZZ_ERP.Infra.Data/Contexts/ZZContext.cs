@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ZZ_ERP.Domain.Entities;
+using ZZ_ERP.Infra.Data.Config;
 using ZZ_ERP.Infra.Data.Identity;
 
 namespace ZZ_ERP.Infra.Data.Contexts
@@ -12,6 +13,8 @@ namespace ZZ_ERP.Infra.Data.Contexts
     {
 
         public DbSet<TipoServico> TipoServicos { get; set; }
+        public DbSet<PermissaoTela> PermissaoTelas { get; set; }
+        public DbSet<TipoPermissao> TipoPermissoes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +24,14 @@ namespace ZZ_ERP.Infra.Data.Contexts
                 "Server=dbfragata.cmcait8irl6a.us-east-2.rds.amazonaws.com,1433;Database=ZZ_ERP_Test;User Id=melchior;Password=Otiagoehfoda";
             optionsBuilder.UseSqlServer(connection);
             base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PermissaoTelaConfig());
+            modelBuilder.ApplyConfiguration(new TipoPermissaoConfig());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

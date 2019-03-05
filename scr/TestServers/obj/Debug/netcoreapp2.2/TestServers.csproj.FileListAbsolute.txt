@@ -22,3 +22,5 @@ C:\Fragata\ZaneZane\scr\TestServers\obj\Debug\netcoreapp2.2\TestServers.dll
 C:\Fragata\ZaneZane\scr\TestServers\obj\Debug\netcoreapp2.2\TestServers.pdb
 C:\Fragata\ZaneZane\scr\TestServers\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.dll
 C:\Fragata\ZaneZane\scr\TestServers\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.pdb
+C:\Fragata\ZaneZane\scr\TestServers\bin\Debug\netcoreapp2.2\ZZ_ERP.DependencyInjection.dll
+C:\Fragata\ZaneZane\scr\TestServers\bin\Debug\netcoreapp2.2\ZZ_ERP.DependencyInjection.pdb

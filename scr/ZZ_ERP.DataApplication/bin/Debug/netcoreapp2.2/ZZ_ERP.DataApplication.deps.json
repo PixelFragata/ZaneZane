@@ -883,6 +883,11 @@
           "ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
         }
       },
+      "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+        "runtime": {
+          "ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        }
+      },
       "ZZ_ERP.Infra.Data/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
@@ -890,7 +895,8 @@
           "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
           "ZZ_ERP.Domain": "1.0.0",
-          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0"
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
         },
         "runtime": {
           "ZZ_ERP.Infra.Data.dll": {}
@@ -1498,6 +1504,11 @@
       "sha512": ""
     },
     "ZZ_ERP.Infra.CrossCutting.Connections/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

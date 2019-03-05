@@ -129,6 +129,42 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.PermissaoTela", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("NomeTela")
+                        .IsRequired()
+                        .HasMaxLength(2147483647);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PermissaoTelas");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoPermissao", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(2147483647);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<int>("Valor");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoPermissoes");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoServico", b =>
                 {
                     b.Property<long>("Id")

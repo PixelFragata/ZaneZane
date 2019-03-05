@@ -6,3 +6,7 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\obj\Debug\netcoreapp2.2\ZZ
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.AssemblyInfo.cs
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.csprojAssemblyReference.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.xml
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.DTO\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.csproj.CopyComplete

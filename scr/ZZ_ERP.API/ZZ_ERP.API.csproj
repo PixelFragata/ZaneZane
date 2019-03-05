@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ZZ_ERP.DependencyInjection\ZZ_ERP.DependencyInjection.csproj" />
     <ProjectReference Include="..\ZZ_ERP.Infra.CrossCutting.Conections\ZZ_ERP.Infra.CrossCutting.Connections.csproj" />
     <ProjectReference Include="..\ZZ_ERP.Infra.CrossCutting.DTO\ZZ_ERP.Infra.CrossCutting.DTO.csproj" />
   </ItemGroup>

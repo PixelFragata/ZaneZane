@@ -1341,6 +1341,16 @@
           "bin/placeholder/ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
         }
       },
+      "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        }
+      },
       "ZZ_ERP.Infra.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -1350,7 +1360,8 @@
           "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
           "ZZ_ERP.Domain": "1.0.0",
-          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0"
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ZZ_ERP.Infra.Data.dll": {}
@@ -4458,6 +4469,11 @@
       "type": "project",
       "path": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj",
       "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj"
+    },
+    "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+      "type": "project",
+      "path": "../ZZ_ERP.Infra.CrossCutting.DTO/ZZ_ERP.Infra.CrossCutting.DTO.csproj",
+      "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.DTO/ZZ_ERP.Infra.CrossCutting.DTO.csproj"
     },
     "ZZ_ERP.Infra.Data/1.0.0": {
       "type": "project",

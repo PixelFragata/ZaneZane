@@ -4443,6 +4443,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
+          "ZZ_ERP.DependencyInjection": "1.0.0",
           "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
           "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
         },
@@ -4466,6 +4467,27 @@
         },
         "runtime": {
           "bin/placeholder/ZZ_ERP.DataApplication.dll": {}
+        }
+      },
+      "ZZ_ERP.DependencyInjection/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
+          "Microsoft.EntityFrameworkCore": "2.2.2",
+          "Microsoft.EntityFrameworkCore.Design": "2.2.2",
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
+          "Microsoft.Extensions.DependencyInjection": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0",
+          "ZZ_ERP.Infra.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ZZ_ERP.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZZ_ERP.DependencyInjection.dll": {}
         }
       },
       "ZZ_ERP.Domain/1.0.0": {
@@ -4511,7 +4533,8 @@
           "Microsoft.EntityFrameworkCore.Relational": "2.2.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2",
           "ZZ_ERP.Domain": "1.0.0",
-          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0"
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0",
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ZZ_ERP.Infra.Data.dll": {}
@@ -12163,6 +12186,11 @@
       "type": "project",
       "path": "../ZZ_ERP.DataApplication/ZZ_ERP.DataApplication.csproj",
       "msbuildProject": "../ZZ_ERP.DataApplication/ZZ_ERP.DataApplication.csproj"
+    },
+    "ZZ_ERP.DependencyInjection/1.0.0": {
+      "type": "project",
+      "path": "../ZZ_ERP.DependencyInjection/ZZ_ERP.DependencyInjection.csproj",
+      "msbuildProject": "../ZZ_ERP.DependencyInjection/ZZ_ERP.DependencyInjection.csproj"
     },
     "ZZ_ERP.Domain/1.0.0": {
       "type": "project",

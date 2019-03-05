@@ -1377,6 +1377,16 @@
         "runtime": {
           "bin/placeholder/ZZ_ERP.Infra.CrossCutting.Connections.dll": {}
         }
+      },
+      "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
+        }
       }
     }
   },
@@ -4586,6 +4596,11 @@
       "type": "project",
       "path": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj",
       "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.Conections/ZZ_ERP.Infra.CrossCutting.Connections.csproj"
+    },
+    "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
+      "type": "project",
+      "path": "../ZZ_ERP.Infra.CrossCutting.DTO/ZZ_ERP.Infra.CrossCutting.DTO.csproj",
+      "msbuildProject": "../ZZ_ERP.Infra.CrossCutting.DTO/ZZ_ERP.Infra.CrossCutting.DTO.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4597,7 +4612,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 2.2.2",
       "Microsoft.NETCore.App >= 2.2.0",
       "ZZ_ERP.Domain >= 1.0.0",
-      "ZZ_ERP.Infra.CrossCutting.Connections >= 1.0.0"
+      "ZZ_ERP.Infra.CrossCutting.Connections >= 1.0.0",
+      "ZZ_ERP.Infra.CrossCutting.DTO >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4635,6 +4651,9 @@
             },
             "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj": {
               "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj"
+            },
+            "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj": {
+              "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj"
             }
           }
         }

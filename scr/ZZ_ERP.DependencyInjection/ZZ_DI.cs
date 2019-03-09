@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 using ZZ_ERP.Infra.Data.Contexts;
 using ZZ_ERP.Infra.Data.Identity;
@@ -37,30 +38,36 @@ namespace ZZ_ERP.DependencyInjection
             
             var tokenConfigurations = TokenConfigurations.Instance;
 
-            services.AddAuthentication(authOptions =>
+            /*services.AddAuthentication(authOptions =>
             {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(bearerOptions =>
-            {
-                var paramsValidation = bearerOptions.TokenValidationParameters;
-                paramsValidation.IssuerSigningKey = signingConfigurations.Key;
-                paramsValidation.ValidAudience = tokenConfigurations.Audience;
-                paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
+            }*/
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(bearerOptions =>
+                {
+                    bearerOptions.TokenValidationParameters = new TokenValidationParameters
+                    {
 
-                // Valida a assinatura de um token recebido
-                paramsValidation.ValidateIssuerSigningKey = true;
+                        ValidateIssuer = true,
+                        ValidateActor = true,
+                        ValidateAudience = true,
+                        IssuerSigningKey = signingConfigurations.Key,
+                        ValidAudience = tokenConfigurations.Audience,
+                        ValidIssuer = tokenConfigurations.Issuer,
 
-                // Verifica se um token recebido ainda é válido
-                paramsValidation.ValidateLifetime = true;
+                        // Valida a assinatura de um token recebido
+                        ValidateIssuerSigningKey = true,
 
-                // Tempo de tolerância para a expiração de um token (utilizado
-                // caso haja problemas de sincronismo de horário entre diferentes
-                // computadores envolvidos no processo de comunicação)
-                paramsValidation.ClockSkew = TimeSpan.Zero;
-            });
+                        // Verifica se um token recebido ainda é válido
+                        ValidateLifetime = true,
 
-            
+                        // Tempo de tolerância para a expiração de um token (utilizado
+                        // caso haja problemas de sincronismo de horário entre diferentes
+                        // computadores envolvidos no processo de comunicação)
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
         }
          
     }

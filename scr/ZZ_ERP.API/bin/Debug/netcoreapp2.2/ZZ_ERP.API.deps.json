@@ -25,6 +25,7 @@
       "ZZ_ERP.API/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.App": "2.2.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "ZZ_ERP.DependencyInjection": "1.0.0",
@@ -541,6 +542,7 @@
       },
       "ZZ_ERP.DependencyInjection/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.2",
           "Microsoft.EntityFrameworkCore.Design": "2.2.2",

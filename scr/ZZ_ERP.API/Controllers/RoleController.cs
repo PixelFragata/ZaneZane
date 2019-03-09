@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 namespace ZZ_ERP.API.Controllers
 {
     [Route("[controller]/[action]")]
-    [ApiController] 
+    [ApiController]
+    //[Authorize("Bearer")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleManager _roleManager;
@@ -39,6 +41,13 @@ namespace ZZ_ERP.API.Controllers
         public async Task<ActionResult<bool>> Create(string roleName)
         {
             return await _roleManager.CreateAsync(roleName);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "RoleManagerCreate")]
+        [HttpPost]
+        public async Task<ActionResult<bool>> CreateClaim(string roleName, string nomeTela, string tipoPermissao)
+        {
+            return await _roleManager.AddRoleClaim(roleName, nomeTela, tipoPermissao);
         }
     }
 }

@@ -32,14 +32,16 @@ namespace ZZ_ERP.API
 
             // Ativa o uso do token como forma de autorizar o acesso
             // a recursos deste projeto
-           /* services.AddAuthorization(auth =>
+            services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
+                auth.AddPolicy("RoleManagerCreate",p => p.RequireClaim("RoleManager", "Create"));
+                auth.AddPolicy("UserManagerRead", p => p.RequireClaim("UserManager", "Read"));
             });
-            */
-            services.AddAuthorization();
+            
+            //services.AddAuthorization();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
         }

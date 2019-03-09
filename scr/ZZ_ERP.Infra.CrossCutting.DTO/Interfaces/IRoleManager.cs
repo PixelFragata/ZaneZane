@@ -10,5 +10,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.Interfaces
     {
         Task<bool> CreateAsync(string roleName);
         List<IdentityRole> ListAll();
+        Task<bool> AddRoleClaim(string roleName, string nomeTela, string tipoPermissao);
     }
 }

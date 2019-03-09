@@ -18,13 +18,15 @@ namespace ZZ_ERP.Infra.Data.Identity
     {
         private readonly UserManager<UserAccount> _userManager;
         private readonly SignInManager<UserAccount> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly TokenConfigurations _tokenConfigurations;
         private readonly SigningConfigurations _signingConfigurations;
 
-        public Authentication(UserManager<UserAccount> userManager, SignInManager<UserAccount> signInManager)
+        public Authentication(UserManager<UserAccount> userManager, SignInManager<UserAccount> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _tokenConfigurations = TokenConfigurations.Instance;
             _signingConfigurations = SigningConfigurations.Instance;
         }
@@ -45,7 +47,7 @@ namespace ZZ_ERP.Infra.Data.Identity
                         var result = await _signInManager.CheckPasswordSignInAsync(userIdentity, password, false);
                         if (result.Succeeded)
                         {
-                            loginResult = CreateToken(username);
+                            loginResult = await CreateToken(username, userIdentity);
                             loginResult.UserId = userIdentity.Id;
                         }
                     }
@@ -61,25 +63,20 @@ namespace ZZ_ERP.Infra.Data.Identity
             }
         }
 
-        private  LoginResultDto CreateToken(string username)
+        private async Task<LoginResultDto> CreateToken(string username, UserAccount user)
         {
             try
             {
                 LoginResultDto loginResult = new LoginResultDto();
                 loginResult.Authenticated = true;
-                ClaimsIdentity identity = new ClaimsIdentity(
-                    new GenericIdentity(username, "Login"),
-                    new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Jti,        Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, username),
-                    });
+                var identity = await ClaimsIdentity(username, user);
 
                 loginResult.CreatedDate = DateTime.Now;
                 loginResult.ExpirationDate =
                     loginResult.CreatedDate + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
 
                 var handler = new JwtSecurityTokenHandler();
+                
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor
                 {
                     Issuer = _tokenConfigurations.Issuer,
@@ -89,7 +86,7 @@ namespace ZZ_ERP.Infra.Data.Identity
                     NotBefore = loginResult.CreatedDate,
                     Expires = loginResult.ExpirationDate
                 });
-
+                
                 loginResult.AccessToken = handler.WriteToken(securityToken);
                 loginResult.Message = "Ok";
 
@@ -101,6 +98,32 @@ namespace ZZ_ERP.Infra.Data.Identity
                 throw;
             }
             
+        }
+
+        private async Task<ClaimsIdentity> ClaimsIdentity(string username, UserAccount user)
+        {
+            ClaimsIdentity identity = new ClaimsIdentity(
+                new GenericIdentity(username, "Login"),
+                new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Jti,        Guid.NewGuid().ToString("N")),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, username),
+                });
+
+            identity.AddClaims(await _userManager.GetClaimsAsync(user));
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            foreach (var role in roles)
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                var myRole = await _roleManager.FindByNameAsync(role);
+                var roleClaims = await _roleManager.GetClaimsAsync(myRole);
+
+                identity.AddClaims(roleClaims);
+            }
+
+            return identity;
         }
 
         /*public async Task<string> Authenticate(string username, string password)

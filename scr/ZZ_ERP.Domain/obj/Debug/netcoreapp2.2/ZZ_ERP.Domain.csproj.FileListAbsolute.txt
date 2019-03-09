@@ -6,4 +6,3 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.Asse
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.AssemblyInfo.cs
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.pdb
-C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.csprojAssemblyReference.cache

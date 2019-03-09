@@ -5,10 +5,4 @@
         NormalPrint,
         SpecificPrint
     }
-
-    public enum Roles
-    {
-        Admin,
-        Cliente
-    }
 }

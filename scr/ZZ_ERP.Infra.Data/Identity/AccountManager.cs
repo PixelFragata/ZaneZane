@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 using ZZ_ERP.Infra.Data.Contexts;
 
@@ -25,7 +26,7 @@ namespace ZZ_ERP.Infra.Data.Identity
         }
 
 
-        public async Task<bool> CreateAsync(string username, string email, string password, string role)
+        public async Task<bool> CreateAsync(string username, string email, string password, string role = Roles.RoleCliente)
         {
                 if (string.IsNullOrEmpty(username))
             {

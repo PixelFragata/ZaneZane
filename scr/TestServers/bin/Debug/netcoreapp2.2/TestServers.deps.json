@@ -72,6 +72,7 @@
       },
       "ZZ_ERP.DependencyInjection/1.0.0": {
         "dependencies": {
+          "ZZ_ERP.DataApplication": "1.0.0",
           "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0",
           "ZZ_ERP.Infra.Data": "1.0.0"
         },

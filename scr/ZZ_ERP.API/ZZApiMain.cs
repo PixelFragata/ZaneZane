@@ -27,9 +27,9 @@ namespace ZZ_ERP.API
         public static void Main(string[] args)
         {
 
-            Thread.Sleep(1000);
             try
             {
+                UsersConnections = new Dictionary<string, IConnectionManager>();
                 Zz = new ServerConnection(AdressPool.ZZ_EF_APK.Ip, AdressPool.ZZ_EF_APK.Port);
                 DelegateAction del = new DelegateAction();
                 del.act = ReturnServer;

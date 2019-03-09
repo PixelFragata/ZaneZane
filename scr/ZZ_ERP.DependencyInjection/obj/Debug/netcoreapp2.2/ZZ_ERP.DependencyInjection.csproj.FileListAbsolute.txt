@@ -20,3 +20,5 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.DependencyInjection\obj\Debug\netcoreapp2.2\ZZ_ER
 C:\Fragata\ZaneZane\scr\ZZ_ERP.DependencyInjection\obj\Debug\netcoreapp2.2\ZZ_ERP.DependencyInjection.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.DependencyInjection\bin\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.DependencyInjection\bin\Debug\netcoreapp2.2\ZZ_ERP.DataApplication.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.DependencyInjection\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.DependencyInjection\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Authentication.JwtBearer.xml

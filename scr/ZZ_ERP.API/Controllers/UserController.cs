@@ -24,6 +24,7 @@ namespace ZZ_ERP.API.Controllers
         }
 
         // GET api/values
+        //[Authorize("Bearer")]
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetAllUsers()
@@ -49,7 +50,7 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClient(UserDto dto)
         {
-            dto.Role = Enum.GetName(typeof(Roles),Roles.Cliente);
+            dto.Role =Roles.RoleCliente;
 
             if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
             {
@@ -60,7 +61,7 @@ namespace ZZ_ERP.API.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet]
+        [HttpGet("{username}")]
         public ActionResult<IEnumerable<UserDto>> GetUserByUsername(string username)
         {
             var users = _manager.GetUserByUsername(username);

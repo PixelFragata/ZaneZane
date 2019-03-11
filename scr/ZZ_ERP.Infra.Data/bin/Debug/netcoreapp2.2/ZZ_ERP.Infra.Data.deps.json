@@ -1459,6 +1459,9 @@
         }
       },
       "ZZ_ERP.Domain/1.0.0": {
+        "dependencies": {
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
+        },
         "runtime": {
           "ZZ_ERP.Domain.dll": {}
         }

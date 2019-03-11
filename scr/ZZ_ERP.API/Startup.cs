@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ZZ_ERP.DependencyInjection;
+using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 
 namespace ZZ_ERP.API
 {
@@ -30,17 +31,6 @@ namespace ZZ_ERP.API
         {
             ZZ_DI.Configure(services);
 
-            // Ativa o uso do token como forma de autorizar o acesso
-            // a recursos deste projeto
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-                auth.AddPolicy("RoleManagerCreate",p => p.RequireClaim("RoleManager", "Create").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
-                auth.AddPolicy("UserManagerRead", p => p.RequireClaim("UserManager", "Read").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
-            });
-            
             //services.AddAuthorization();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             

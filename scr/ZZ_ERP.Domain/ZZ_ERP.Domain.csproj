@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZZ_ERP.Infra.CrossCutting.DTO\ZZ_ERP.Infra.CrossCutting.DTO.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -188,10 +188,16 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<DateTime>("DeactivationDate");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<bool>("LockoutEnabled");
 

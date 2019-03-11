@@ -37,7 +37,7 @@ namespace ZZ_ERP.API.Controllers
         }
 
         // GET api/values/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "UserManagerCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Create(UserDto dto)
         {
@@ -52,7 +52,7 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClient(UserDto dto)
         {
-            dto.Role =Roles.RoleCliente;
+            dto.Role = "Cliente";
 
             if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
             {
@@ -62,8 +62,8 @@ namespace ZZ_ERP.API.Controllers
             return false;
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet("{username}")]
+        [Authorize(Policy = "UserManagerRead")]
+        [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetUserByUsername(string username)
         {
             var users = _manager.GetUserByUsername(username);
@@ -71,7 +71,7 @@ namespace ZZ_ERP.API.Controllers
             return new ActionResult<IEnumerable<UserDto>>(dtos);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetUserByEmail(string email)
         {
@@ -80,7 +80,7 @@ namespace ZZ_ERP.API.Controllers
             return new ActionResult<IEnumerable<UserDto>>(dtos);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "UserManagerDelete")]
         [HttpDelete("{id}")]
         public void Delete(string id)
         {

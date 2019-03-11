@@ -26,13 +26,18 @@ namespace ZZ_ERP.Infra.Data.Identity
         }
 
 
-        public async Task<bool> CreateAsync(string username, string email, string password, string role = Roles.RoleCliente)
+        public async Task<bool> CreateAsync(string username, string email, string password, string role = "Cliente")
         {
                 if (string.IsNullOrEmpty(username))
             {
                 username = email;
             }
-            var user = new UserAccount { UserName = username, Email = email };
+
+            var user = new UserAccount
+            {
+                UserName = username, Email = email, CreateDate = DateTime.Today, IsActive = true
+            };
+
             var result = await _userManager.CreateAsync(user, password);
 
             if (result.Succeeded)
@@ -69,7 +74,14 @@ namespace ZZ_ERP.Infra.Data.Identity
         {
             var users = _dbContext.Users;
             var user = users.FirstOrDefault(u => u.Id.Equals(id));
-            return true;
+            if (user != null)
+            {
+                user.IsActive = false;
+                user.DeactivationDate = DateTime.Today;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
 

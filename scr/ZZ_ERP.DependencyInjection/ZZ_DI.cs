@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 using ZZ_ERP.Infra.Data.Contexts;
 using ZZ_ERP.Infra.Data.Identity;
+using ZZ_ERP.Infra.Data.Repositories;
 
 namespace ZZ_ERP.DependencyInjection
 {
@@ -34,6 +36,7 @@ namespace ZZ_ERP.DependencyInjection
             services.AddScoped(typeof(IAccountManager), typeof(AccountManager));
             services.AddScoped(typeof(IRoleManager), typeof(RoleManager));
 
+            
             var signingConfigurations = SigningConfigurations.Instance;
             
             var tokenConfigurations = TokenConfigurations.Instance;
@@ -68,6 +71,20 @@ namespace ZZ_ERP.DependencyInjection
                         ClockSkew = TimeSpan.Zero
                     };
                 });
+
+            var myPolicies = new MyPolicesRepository();
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+                foreach (var policy in myPolicies.MyPolicies)
+                {
+                    auth.AddPolicy(policy.PolicyName, p => p.RequireClaim(policy.PermissaoTela, policy.TipoPermissao).AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+                }
+                //auth.AddPolicy("RoleManagerCreate",p => p.RequireClaim("RoleManager", "Create").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+                //auth.AddPolicy("UserManagerRead", p => p.RequireClaim("UserManager", "Read").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+            });
         }
          
     }

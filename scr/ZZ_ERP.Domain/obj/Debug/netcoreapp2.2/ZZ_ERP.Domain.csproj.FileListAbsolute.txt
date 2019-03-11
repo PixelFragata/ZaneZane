@@ -7,3 +7,10 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.Asse
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.csprojAssemblyReference.cache
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.dll
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.DTO.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.xml
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Domain\obj\Debug\netcoreapp2.2\ZZ_ERP.Domain.csproj.CopyComplete

@@ -8,6 +8,8 @@ namespace ZZ_ERP.Infra.Data.Identity
 {
     public class UserAccount : IdentityUser , IAccount
     {
-
+        public bool IsActive { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime DeactivationDate { get; set; }
     }
 }

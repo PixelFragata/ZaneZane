@@ -543,6 +543,8 @@
       "ZZ_ERP.DependencyInjection/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0",
+          "Microsoft.AspNetCore.Authorization": "2.2.0",
+          "Microsoft.AspNetCore.Authorization.Policy": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.2",
           "Microsoft.EntityFrameworkCore.Design": "2.2.2",
@@ -562,6 +564,9 @@
         }
       },
       "ZZ_ERP.Domain/1.0.0": {
+        "dependencies": {
+          "ZZ_ERP.Infra.CrossCutting.DTO": "1.0.0"
+        },
         "runtime": {
           "ZZ_ERP.Domain.dll": {}
         },

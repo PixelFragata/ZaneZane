@@ -14,6 +14,7 @@ namespace ZZ_ERP.DataApplication.Clients
         {
             Manager = manager;
             Connection = connection;
+            await connection.WriteServer("", 542, ServerCommands.LogResultOk, "");
         }
 
         public override async Task Logout()

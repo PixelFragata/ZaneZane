@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
@@ -10,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
-
 namespace ZZ_ERP.API.Controllers
 {
     [Route("[controller]/[action]")]
@@ -27,13 +27,13 @@ namespace ZZ_ERP.API.Controllers
         // GET api/values
         //[Authorize("Bearer")]
         //[Authorize(Roles = "Admin")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "UserManagerRead")]
+        [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
-        public ActionResult<IEnumerable<UserDto>> GetAllUsers()
+        public ActionResult<List<UserDto>> GetAllUsers()
         {
             var users = _manager.ListAll();
-            var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName});
-            return new ActionResult<IEnumerable<UserDto>>(dtos);
+            var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName}).ToList();
+            return new List<UserDto>(dtos);
         }
 
         // GET api/values/5

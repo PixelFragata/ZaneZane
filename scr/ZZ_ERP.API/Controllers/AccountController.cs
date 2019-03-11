@@ -33,18 +33,16 @@ namespace ZZ_ERP.API.Controllers
         {
             var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
 
-            await ZZApiMain.AddUserConnection(resultDto.UserId);
+            await ZZApiMain.AddUserConnection(resultDto);
             return resultDto;
         }
 
+        [Authorize("Bearer")]
+        [HttpGet]
         public async Task<ActionResult<bool>> Logout()
         {
-            if (await _authentication.Logout())
-            {
-                return true;
-            }
-
-            return false;
+            await ZZApiMain.RemoveUserConnection(this.User.Identity.Name);
+            return true;
         }
 
         public async Task<ActionResult<LoginResultDto>> LoginTeste()
@@ -52,7 +50,7 @@ namespace ZZ_ERP.API.Controllers
             var dto = new LoginDto{Password = "admin", Username = "admin"};
             var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
 
-            await ZZApiMain.AddUserConnection(resultDto.UserId);
+            await ZZApiMain.AddUserConnection(resultDto);
             return resultDto;
         }  
     }

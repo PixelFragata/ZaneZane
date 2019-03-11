@@ -37,8 +37,8 @@ namespace ZZ_ERP.API
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
-                auth.AddPolicy("RoleManagerCreate",p => p.RequireClaim("RoleManager", "Create"));
-                auth.AddPolicy("UserManagerRead", p => p.RequireClaim("UserManager", "Read"));
+                auth.AddPolicy("RoleManagerCreate",p => p.RequireClaim("RoleManager", "Create").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+                auth.AddPolicy("UserManagerRead", p => p.RequireClaim("UserManager", "Read").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
             });
             
             //services.AddAuthorization();

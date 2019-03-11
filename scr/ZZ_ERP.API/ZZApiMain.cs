@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,9 @@ using ZZ_ERP.API.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.Connections.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
+using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
+using Timer = System.Timers.Timer;
 
 namespace ZZ_ERP.API
 {
@@ -79,10 +82,102 @@ namespace ZZ_ERP.API
             }
         }
 
-        public static async Task AddUserConnection(string userId)
+        public static bool VerifyUserAuthorize(string username)
         {
-            var conn = new ConnectionManager(userId);
-            UsersConnections.Add(userId,conn);
+            if (UsersConnections.ContainsKey(username))
+            {
+                return true;
+            }
+
+            return false;
         }
+
+        public static async Task AddUserConnection(LoginResultDto loginResult)
+        {
+            var del = new DelegateAction{act = ReturnLoginRequest};
+            var cmd = new Command{Cmd = ServerCommands.AddClientAuthorized, Json = await SerializerAsync.SerializeJson(loginResult.Username)};
+            await Zz.WriteServer(del, cmd);
+
+            var conn = new ConnectionManager(loginResult);
+            UsersConnections.Add(loginResult.Username, conn);
+        }
+
+        public static Timer SetTimer(double interval, ElapsedEventHandler e)
+        {
+            Timer t = new Timer(interval);
+            t.Elapsed += e;
+            t.AutoReset = false;
+            t.Enabled = true;
+
+            return t;
+        }
+
+        public static async Task RemoveUserConnection(string username)
+        {
+            var del = new DelegateAction { act = ReturnLogoutRequest };
+            var cmd = new Command { Cmd = ServerCommands.RemoveClientAuthorized, Json = await SerializerAsync.SerializeJson(username) };
+            await Zz.WriteServer(del, cmd);
+        }
+
+
+        public static async void ReturnLoginRequest(Object[] server, Object[] local)
+        {
+            var dataJson = SerializerAsync.DeserializeJson<Command>(server[0].ToString()).Result;
+            try
+            {
+                if (dataJson != null)
+                {
+                    if (dataJson.Cmd.Equals(ServerCommands.LogResultOk))
+                    {
+                        var username = await SerializerAsync.DeserializeJson<string>(dataJson.Json);
+                        if (UsersConnections.TryGetValue(username, out var conn))
+                        {
+                            await conn.Zz.WriteServer(new Command { Cmd = ServerCommands.IsUser, Json = await SerializerAsync.SerializeJson(username)});
+                        }
+                    }
+                    else if (dataJson.Cmd.Equals(ServerCommands.LogResultDeny))
+                    {
+                        var username = await SerializerAsync.DeserializeJson<string>(dataJson.Json);
+                        await RemoveUserConnection(username);
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public static async void ReturnLogoutRequest(Object[] server, Object[] local)
+        {
+            var dataJson = SerializerAsync.DeserializeJson<Command>(server[0].ToString()).Result;
+            try
+            {
+                if (dataJson != null)
+                {
+                    if (dataJson.Cmd.Equals(ServerCommands.LogResultOk))
+                    {
+                        var username = await SerializerAsync.DeserializeJson<string>(dataJson.Json);
+                        UsersConnections.Remove(username);
+                        ConsoleEx.WriteLine("Usuario removido da lista de autorizados com sucesso");
+                    }
+                    else if (dataJson.Cmd.Equals(ServerCommands.LogResultDeny))
+                    {
+                        var username = await SerializerAsync.DeserializeJson<string>(dataJson.Json);
+                        UsersConnections.Remove(username);
+                        ConsoleEx.WriteLine("Deu merda ao remover o usuario da lista de autorizados");
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
     }
 }

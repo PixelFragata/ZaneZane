@@ -20,11 +20,15 @@ namespace ZZ_ERP.DataApplication
         public TcpListener ServerConn;
         private string _ip;
         private int _port;
+        private List<string> _authorizedUserList;
+        private Dictionary<string, ZZClientManager> _authorizedClients;
 
         public ZZServer(string ip, int port)
         {
             _ip = ip;
             _port = port;
+            _authorizedUserList = new List<string>();
+            _authorizedClients = new Dictionary<string, ZZClientManager>();
         }
 
         public void Start()
@@ -67,6 +71,44 @@ namespace ZZ_ERP.DataApplication
                     break;
                 }
             }
+        }
+
+        public bool AddAuthorizedUser(string username)
+        {
+            ConsoleEx.WriteLine("Adicionando usuario autorizado na lista");
+            if (_authorizedUserList.Contains(username))
+            {
+                return false;
+            }
+            _authorizedUserList.Add(username);
+            return true;
+        }
+
+        public bool VerifyUserAuthorization(string username, ZZClientManager client)
+        {
+            if (_authorizedUserList.Contains(username))
+            {
+                ConsoleEx.WriteLine("Um usuario autorizado se conectou");
+                _authorizedClients.Add(username,client);
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemoveAuthorizedUser(string username)
+        {
+            if (_authorizedUserList.Contains(username))
+            { 
+                if (_authorizedClients.TryGetValue(username, out var client))
+                {
+                    ConsoleEx.WriteLine("Usuario dando logout");
+                    client.Dispose();
+                    _authorizedUserList.Remove(username);
+                    _authorizedClients.Remove(username);
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static async Task InitializeTipoPermissao(ZZContext context)

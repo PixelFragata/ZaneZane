@@ -3,6 +3,7 @@
     public static class ServerCommands
     {
         public static string Login = "Login";
+        public static string Logout = "Logout";
         public static string Register = "Register";
         public static string Exit = "Exit";
         public static string LogResultOk = "LogOK";
@@ -20,6 +21,7 @@
         public static string BroadCastId = "All";
         public static string IsUser = "IsUser";
         public static string IsController = "IsController";
-
+        public static string AddClientAuthorized = "AddClientAuthorized";
+        public static string RemoveClientAuthorized = "RemoveClientAuthorized";
     }
 }

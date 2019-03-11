@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
+using Timer = System.Timers.Timer;
 
 namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
 {
@@ -345,7 +347,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
         {
             if(string.IsNullOrEmpty(id))
             {
-                id = ServerCommands.BroadCastId;
+                id = await GetCommandId();
             }
 
             var cmd = new Command {Id = id, Cmd = command, Json = json};
@@ -361,6 +363,10 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
         
         public async Task WriteServer(DelegateAction del, Command cmd)
         {
+            if (string.IsNullOrEmpty(cmd.Id))
+            {
+                cmd.Id = await GetCommandId();
+            }
             var cmdSend = await SerializerAsync.SerializeJson(cmd);
             
             if (!_srvsCmdsBuffer.ContainsKey(cmd.Id))
@@ -513,6 +519,12 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
                 ConsoleEx.WriteError(e);
                 return null;
             }
+        }
+
+        public static async Task<string> GetCommandId()
+        {
+            Thread.Sleep(2);
+            return DateTime.Now.ToString("ddMMyyyyHHmmssfff");
         }
     }
 }

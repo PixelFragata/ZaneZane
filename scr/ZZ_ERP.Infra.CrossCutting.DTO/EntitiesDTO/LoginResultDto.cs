@@ -11,6 +11,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
         public DateTime ExpirationDate { get; set; }
         public string AccessToken { get; set; }
         public string Message { get; set; }
-        public string UserId { get; set; }
+        public string Username { get; set; }
     }
 }

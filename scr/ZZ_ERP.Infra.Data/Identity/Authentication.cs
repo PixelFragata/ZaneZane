@@ -48,7 +48,7 @@ namespace ZZ_ERP.Infra.Data.Identity
                         if (result.Succeeded)
                         {
                             loginResult = await CreateToken(username, userIdentity);
-                            loginResult.UserId = userIdentity.Id;
+                            loginResult.Username = userIdentity.UserName;
                         }
                     }
                     

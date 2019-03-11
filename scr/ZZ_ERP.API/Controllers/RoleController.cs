@@ -43,7 +43,7 @@ namespace ZZ_ERP.API.Controllers
             return await _roleManager.CreateAsync(roleName);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "RoleManagerCreate")]
+        [Authorize(Policy = "RoleManagerCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClaim(string roleName, string nomeTela, string tipoPermissao)
         {

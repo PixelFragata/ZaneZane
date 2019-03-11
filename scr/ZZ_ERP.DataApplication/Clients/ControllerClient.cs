@@ -25,7 +25,48 @@ namespace ZZ_ERP.DataApplication.Clients
 
         public override async Task Command(Command command)
         {
+            try
+            {
+                if (Manager != null && Connection != null)
+                {
+                    if (command.Cmd != null)
+                    {
+                        if (command.Cmd.Equals(ServerCommands.AddClientAuthorized))
+                        {
+                            if (Manager.Server.AddAuthorizedUser(
+                                await SerializerAsync.DeserializeJson<string>(command.Json)))
+                            {
+                                command.Cmd = ServerCommands.LogResultOk;
+                            }
+                            else
+                            {
+                                command.Cmd = ServerCommands.LogResultDeny;
+                            }
 
+                            await Connection.WriteServer(command);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.RemoveClientAuthorized))
+                        {
+                            if (Manager.Server.RemoveAuthorizedUser(
+                                await SerializerAsync.DeserializeJson<string>(command.Json)))
+                            {
+                                command.Cmd = ServerCommands.LogResultOk;
+                            }
+                            else
+                            {
+                                command.Cmd = ServerCommands.LogResultDeny;
+                            }
+
+                            await Connection.WriteServer(command);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError("Erro ao receber command do controller ", e);
+                throw;
+            }
         }
     }
 }

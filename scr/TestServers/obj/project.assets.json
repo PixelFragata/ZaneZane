@@ -4520,6 +4520,9 @@
       "ZZ_ERP.Infra.CrossCutting.DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "ZZ_ERP.Infra.CrossCutting.Connections": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/ZZ_ERP.Infra.CrossCutting.DTO.dll": {}
         },

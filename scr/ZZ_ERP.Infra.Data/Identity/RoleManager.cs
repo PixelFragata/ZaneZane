@@ -10,6 +10,7 @@ using ZZ_ERP.Infra.Data.Contexts;
 using System.Linq;
 using System.Security.Claims;
 using ZZ_ERP.Domain.Entities;
+using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 using ZZ_ERP.Infra.Data.Repositories;
 
 namespace ZZ_ERP.Infra.Data.Identity
@@ -72,6 +73,58 @@ namespace ZZ_ERP.Infra.Data.Identity
             }
 
             return false;
+        }
+
+        public async Task<MatrizRolePermission> GetRolePermissions(string roleName)
+        {
+            try
+            {
+                var role = await _roleManager.FindByNameAsync(roleName);
+                if (role != null)
+                {
+                    var matriz = new MatrizRolePermission();
+                    matriz.RoleName = roleName;
+                    var telas = await _permissaoTelasRepository.Get();
+                    matriz.Telas = telas.Select(t => t.NomeTela).ToList();
+
+                    var permissoes = await _tiposPermissaoRepository.Get();
+                    matriz.Permissoes = permissoes.Select(t => t.Descricao).ToList();
+
+                    matriz.TelasPermissoes = new bool[matriz.Telas.Count][];
+
+                    var myClaims = await _roleManager.GetClaimsAsync(role);
+                    int i = 0, j = 0;
+
+                    foreach (var tela in matriz.Telas)
+                    {
+                        matriz.TelasPermissoes[i] = new bool[matriz.Permissoes.Count];
+                        j = 0;
+                        foreach (var permissao in matriz.Permissoes)
+                        {
+                            if (myClaims.Where(c => c.Type.Equals(tela) && c.Value.Equals(permissao)).Any())
+                            {
+                                matriz.TelasPermissoes[i][j] = true;
+                            }
+                            else
+                            {
+                                matriz.TelasPermissoes[i][j] = false;
+                            }
+
+                            j++;
+                        }
+
+                        i++;
+                    }
+                    return matriz;
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return null;
+            }
         }
     }
 }

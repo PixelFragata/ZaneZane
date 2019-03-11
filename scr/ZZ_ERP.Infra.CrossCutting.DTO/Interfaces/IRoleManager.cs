@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 
 namespace ZZ_ERP.Infra.CrossCutting.DTO.Interfaces
 {
@@ -11,5 +12,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.Interfaces
         Task<bool> CreateAsync(string roleName);
         List<IdentityRole> ListAll();
         Task<bool> AddRoleClaim(string roleName, string nomeTela, string tipoPermissao);
+        Task<MatrizRolePermission> GetRolePermissions(string roleName);
     }
 }

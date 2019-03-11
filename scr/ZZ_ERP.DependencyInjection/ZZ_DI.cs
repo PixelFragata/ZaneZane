@@ -35,7 +35,6 @@ namespace ZZ_ERP.DependencyInjection
             services.AddScoped(typeof(IAuthentication), typeof(Authentication));
             services.AddScoped(typeof(IAccountManager), typeof(AccountManager));
             services.AddScoped(typeof(IRoleManager), typeof(RoleManager));
-
             
             var signingConfigurations = SigningConfigurations.Instance;
             

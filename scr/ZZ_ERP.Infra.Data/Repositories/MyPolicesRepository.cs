@@ -46,6 +46,8 @@ namespace ZZ_ERP.Infra.Data.Repositories
                     }
                 }
             }
+
+            _instance = this;
         }
     }
 }

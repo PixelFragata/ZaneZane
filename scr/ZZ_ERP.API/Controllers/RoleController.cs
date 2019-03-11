@@ -15,7 +15,7 @@ namespace ZZ_ERP.API.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    //[Authorize("Bearer")]
+    [Authorize("Bearer")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleManager _roleManager;
@@ -26,7 +26,7 @@ namespace ZZ_ERP.API.Controllers
         }
 
         // GET api/values
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Policy = "RoleManagerRead")]
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAllUsers()
         {
@@ -36,7 +36,7 @@ namespace ZZ_ERP.API.Controllers
         }
 
         // GET api/values/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Policy = "RoleManagerCreate")]
         [HttpPost("{roleName}")]
         public async Task<ActionResult<bool>> Create(string roleName)
         {
@@ -48,6 +48,13 @@ namespace ZZ_ERP.API.Controllers
         public async Task<ActionResult<bool>> CreateClaim(string roleName, string nomeTela, string tipoPermissao)
         {
             return await _roleManager.AddRoleClaim(roleName, nomeTela, tipoPermissao);
+        }
+
+        [Authorize(Policy = "RoleManagerRead")]
+        [HttpGet]
+        public async Task<ActionResult<MatrizRolePermission>> GetRoleClaims(string roleName)
+        {
+            return await _roleManager.GetRolePermissions(roleName);
         }
     }
 }

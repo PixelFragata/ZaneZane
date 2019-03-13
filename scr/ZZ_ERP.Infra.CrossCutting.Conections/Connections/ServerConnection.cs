@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -34,6 +35,8 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
         private Dictionary<string, DelegateAction> _srvsCmdsBuffer = new Dictionary<string, DelegateAction>();
         private object _owner;
         private bool _bWriteBuffer;
+        private List<Command> _waitCommandsList;
+        private bool _isWait;
         
         public ServerConnection(TcpClient client)
         {
@@ -116,10 +119,12 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
             _timerRead = SetTimer(200.0f, ReadBuffer);
             _timerWrite = SetTimer(100.0f, WriteBuffer);
 
-            _timerHearthBit = SetTimer(1000.0f, HearthBit);
+            //_timerHearthBit = SetTimer(1000.0f, HearthBit);
             _timerBufferRead = SetTimer(50.0f,Read);
-            _timerHeartBitCheck = SetTimer(1000.0f, HearthBitCheck);
+            //_timerHeartBitCheck = SetTimer(1000.0f, HearthBitCheck);
             _timerDelegate = SetTimer(50.0f, DelegateExec);
+            _waitCommandsList = new List<Command>();
+            _isWait = false;
         }
 
         public static Timer SetTimer(double interval, ElapsedEventHandler e)
@@ -154,7 +159,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
             {
 //                _timerRead.Enabled = false;
 
-                if (_clientSocket?.Client?.Available > 0)
+                if (!_isWait && _clientSocket?.Client?.Available > 0)
                 {
                     _hearthBitCount = 0;
 
@@ -175,7 +180,6 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
 
 
                                 DelegateAction del;
-
                                 if (!string.IsNullOrEmpty(bt.Id) &&
                                     _srvsCmdsBuffer.TryGetValue(bt.Id, out del))
                                 {
@@ -215,7 +219,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
 
         }
 
-        private async void HearthBit(Object source, ElapsedEventArgs e)
+        /*private async void HearthBit(Object source, ElapsedEventArgs e)
         {
             try
             {
@@ -247,7 +251,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
                 ConsoleEx.WriteError("Nao consegui bater", exception);
             }
         }
-
+        */
         /// <summary>
         /// Escreve o buffer no socket
         /// </summary>
@@ -271,7 +275,7 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
                         if (command != null)
                         {
                             string data = await StringCompressionAsync.CompressString(command);
-                            await _sw.WriteLineAsync(data).ConfigureAwait(false);
+                            await _sw.WriteLineAsync(data).ConfigureAwait(false); 
                             await _sw.FlushAsync().ConfigureAwait(false);
                         }
                     }
@@ -289,7 +293,53 @@ namespace ZZ_ERP.Infra.CrossCutting.Connections.Connections
                 //ConsoleEx.WriteError("Erro no WriteBuffer", exception);
             }
         }
-        
+
+        public async Task<Command> GetApiWaitCommand(string id)
+        {
+            Command cmd = null;
+            _isWait = true;
+            int timeCount = 0;
+            //while (cmd == null && timeCount <= ServerCommands.TimeOutApiRequest)
+            //{
+            //    cmd = _waitCommandsList.First(c => c.Id == id);
+            //    await Task.Delay(100);
+            //    timeCount++;
+            //}
+            do
+            {
+                var data = _sr?.ReadLine();
+                var dataDescomp = await StringCompressionAsync.DecompressString(data);
+                cmd = await SerializerAsync.DeserializeJson<Command>(dataDescomp);
+                if (cmd != null && !cmd.IsWait)
+                {
+                    DelegateAction del;
+                    if (!string.IsNullOrEmpty(cmd.Id) &&
+                        _srvsCmdsBuffer.TryGetValue(cmd.Id, out del))
+                    {
+                        del.server[0] = dataDescomp;
+                        del.Exec();
+                    }
+                    else if (_srvsCmdsBuffer.TryGetValue(ServerCommands.BroadCastId, out del))
+                    {
+                        del.server[0] = dataDescomp;
+                        del.Exec();
+                    }
+                }
+            } while (cmd != null && !cmd.IsWait);
+            _isWait = false;
+
+            return cmd;
+        }
+
+        public async Task<string> ApiWriteServer(string username, Command cmd)
+        {
+            cmd.Id = username + await GetCommandId();
+            cmd.IsWait = true;
+
+            var cmdSend = await SerializerAsync.SerializeJson(cmd);
+            _bufferWrite.Enqueue(cmdSend);
+            return cmd.Id;
+        }
         /// <summary>
         /// Escreve um comando para o servidor de forma assincrona.
         /// </summary>

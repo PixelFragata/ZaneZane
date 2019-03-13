@@ -13,6 +13,7 @@
         public static string Packages = "Packages";
         public static string EmptyStr = "ACaralhaEstaVazia";
         public static string TimeOut = "TimeOut";
+        public static int TimeOutApiRequest = 10000;
         public static string WhatTimeIsIt = "WhatTimeIsIt";
         public static string Wait = "w8";
         public static string HearthBit = "HearthBit";
@@ -23,5 +24,6 @@
         public static string IsController = "IsController";
         public static string AddClientAuthorized = "AddClientAuthorized";
         public static string RemoveClientAuthorized = "RemoveClientAuthorized";
+        public static string GetAllTiposServiço = "GetAllTiposServiço";
     }
 }

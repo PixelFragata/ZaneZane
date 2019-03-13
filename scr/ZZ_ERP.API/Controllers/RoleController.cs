@@ -30,9 +30,14 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAllUsers()
         {
-            var users = _roleManager.ListAll();
-            var dtos = users.Select(u => u.Name);
-            return new ActionResult<IEnumerable<string>>(dtos);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                var users = _roleManager.ListAll();
+                var dtos = users.Select(u => u.Name);
+                return new ActionResult<IEnumerable<string>>(dtos);
+            }
+
+            return null;
         }
 
         // GET api/values/5
@@ -40,21 +45,36 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost("{roleName}")]
         public async Task<ActionResult<bool>> Create(string roleName)
         {
-            return await _roleManager.CreateAsync(roleName);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                return await _roleManager.CreateAsync(roleName);
+            }
+
+            return false;
         }
 
         [Authorize(Policy = "RoleManagerCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClaim(string roleName, string nomeTela, string tipoPermissao)
         {
-            return await _roleManager.AddRoleClaim(roleName, nomeTela, tipoPermissao);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                return await _roleManager.AddRoleClaim(roleName, nomeTela, tipoPermissao);
+            }
+
+            return false;
         }
 
         [Authorize(Policy = "RoleManagerRead")]
         [HttpGet]
         public async Task<ActionResult<MatrizRolePermission>> GetRoleClaims(string roleName)
         {
-            return await _roleManager.GetRolePermissions(roleName);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                return await _roleManager.GetRolePermissions(roleName);
+            }
+
+            return null;
         }
     }
 }

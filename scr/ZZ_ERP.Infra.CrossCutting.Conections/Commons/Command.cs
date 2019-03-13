@@ -6,5 +6,6 @@
         public long EntityId { get; set; }
         public string Json { get; set; }
         public string Cmd { get; set; }
+        public bool IsWait { get; set; }
     }
 }

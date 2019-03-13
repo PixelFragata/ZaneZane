@@ -31,9 +31,14 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public ActionResult<List<UserDto>> GetAllUsers()
         {
-            var users = _manager.ListAll();
-            var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName}).ToList();
-            return new List<UserDto>(dtos);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                var users = _manager.ListAll();
+                var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName}).ToList();
+                return new List<UserDto>(dtos);
+            }
+
+            return null;
         }
 
         // GET api/values/5
@@ -41,9 +46,12 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost]
         public async Task<ActionResult<bool>> Create(UserDto dto)
         {
-            if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
             {
-                return true;
+                if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -66,25 +74,38 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetUserByUsername(string username)
         {
-            var users = _manager.GetUserByUsername(username);
-            var dtos = users.Select(u => new UserDto { Id = u.Id, Email = u.Email, Username = u.UserName });
-            return new ActionResult<IEnumerable<UserDto>>(dtos);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                var users = _manager.GetUserByUsername(username);
+                var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName});
+                return new ActionResult<IEnumerable<UserDto>>(dtos);
+            }
+
+            return null;
         }
 
         [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetUserByEmail(string email)
         {
-            var users = _manager.GetUserByEmail(email);
-            var dtos = users.Select(u => new UserDto { Id = u.Id, Email = u.Email, Username = u.UserName });
-            return new ActionResult<IEnumerable<UserDto>>(dtos);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                var users = _manager.GetUserByEmail(email);
+                var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName});
+                return new ActionResult<IEnumerable<UserDto>>(dtos);
+            }
+
+            return null;
         }
 
         [Authorize(Policy = "UserManagerDelete")]
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            _manager.DeleteUser(id);
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                _manager.DeleteUser(id);
+            }
         }
     }
 }

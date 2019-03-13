@@ -6,3 +6,4 @@ C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreap
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\bin\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.dll
 C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.pdb
+C:\Fragata\ZaneZane\scr\ZZ_ERP.Infra.CrossCutting.Conections\obj\Debug\netcoreapp2.2\ZZ_ERP.Infra.CrossCutting.Connections.csprojAssemblyReference.cache

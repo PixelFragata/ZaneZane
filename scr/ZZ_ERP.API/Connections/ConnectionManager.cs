@@ -4,7 +4,7 @@ using System.Timers;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.Connections.Connections;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
-using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
+using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 using Timer = System.Timers.Timer;
 

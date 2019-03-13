@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
+namespace ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO
 {
     public class MatrizRolePermission
     {

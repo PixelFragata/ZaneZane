@@ -10,7 +10,7 @@ using ZZ_ERP.Infra.Data.Contexts;
 using System.Linq;
 using System.Security.Claims;
 using ZZ_ERP.Domain.Entities;
-using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
+using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.Data.Repositories;
 
 namespace ZZ_ERP.Infra.Data.Identity

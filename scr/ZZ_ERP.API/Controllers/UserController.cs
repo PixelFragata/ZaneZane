@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
-using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
+using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 namespace ZZ_ERP.API.Controllers
 {
@@ -29,7 +29,7 @@ namespace ZZ_ERP.API.Controllers
         //[Authorize(Roles = "Admin")]
         [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
-        public ActionResult<List<UserDto>> GetAllUsers()
+        public ActionResult<List<UserDto>> GetAll()
         {
             if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
             {
@@ -72,7 +72,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
-        public ActionResult<IEnumerable<UserDto>> GetUserByUsername(string username)
+        public ActionResult<IEnumerable<UserDto>> GetByUsername(string username)
         {
             if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
             {
@@ -86,7 +86,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
-        public ActionResult<IEnumerable<UserDto>> GetUserByEmail(string email)
+        public ActionResult<IEnumerable<UserDto>> GetByEmail(string email)
         {
             if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
             {
@@ -100,11 +100,11 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UserManagerDelete")]
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public void Delete(string username)
         {
             if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
             {
-                _manager.DeleteUser(id);
+                _manager.DeleteUser(username);
             }
         }
     }

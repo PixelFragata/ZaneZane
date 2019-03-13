@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
-using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
+using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 
 namespace ZZ_ERP.API.Controllers
@@ -28,7 +28,7 @@ namespace ZZ_ERP.API.Controllers
         // GET api/values
         [Authorize(Policy = "RoleManagerRead")]
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetAllUsers()
+        public ActionResult<IEnumerable<string>> GetAll()
         {
             if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
             {

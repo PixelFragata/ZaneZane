@@ -11,6 +11,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.Interfaces
         List<IAccount> ListAll();
         List<IAccount> GetUserByUsername(string username);
         List<IAccount> GetUserByEmail(string email);
-        bool DeleteUser(string id);
+        bool DeleteUser(string username);
     }
 }

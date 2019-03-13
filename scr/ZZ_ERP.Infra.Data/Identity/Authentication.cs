@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
-using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
+using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 
 namespace ZZ_ERP.Infra.Data.Identity

@@ -24,6 +24,9 @@
         public static string IsController = "IsController";
         public static string AddClientAuthorized = "AddClientAuthorized";
         public static string RemoveClientAuthorized = "RemoveClientAuthorized";
-        public static string GetAllTiposServiço = "GetAllTiposServiço";
+        public static string GetAllTiposServico = "GetAllTiposServico";
+        public static string AddTipoServico = "AddTipoServico";
+        public static string EditTipoServico = "EditTipoServico";
+        public static string DeleteTipoServico = "DeleteTipoServico";
     }
 }

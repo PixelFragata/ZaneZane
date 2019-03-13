@@ -42,10 +42,15 @@ namespace ZZ_ERP.Infra.Data.Repositories
             {
                 IQueryable<TEntity> query = DbSet;
 
+               
 
                 if (filter != null)
                 {
-                    query = query.Where(filter);
+                    query = query.Where(filter).Where(e => e.IsActive);
+                }
+                else
+                {
+                    query = query.Where(e => e.IsActive);
                 }
 
                 var properties = includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

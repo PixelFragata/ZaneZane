@@ -70,10 +70,10 @@ namespace ZZ_ERP.Infra.Data.Identity
             return users.Any() ? users.Select(u => (IAccount)u).ToList() : new List<IAccount>();
         }
 
-        public bool DeleteUser(string id)
+        public bool DeleteUser(string username)
         {
             var users = _dbContext.Users;
-            var user = users.FirstOrDefault(u => u.Id.Equals(id));
+            var user = users.FirstOrDefault(u => u.UserName.Equals(username));
             if (user != null)
             {
                 user.IsActive = false;

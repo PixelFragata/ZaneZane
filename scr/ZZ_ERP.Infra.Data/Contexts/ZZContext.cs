@@ -15,6 +15,7 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<TipoServico> TipoServicos { get; set; }
         public DbSet<PermissaoTela> PermissaoTelas { get; set; }
         public DbSet<TipoPermissao> TipoPermissoes { get; set; }
+        public DbSet<UnidadeMedida> UnidadeMedidas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +31,7 @@ namespace ZZ_ERP.Infra.Data.Contexts
         {
             modelBuilder.ApplyConfiguration(new PermissaoTelaConfig());
             modelBuilder.ApplyConfiguration(new TipoPermissaoConfig());
+            modelBuilder.ApplyConfiguration(new UnidadeMedidaConfig());
 
             base.OnModelCreating(modelBuilder);
         }

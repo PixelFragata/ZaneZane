@@ -178,6 +178,26 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("TipoServicos");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.UnidadeMedida", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(2147483647);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Sigla")
+                        .IsRequired()
+                        .HasMaxLength(5);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnidadeMedidas");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Infra.Data.Identity.UserAccount", b =>
                 {
                     b.Property<string>("Id")

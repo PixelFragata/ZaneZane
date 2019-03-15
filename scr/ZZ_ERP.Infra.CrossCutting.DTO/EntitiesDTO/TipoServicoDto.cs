@@ -4,9 +4,8 @@ using System.Text;
 
 namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
 {
-    public class TipoServicoDto
+    public class TipoServicoDto : EntityDto
     {
-        public string CurrentDescription { get; set; }
-        public string NewDescription { get; set; }
+        public string Description { get; set; }
     }
 }

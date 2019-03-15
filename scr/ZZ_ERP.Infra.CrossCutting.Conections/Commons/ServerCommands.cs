@@ -24,9 +24,22 @@
         public static string IsController = "IsController";
         public static string AddClientAuthorized = "AddClientAuthorized";
         public static string RemoveClientAuthorized = "RemoveClientAuthorized";
-        public static string GetAllTiposServico = "GetAllTiposServico";
-        public static string AddTipoServico = "AddTipoServico";
-        public static string EditTipoServico = "EditTipoServico";
-        public static string DeleteTipoServico = "DeleteTipoServico";
+
+
+        #region Actions
+        public static string GetAll = "GetAll";
+        public static string Add = "Add";
+        public static string Edit = "Edit";
+        public static string Disable = "Disable";
+
+        #endregion
+
+        #region Permissions
+        public static string Create = "Create";
+        public static string Read = "Read";
+        public static string Update = "Update";
+        public static string Delete = "Delete";
+        #endregion
+
     }
 }

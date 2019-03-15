@@ -35,25 +35,32 @@ namespace ZZ_ERP.DataApplication.Clients
                 {
                     if (command.Cmd != null)
                     {
-                        if (command.Cmd.Equals(ServerCommands.GetAllTiposServico))
+                        if(!string.IsNullOrWhiteSpace(command.Tela))
                         {
-                            Cmd = await TiposServicosManager.GetAll(command);
-                            await Connection.WriteServer(Cmd);
-                        }
-                        else if (command.Cmd.Equals(ServerCommands.AddTipoServico))
-                        {
-                            Cmd = await TiposServicosManager.Add(command);
-                            await Connection.WriteServer(Cmd);
-                        }
-                        else if (command.Cmd.Equals(ServerCommands.EditTipoServico))
-                        {
-                            Cmd = await TiposServicosManager.Edit(command);
-                            await Connection.WriteServer(Cmd);
-                        }
-                        else if (command.Cmd.Equals(ServerCommands.DeleteTipoServico))
-                        {
-                            Cmd = await TiposServicosManager.Delete(command);
-                            await Connection.WriteServer(Cmd);
+                            var managerName = "ZZ_ERP.DataApplication.EntitiesManager." + command.Tela + "Manager";
+                            var type = Type.GetType(managerName);
+                            var manager = (IEntityManager) Activator.CreateInstance(type);
+
+                            if (command.Cmd.Equals(ServerCommands.GetAll))
+                            {
+                                Cmd = await manager.GetAll(command);
+                                await Connection.WriteServer(Cmd);
+                            }
+                            else if (command.Cmd.Equals(ServerCommands.Add))
+                            {
+                                Cmd = await manager.Add(command);
+                                await Connection.WriteServer(Cmd);
+                            }
+                            else if (command.Cmd.Equals(ServerCommands.Edit))
+                            {
+                                Cmd = await manager.Edit(command);
+                                await Connection.WriteServer(Cmd);
+                            }
+                            else if (command.Cmd.Equals(ServerCommands.Disable))
+                            {
+                                Cmd = await manager.Delete(command);
+                                await Connection.WriteServer(Cmd);
+                            }
                         }
                     }
                 }

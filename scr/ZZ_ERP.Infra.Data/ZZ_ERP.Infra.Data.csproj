@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20190305010459_AddPermissoes.cs" />
+    <Compile Remove="Migrations\20190314181749_AddUnidadeMedida.cs" />
   </ItemGroup>
 
   <ItemGroup>

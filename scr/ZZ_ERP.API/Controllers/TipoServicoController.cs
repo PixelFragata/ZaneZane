@@ -20,25 +20,24 @@ namespace ZZ_ERP.API.Controllers
     [Authorize("Bearer")]
     public class TipoServicoController : ControllerBase
     {
-
+        public static string Tela = "TipoServico";
 
         [Authorize(Policy = "TipoServicoRead")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TipoServicoDto>>> GetAll()
         {
             var myUsername = User.Identity.Name;
             if (ZZApiMain.VerifyUserAuthorize(myUsername))
             {
                 if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command{Cmd = ServerCommands.GetAllTiposServico});
+                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command{Cmd = ServerCommands.GetAll, Tela = Tela});
 
                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 
-
                     if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                     {
-                        return await SerializerAsync.DeserializeJsonList<string>(responseCommand.Json);
+                        return await SerializerAsync.DeserializeJsonList<TipoServicoDto>(responseCommand.Json);
                     }
                 }
             }
@@ -56,7 +55,7 @@ namespace ZZ_ERP.API.Controllers
             {
                 if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.AddTipoServico, Json = await SerializerAsync.SerializeJson(tipoServicoDescricao)});
+                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(tipoServicoDescricao)});
 
                     responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 
@@ -80,7 +79,7 @@ namespace ZZ_ERP.API.Controllers
             {
                 if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.EditTipoServico, Json = await SerializerAsync.SerializeJson(dto) });
+                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
 
                     responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 
@@ -95,7 +94,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoServicoDelete")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(string tipoServicoDescricao)
+        public async Task<ActionResult<bool>> Delete(TipoServicoDto dto)
         {
             var myUsername = User.Identity.Name;
             Command responseCommand = null;
@@ -104,7 +103,7 @@ namespace ZZ_ERP.API.Controllers
             {
                 if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.DeleteTipoServico, Json = await SerializerAsync.SerializeJson(tipoServicoDescricao) });
+                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
 
                     responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 

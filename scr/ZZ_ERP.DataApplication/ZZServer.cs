@@ -49,10 +49,13 @@ namespace ZZ_ERP.DataApplication
         private async Task StartServer()
         {
 
-            /*using (var context = new ZZContext())
-            {
+            //using (var context = new ZZContext())
+            //{
+            //    var permissaoRep = new Repository<PermissaoTela>(context);
 
-            }*/
+            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = "UnidadeMedida" });
+            //    await permissaoRep.Save();
+            //}
 
             ServerConn = new TcpListener(IPAddress.Parse(AdressPool.ZZ_EF_APK.Ip), AdressPool.ZZ_EF_APK.Port);
             ServerConn.Start();
@@ -133,6 +136,7 @@ namespace ZZ_ERP.DataApplication
             permissaoList.Add(new PermissaoTela { NomeTela = "UserManager" });
             permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager" });
             permissaoList.Add(new PermissaoTela { NomeTela = "TipoServico" });
+            permissaoList.Add(new PermissaoTela { NomeTela = "UnidadeMedida" });
 
 
             await permissaoRep.InsertList(permissaoList);

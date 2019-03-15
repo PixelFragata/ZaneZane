@@ -6,6 +6,7 @@
         public long EntityId { get; set; }
         public string Json { get; set; }
         public string Cmd { get; set; }
+        public string Tela { get; set; }
         public bool IsWait { get; set; }
 
         public Command()
@@ -17,6 +18,7 @@
             EntityId = cmd.EntityId;
             Json = cmd.Json;
             Cmd = cmd.Cmd;
+            Tela = cmd.Tela;
             IsWait = cmd.IsWait;
         }
         

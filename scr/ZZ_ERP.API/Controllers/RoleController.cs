@@ -65,6 +65,22 @@ namespace ZZ_ERP.API.Controllers
             return false;
         }
 
+        [Authorize(Policy = "RoleManagerCreate")]
+        [HttpPost]
+        public async Task<ActionResult<bool>> CreateScreenClaims(string roleName, string nomeTela)
+        {
+            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            {
+                var success = await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Create);
+                success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Read);
+                success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Update);
+                success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Delete );
+                return success;
+            }
+
+            return false;
+        }
+
         [Authorize(Policy = "RoleManagerRead")]
         [HttpGet]
         public async Task<ActionResult<MatrizRolePermission>> GetRoleClaims(string roleName)

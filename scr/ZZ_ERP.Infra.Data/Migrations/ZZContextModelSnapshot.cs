@@ -129,6 +129,22 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.CondicaoPagamento", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CondicaoPagamentos");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.PermissaoTela", b =>
                 {
                     b.Property<long>("Id")
@@ -144,6 +160,22 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PermissaoTelas");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoOS", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposOS");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoPermissao", b =>
@@ -169,7 +201,8 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DescricaoServico");
+                    b.Property<string>("Descricao")
+                        .IsRequired();
 
                     b.Property<bool>("IsActive");
 

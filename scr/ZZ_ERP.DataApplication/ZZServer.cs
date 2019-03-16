@@ -53,7 +53,7 @@ namespace ZZ_ERP.DataApplication
             //{
             //    var permissaoRep = new Repository<PermissaoTela>(context);
 
-            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = "UnidadeMedida" });
+            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.CondicaoPagamento });
             //    await permissaoRep.Save();
             //}
 
@@ -135,8 +135,10 @@ namespace ZZ_ERP.DataApplication
             var permissaoList = new List<PermissaoTela>();
             permissaoList.Add(new PermissaoTela { NomeTela = "UserManager" });
             permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager" });
-            permissaoList.Add(new PermissaoTela { NomeTela = "TipoServico" });
-            permissaoList.Add(new PermissaoTela { NomeTela = "UnidadeMedida" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoServico });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.UnidadeMedida });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoOS });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CondicaoPagamento });
 
 
             await permissaoRep.InsertList(permissaoList);

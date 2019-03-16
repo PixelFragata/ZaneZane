@@ -13,67 +13,47 @@ using ZZ_ERP.Infra.Data.Repositories;
 
 namespace ZZ_ERP.DataApplication.EntitiesManager
 {
-    public class UnidadeMedidaManager : IEntityManager
+    public class UnidadeMedidaManager : EntityManager<UnidadeMedida>
     {
 
-        public async Task<Command> GetAll(Command command)
+        public override async Task<Command> Add(Command command)
         {
             Command cmd = new Command(command);
-
-            using (var context = new ZZContext())
+            try
             {
-                var rep = new Repository<UnidadeMedida>(context);
-                var entities = await rep.Get();
-                var list = entities.ToList();
+                var dto = await SerializerAsync.DeserializeJson<UnidadeMedidaDto>(command.Json);
 
-                if (list.Any())
+                var entity = await MyRepository.Get(t => t.Sigla.Equals(dto.Sigla));
+
+                if (entity != null && !entity.Any())
                 {
                     cmd.Cmd = ServerCommands.LogResultOk;
-                    var dtos = list.Select(t => t.ConvertDto()).ToList();
-                    cmd.Json = await SerializerAsync.SerializeJsonList(dtos);
-                }
-                else
-                {
-                    cmd.Cmd = ServerCommands.LogResultDeny;
-                }
-            }
-
-            return cmd;
-        }
-
-        public async Task<Command> Add(Command command)
-        {
-            Command cmd = new Command(command);
-            var dto = await SerializerAsync.DeserializeJson<UnidadeMedidaDto>(command.Json);
-            using (var context = new ZZContext())
-            {
-                var rep = new Repository<UnidadeMedida>(context);
-                var entity = await rep.Get(t => t.Sigla.Equals(dto.Sigla));
-
-                if (!entity.Any())
-                {
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    await rep.Insert(new UnidadeMedida { Sigla = dto.Sigla, Descricao = dto.Description});
+                    await MyRepository.Insert(new UnidadeMedida { Sigla = dto.Sigla, Descricao = dto.Description });
                     cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await rep.Save();
+                    await MyRepository.Save();
                 }
                 else
                 {
                     cmd.Cmd = ServerCommands.LogResultDeny;
                 }
             }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
 
             return cmd;
         }
 
-        public async Task<Command> Edit(Command command)
+        public override async Task<Command> Edit(Command command)
         {
             Command cmd = new Command(command);
-            var dto = await SerializerAsync.DeserializeJson<UnidadeMedidaDto>(command.Json);
-            using (var context = new ZZContext())
+            try
             {
-                var rep = new Repository<UnidadeMedida>(context);
-                var entity = await rep.GetById(cmd.EntityId);
+                var dto = await SerializerAsync.DeserializeJson<UnidadeMedidaDto>(command.Json);
+
+                var entity = await MyRepository.GetById(cmd.EntityId);
 
                 if (entity != null)
                 {
@@ -81,7 +61,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     if (dto.Description != null) entity.Descricao = dto.Description;
                     cmd.Cmd = ServerCommands.LogResultOk;
                     cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await rep.Save();
+                    await MyRepository.Save();
                 }
                 else
                 {
@@ -89,31 +69,10 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     cmd.Json = await SerializerAsync.SerializeJson(false);
                 }
             }
-
-            return cmd;
-        }
-
-        public async Task<Command> Delete(Command command)
-        {
-            Command cmd = new Command(command);
-            cmd.Json = await SerializerAsync.DeserializeJson<string>(command.Json);
-            using (var context = new ZZContext())
+            catch (Exception e)
             {
-                var rep = new Repository<UnidadeMedida>(context);
-                var entity = await rep.GetById(cmd.EntityId);
+                ConsoleEx.WriteError(e);
 
-                if (entity != null)
-                {
-                    entity.IsActive = false;
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await rep.Save();
-                }
-                else
-                {
-                    cmd.Cmd = ServerCommands.LogResultDeny;
-                    cmd.Json = await SerializerAsync.SerializeJson(false);
-                }
             }
 
             return cmd;

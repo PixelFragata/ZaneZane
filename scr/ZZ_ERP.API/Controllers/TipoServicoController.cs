@@ -20,11 +20,11 @@ namespace ZZ_ERP.API.Controllers
     [Authorize("Bearer")]
     public class TipoServicoController : ControllerBase
     {
-        public static string Tela = "TipoServico";
+        public static string Tela = ServerCommands.TipoServico;
 
         [Authorize(Policy = "TipoServicoRead")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoServicoDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TipoDto>>> GetAll()
         {
             var myUsername = User.Identity.Name;
             if (ZZApiMain.VerifyUserAuthorize(myUsername))
@@ -37,7 +37,7 @@ namespace ZZ_ERP.API.Controllers
 
                     if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                     {
-                        return await SerializerAsync.DeserializeJsonList<TipoServicoDto>(responseCommand.Json);
+                        return await SerializerAsync.DeserializeJsonList<TipoDto>(responseCommand.Json);
                     }
                 }
             }
@@ -46,18 +46,17 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoServicoCreate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Create(string tipoServicoDescricao)
+        public async Task<ActionResult<bool>> Create(TipoDto dto)
         {
             var myUsername = User.Identity.Name;
-            Command responseCommand = null;
 
             if (ZZApiMain.VerifyUserAuthorize(myUsername))
             {
                 if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(tipoServicoDescricao)});
+                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(dto)});
 
-                    responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 
                     if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                     {
@@ -70,10 +69,9 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoServicoUpdate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Edit(TipoServicoDto dto)
+        public async Task<ActionResult<bool>> Edit(TipoDto dto)
         {
             var myUsername = User.Identity.Name;
-            Command responseCommand = null;
 
             if (ZZApiMain.VerifyUserAuthorize(myUsername))
             {
@@ -81,7 +79,7 @@ namespace ZZ_ERP.API.Controllers
                 {
                     var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
 
-                    responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 
                     if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                     {
@@ -94,10 +92,9 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoServicoDelete")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(TipoServicoDto dto)
+        public async Task<ActionResult<bool>> Delete(TipoDto dto)
         {
             var myUsername = User.Identity.Name;
-            Command responseCommand = null;
 
             if (ZZApiMain.VerifyUserAuthorize(myUsername))
             {
@@ -105,7 +102,7 @@ namespace ZZ_ERP.API.Controllers
                 {
                     var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
 
-                    responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
 
                     if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                     {

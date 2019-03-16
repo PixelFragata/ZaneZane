@@ -16,11 +16,11 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<PermissaoTela> PermissaoTelas { get; set; }
         public DbSet<TipoPermissao> TipoPermissoes { get; set; }
         public DbSet<UnidadeMedida> UnidadeMedidas { get; set; }
+        public DbSet<TipoOS> TiposOS { get; set; }
+        public DbSet<CondicaoPagamento> CondicaoPagamentos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            Console.WriteLine("Configurando Conexao 332");
-
             const string connection =
                 "Server=dbfragata.cmcait8irl6a.us-east-2.rds.amazonaws.com,1433;Database=ZZ_ERP_Test;User Id=melchior;Password=Otiagoehfoda";
             optionsBuilder.UseSqlServer(connection);

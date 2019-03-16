@@ -20,7 +20,7 @@ namespace ZZ_ERP.API.Controllers
     [Authorize("Bearer")]
     public class UnidadeMedidaController : ControllerBase
     {
-        public const string Tela = "UnidadeMedida";
+        public static string Tela = ServerCommands.UnidadeMedida;
 
         [Authorize(Policy = "UnidadeMedidaRead")]
         [HttpGet]

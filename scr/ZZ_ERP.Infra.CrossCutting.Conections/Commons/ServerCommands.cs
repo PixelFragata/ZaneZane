@@ -41,5 +41,12 @@
         public static string Delete = "Delete";
         #endregion
 
+        #region Telas
+        public const string TipoServico = "TipoServico";
+        public const string UnidadeMedida = "UnidadeMedida";
+        public const string TipoOS = "TipoOS";
+        public const string CondicaoPagamento = "CondicaoPagamento";
+        #endregion
+
     }
 }

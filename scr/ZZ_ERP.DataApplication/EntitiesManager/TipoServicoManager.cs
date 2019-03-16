@@ -13,74 +13,54 @@ using ZZ_ERP.Infra.Data.Repositories;
 
 namespace ZZ_ERP.DataApplication.EntitiesManager
 {
-    public class TipoServicoManager : IEntityManager
-    {
+    public class TipoServicoManager : EntityManager<TipoServico>
+    { 
 
-        public async Task<Command> GetAll(Command command)
+        public override async Task<Command> Add(Command command)
         {
             Command cmd = new Command(command);
-
-            using (var context = new ZZContext())
+            try
             {
-                var tiposRep = new Repository<TipoServico>(context);
-                var tiposList = await tiposRep.Get();
-                var tipoServicos = tiposList.ToList();
+                var dto = await SerializerAsync.DeserializeJson<TipoDto>(command.Json);
 
-                if (tipoServicos.Any())
+                var tipos = await MyRepository.Get(t => t.Descricao.Equals(dto.Description));
+
+                if (tipos != null && !tipos.Any())
                 {
                     cmd.Cmd = ServerCommands.LogResultOk;
-                    var nameTipos = tipoServicos.Select(t => t.ConvertDto()).ToList();
-                    cmd.Json = await SerializerAsync.SerializeJsonList(nameTipos);
-                }
-                else
-                {
-                    cmd.Cmd = ServerCommands.LogResultDeny;
-                }
-            }
-
-            return cmd;
-        }
-
-        public async Task<Command> Add(Command command)
-        {
-            Command cmd = new Command(command);
-            cmd.Json = await SerializerAsync.DeserializeJson<string>(command.Json);
-            using (var context = new ZZContext())
-            {
-                var rep = new Repository<TipoServico>(context);
-                var tipos = await rep.Get(t => t.DescricaoServico.Equals(cmd.Json));
-
-                if (!tipos.Any())
-                {
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    await rep.Insert(new TipoServico {DescricaoServico = cmd.Json });
+                    await MyRepository.Insert(new TipoServico {Descricao = dto.Description });
                     cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await rep.Save();
+                    await MyRepository.Save();
                 }
                 else
                 {
                     cmd.Cmd = ServerCommands.LogResultDeny;
                 }
             }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
 
             return cmd;
         }
 
-        public async Task<Command> Edit(Command command)
+        public override async Task<Command> Edit(Command command)
         {
             Command cmd = new Command(command);
-            var dto = await SerializerAsync.DeserializeJson<TipoServicoDto>(command.Json);
-            using (var context = new ZZContext())
+            try
             {
-                var rep = new Repository<TipoServico>(context);
-                var tipoServico = await rep.GetById(cmd.EntityId);
+                var dto = await SerializerAsync.DeserializeJson<TipoDto>(command.Json);
+
+                var tipoServico = await MyRepository.GetById(cmd.EntityId);
 
                 if (tipoServico != null)
                 {
-                    tipoServico.DescricaoServico = dto.Description;
+                    tipoServico.Descricao = dto.Description;
                     cmd.Cmd = ServerCommands.LogResultOk;
                     cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await rep.Save();
+                    await MyRepository.Save();
                 }
                 else
                 {
@@ -88,31 +68,10 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     cmd.Json = await SerializerAsync.SerializeJson(false);
                 }
             }
-
-            return cmd;
-        }
-
-        public async Task<Command> Delete(Command command)
-        {
-            Command cmd = new Command(command);
-            cmd.Json = await SerializerAsync.DeserializeJson<string>(command.Json);
-            using (var context = new ZZContext())
+            catch (Exception e)
             {
-                var rep = new Repository<TipoServico>(context);
-                var tipo = await rep.GetById(cmd.EntityId);
+                ConsoleEx.WriteError(e);
 
-                if (tipo != null)
-                {
-                    tipo.IsActive = false;
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await rep.Save();
-                }
-                else
-                {
-                    cmd.Cmd = ServerCommands.LogResultDeny;
-                    cmd.Json = await SerializerAsync.SerializeJson(false);
-                }
             }
 
             return cmd;

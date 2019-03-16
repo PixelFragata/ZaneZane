@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using ZZ_ERP.DataApplication.EntitiesManager;
@@ -37,9 +38,9 @@ namespace ZZ_ERP.DataApplication.Clients
                     {
                         if(!string.IsNullOrWhiteSpace(command.Tela))
                         {
-                            var managerName = "ZZ_ERP.DataApplication.EntitiesManager." + command.Tela + "Manager";
-                            var type = Type.GetType(managerName);
-                            var manager = (IEntityManager) Activator.CreateInstance(type);
+                            
+                            var manager = await GetManager(command.Tela);
+                            if (manager == null) throw new ArgumentNullException(nameof(manager));
 
                             if (command.Cmd.Equals(ServerCommands.GetAll))
                             {
@@ -71,6 +72,37 @@ namespace ZZ_ERP.DataApplication.Clients
                 throw;
             }
             
+        }
+
+        private async Task<IEntityManager> GetManager(string tela)
+        {
+            IEntityManager manager = null;
+            try
+            {
+                switch (tela)
+                {
+                    case ServerCommands.UnidadeMedida:
+                        manager = new UnidadeMedidaManager();
+                        break;
+                    case ServerCommands.TipoServico:
+                        manager = new TipoServicoManager();
+                        break;
+                    case ServerCommands.TipoOS:
+                        manager = new TipoOSManager();
+                        break;
+                    case ServerCommands.CondicaoPagamento:
+                        manager = new CondicaoPagamentoManager();
+                        break;
+                    default:
+                        manager = null;
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+            }
+            return manager;
         }
     }
 }

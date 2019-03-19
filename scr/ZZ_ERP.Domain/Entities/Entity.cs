@@ -18,5 +18,6 @@ namespace ZZ_ERP.Domain.Entities
 
 
         public abstract EntityDto ConvertDto();
+        public abstract void UpdateEntity(EntityDto dto);
     }
 }

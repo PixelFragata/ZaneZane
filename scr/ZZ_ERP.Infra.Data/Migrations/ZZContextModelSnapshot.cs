@@ -129,6 +129,22 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.CentroCustoSintetico", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CentrosCustoSintetico");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.CondicaoPagamento", b =>
                 {
                     b.Property<long>("Id")
@@ -143,6 +159,26 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CondicaoPagamentos");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Estado", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(2147483647);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Sigla")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Estados");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.PermissaoTela", b =>
@@ -160,6 +196,70 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PermissaoTelas");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Servico", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CentroCustoId");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("DescricaoCompleta")
+                        .HasMaxLength(2147483647);
+
+                    b.Property<string>("DescricaoResumida")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Observacoes")
+                        .HasMaxLength(2147483647);
+
+                    b.Property<long>("TipoServicoId");
+
+                    b.Property<long>("UnidadeMedidaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CentroCustoId");
+
+                    b.HasIndex("TipoServicoId");
+
+                    b.HasIndex("UnidadeMedidaId");
+
+                    b.ToTable("Servicos");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.TabelaCusto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataTabela");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(2147483647);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<float>("Preco");
+
+                    b.Property<long>("ServicoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("TabelasCusto");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoOS", b =>
@@ -330,6 +430,32 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasOne("ZZ_ERP.Infra.Data.Identity.UserAccount")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Servico", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.CentroCustoSintetico", "CentroCusto")
+                        .WithMany()
+                        .HasForeignKey("CentroCustoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.TipoServico", "TipoServico")
+                        .WithMany()
+                        .HasForeignKey("TipoServicoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.UnidadeMedida", "UnidadeMedida")
+                        .WithMany()
+                        .HasForeignKey("UnidadeMedidaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.TabelaCusto", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Servico", "Servico")
+                        .WithMany("TabelasCusto")
+                        .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

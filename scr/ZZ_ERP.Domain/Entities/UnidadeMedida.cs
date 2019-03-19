@@ -15,7 +15,7 @@ namespace ZZ_ERP.Domain.Entities
         {
             try
             {
-                var dto = new UnidadeMedidaDto {Id = Id, Sigla = Sigla, Description = Descricao};
+                var dto = new TipoSiglaDto {Id = Id, Sigla = Sigla, Description = Descricao};
 
                 return dto;
             }
@@ -24,6 +24,21 @@ namespace ZZ_ERP.Domain.Entities
                 ConsoleEx.WriteError(e);
                 return null;
             }
+        }
+
+        public override void UpdateEntity(EntityDto dto)
+        {
+            try
+            {
+                var tipoDto = (TipoSiglaDto)dto;
+                Descricao = tipoDto.Description;
+                Sigla = tipoDto.Sigla;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+            }
+
         }
     }
 }

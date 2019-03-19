@@ -31,6 +31,7 @@ namespace ZZ_ERP.DependencyInjection
                     config.Password.RequireUppercase = false;
                 }).AddEntityFrameworkStores<ZZContext>()
                 .AddDefaultTokenProviders();
+            
 
             services.AddScoped(typeof(IAuthentication), typeof(Authentication));
             services.AddScoped(typeof(IAccountManager), typeof(AccountManager));

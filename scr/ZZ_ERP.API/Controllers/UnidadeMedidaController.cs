@@ -24,7 +24,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UnidadeMedidaRead")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UnidadeMedidaDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> GetAll()
         {
             var myUsername = User.Identity.Name;
             if (ZZApiMain.VerifyUserAuthorize(myUsername))
@@ -37,7 +37,7 @@ namespace ZZ_ERP.API.Controllers
 
                     if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                     {
-                        return await SerializerAsync.DeserializeJsonList<UnidadeMedidaDto>(responseCommand.Json);
+                        return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
                     }
                 }
             }
@@ -46,7 +46,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UnidadeMedidaCreate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Create(UnidadeMedidaDto dto)
+        public async Task<ActionResult<bool>> Create(TipoSiglaDto dto)
         {
             var myUsername = User.Identity.Name;
 
@@ -69,7 +69,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UnidadeMedidaUpdate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Edit(UnidadeMedidaDto dto)
+        public async Task<ActionResult<bool>> Edit(TipoSiglaDto dto)
         {
             var myUsername = User.Identity.Name;
 
@@ -92,7 +92,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "UnidadeMedidaDelete")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(UnidadeMedidaDto dto)
+        public async Task<ActionResult<bool>> Delete(TipoSiglaDto dto)
         {
             var myUsername = User.Identity.Name;
 

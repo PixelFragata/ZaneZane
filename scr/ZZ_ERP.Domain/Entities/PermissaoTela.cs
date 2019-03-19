@@ -12,5 +12,10 @@ namespace ZZ_ERP.Domain.Entities
         {
             throw new NotImplementedException();
         }
+
+        public override void UpdateEntity(EntityDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

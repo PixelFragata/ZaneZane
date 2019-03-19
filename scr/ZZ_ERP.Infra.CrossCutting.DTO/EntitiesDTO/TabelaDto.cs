@@ -4,9 +4,11 @@ using System.Text;
 
 namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
 {
-    public class UnidadeMedidaDto : EntityDto
+    public class TabelaDto : EntityDto
     {
-        public string Sigla { get; set; }
         public string Description { get; set; }
+        public float Price { get; set; }
+        public DateTime TableDate { get; set; }
+        public long ServicoId { get; set; }
     }
 }

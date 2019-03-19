@@ -27,5 +27,19 @@ namespace ZZ_ERP.Domain.Entities
                 return null;
             }
         }
+
+        public override void UpdateEntity(EntityDto dto)
+        {
+            try
+            {
+                var tipoDto = (TipoDto)dto;
+                Descricao = tipoDto.Description;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+            }
+
+        }
     }
 }

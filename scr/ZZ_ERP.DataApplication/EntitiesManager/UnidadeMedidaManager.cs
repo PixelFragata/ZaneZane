@@ -21,7 +21,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             Command cmd = new Command(command);
             try
             {
-                var dto = await SerializerAsync.DeserializeJson<UnidadeMedidaDto>(command.Json);
+                var dto = await SerializerAsync.DeserializeJson<TipoSiglaDto>(command.Json);
 
                 var entity = await MyRepository.Get(t => t.Sigla.Equals(dto.Sigla));
 
@@ -51,7 +51,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             Command cmd = new Command(command);
             try
             {
-                var dto = await SerializerAsync.DeserializeJson<UnidadeMedidaDto>(command.Json);
+                var dto = await SerializerAsync.DeserializeJson<TipoSiglaDto>(command.Json);
 
                 var entity = await MyRepository.GetById(cmd.EntityId);
 

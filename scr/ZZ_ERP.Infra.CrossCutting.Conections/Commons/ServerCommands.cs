@@ -46,6 +46,9 @@
         public const string UnidadeMedida = "UnidadeMedida";
         public const string TipoOS = "TipoOS";
         public const string CondicaoPagamento = "CondicaoPagamento";
+        public const string CentroCustoSintetico = "CentroCustoSintetico";
+        public const string TabelaCusto = "TabelaCusto";
+        public const string Servico = "Servico";
         #endregion
 
     }

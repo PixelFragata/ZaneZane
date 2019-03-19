@@ -93,6 +93,15 @@ namespace ZZ_ERP.DataApplication.Clients
                     case ServerCommands.CondicaoPagamento:
                         manager = new CondicaoPagamentoManager();
                         break;
+                    case ServerCommands.CentroCustoSintetico:
+                        manager = new CentroCustoSinteticoManager();
+                        break;
+                    case ServerCommands.Servico:
+                        manager = new ServicoManager();
+                        break;
+                    case ServerCommands.TabelaCusto:
+                        manager = new TabelaCustoManager();
+                        break;
                     default:
                         manager = null;
                         break;

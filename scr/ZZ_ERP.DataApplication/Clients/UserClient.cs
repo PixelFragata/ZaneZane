@@ -63,6 +63,16 @@ namespace ZZ_ERP.DataApplication.Clients
                                 await Connection.WriteServer(Cmd);
                             }
                         }
+                        else if (command.Cmd.Equals(ServerCommands.UpdateEstados))
+                        {
+                            Cmd = await LocalizationManager.UpdateEstados(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.UpdateCidades))
+                        {
+                            Cmd = await LocalizationManager.UpdateCidades(command);
+                            await Connection.WriteServer(Cmd);
+                        }
                     }
                 }
             }

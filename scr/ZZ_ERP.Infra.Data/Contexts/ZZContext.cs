@@ -20,6 +20,7 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<CondicaoPagamento> CondicaoPagamentos { get; set; }
         public DbSet<CentroCustoSintetico> CentrosCustoSintetico { get; set; }
         public DbSet<Estado> Estados { get; set; }
+        public DbSet<Cidade> Cidades { get; set; }
         public DbSet<TabelaCusto> TabelasCusto { get; set; }
         public DbSet<Servico> Servicos { get; set; }
 

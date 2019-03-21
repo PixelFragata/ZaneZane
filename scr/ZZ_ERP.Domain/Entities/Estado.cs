@@ -10,12 +10,13 @@ namespace ZZ_ERP.Domain.Entities
     {
         public string Sigla { get; set; }
         public string Descricao { get; set; }
+        public int Ibge { get; set; }
 
         public override EntityDto ConvertDto()
         {
             try
             {
-                var dto = new TipoSiglaDto {Id = Id, Sigla = Sigla, Description = Descricao};
+                var dto = new TipoSiglaDto {Id = Ibge, Sigla = Sigla, Description = Descricao};
 
                 return dto;
             }
@@ -33,6 +34,7 @@ namespace ZZ_ERP.Domain.Entities
                 var tipoDto = (TipoSiglaDto)dto;
                 Descricao = tipoDto.Description;
                 Sigla = tipoDto.Sigla;
+                Ibge = (int)tipoDto.Id;
             }
             catch (Exception e)
             {

@@ -31,7 +31,8 @@
         public static string Add = "Add";
         public static string Edit = "Edit";
         public static string Disable = "Disable";
-
+        public static string UpdateEstados = "UpdateEstados";
+        public static string UpdateCidades = "UpdateCidades";
         #endregion
 
         #region Permissions
@@ -49,6 +50,7 @@
         public const string CentroCustoSintetico = "CentroCustoSintetico";
         public const string TabelaCusto = "TabelaCusto";
         public const string Servico = "Servico";
+        public const string Localization = "Localization";
         #endregion
 
     }

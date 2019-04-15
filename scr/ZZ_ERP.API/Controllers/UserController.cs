@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
+using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 namespace ZZ_ERP.API.Controllers
@@ -31,14 +32,23 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public ActionResult<List<UserDto>> GetAll()
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                var users = _manager.ListAll();
-                var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName}).ToList();
-                return new List<UserDto>(dtos);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    var users = _manager.ListAll();
+                    var dtos = users.Select(u => new UserDto { Id = u.Id, Email = u.Email, Username = u.UserName }).ToList();
+                    return new List<UserDto>(dtos);
+                }
 
-            return null;
+                return null;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         // GET api/values/5
@@ -46,66 +56,110 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost]
         public async Task<ActionResult<bool>> Create(UserDto dto)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
                 {
-                    return true;
+                    if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+                    {
+                        return true;
+                    }
                 }
-            }
 
-            return false;
+                return false;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClient(UserDto dto)
         {
-            dto.Role = "Cliente";
-
-            if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+            try
             {
-                return true;
-            }
+                dto.Role = "Cliente";
 
-            return false;
+                if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetByUsername(string username)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                var users = _manager.GetUserByUsername(username);
-                var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName});
-                return new ActionResult<IEnumerable<UserDto>>(dtos);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    var users = _manager.GetUserByUsername(username);
+                    var dtos = users.Select(u => new UserDto { Id = u.Id, Email = u.Email, Username = u.UserName });
+                    return new ActionResult<IEnumerable<UserDto>>(dtos);
+                }
 
-            return null;
+                return null;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "UserManagerRead")]
         [HttpGet]
         public ActionResult<IEnumerable<UserDto>> GetByEmail(string email)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                var users = _manager.GetUserByEmail(email);
-                var dtos = users.Select(u => new UserDto {Id = u.Id, Email = u.Email, Username = u.UserName});
-                return new ActionResult<IEnumerable<UserDto>>(dtos);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    var users = _manager.GetUserByEmail(email);
+                    var dtos = users.Select(u => new UserDto { Id = u.Id, Email = u.Email, Username = u.UserName });
+                    return new ActionResult<IEnumerable<UserDto>>(dtos);
+                }
 
-            return null;
+                return null;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "UserManagerDelete")]
         [HttpDelete("{id}")]
         public void Delete(string username)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                _manager.DeleteUser(username);
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    _manager.DeleteUser(username);
+                }
             }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+            }
+            
         }
     }
 }

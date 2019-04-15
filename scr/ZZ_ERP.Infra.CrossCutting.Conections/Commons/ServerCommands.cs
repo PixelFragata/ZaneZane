@@ -31,8 +31,14 @@
         public static string Add = "Add";
         public static string Edit = "Edit";
         public static string Disable = "Disable";
-        public static string UpdateEstados = "UpdateEstados";
-        public static string UpdateCidades = "UpdateCidades";
+        public static string UpdateStates = "UpdateStates";
+        public static string GetAllStates = "GetAllStates";
+        public static string UpdateCities = "UpdateCities";
+        public static string GetCityByUf = "GetCityByUf";
+        public static string GetAddressByZipCode = "GetAddressByZipCode";
+        public static string GetAddress = "GetAddress";
+        public static string SaveAddress = "SaveAddress";
+        public static string EditAddress = "EditAddress";
         #endregion
 
         #region Permissions
@@ -51,6 +57,7 @@
         public const string TabelaCusto = "TabelaCusto";
         public const string Servico = "Servico";
         public const string Localization = "Localization";
+        public const string Funcionario = "Funcionario";
         #endregion
 
     }

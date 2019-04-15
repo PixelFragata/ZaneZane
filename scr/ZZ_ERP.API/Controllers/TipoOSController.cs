@@ -26,91 +26,127 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TipoDto>>> GetAll()
         {
-            var myUsername = User.Identity.Name;
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command{Cmd = ServerCommands.GetAll, Tela = Tela});
-
-                   var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return await SerializerAsync.DeserializeJsonList<TipoDto>(responseCommand.Json);
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetAll, Tela = Tela });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<TipoDto>(responseCommand.Json);
+                        }
                     }
                 }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "TipoOSCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Create(TipoDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(dto)});
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "TipoOSUpdate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Edit(TipoDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "TipoOSDelete")]
         [HttpDelete]
         public async Task<ActionResult<bool>> Delete(TipoDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
     }

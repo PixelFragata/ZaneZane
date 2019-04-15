@@ -29,6 +29,22 @@ namespace ZZ_ERP.Domain.Entities
             }
         }
 
+        public EntityDto ConvertDto(string uf)
+        {
+            try
+            {
+                var dto = (TipoSiglaDto) ConvertDto();
+                dto.Sigla = uf;
+
+                return dto;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return null;
+            }
+        }
+
         public override void UpdateEntity(EntityDto dto)
         {
             try

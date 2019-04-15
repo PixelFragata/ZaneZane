@@ -62,7 +62,7 @@ namespace ZZ_ERP.Domain.Entities
             catch (Exception e)
             {
                 ConsoleEx.WriteError(e);
-            }
+            } 
 
         }
     }

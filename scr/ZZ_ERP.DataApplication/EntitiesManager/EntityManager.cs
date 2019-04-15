@@ -24,7 +24,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
 
 
-        public async Task<Command> GetAll(Command command)
+        public virtual async Task<Command> GetAll(Command command)
         {
             Command cmd = new Command(command);
             try

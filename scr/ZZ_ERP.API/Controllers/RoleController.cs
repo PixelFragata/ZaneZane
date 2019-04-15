@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
+using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 
@@ -30,14 +31,23 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAll()
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                var users = _roleManager.ListAll();
-                var dtos = users.Select(u => u.Name);
-                return new ActionResult<IEnumerable<string>>(dtos);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    var users = _roleManager.ListAll();
+                    var dtos = users.Select(u => u.Name);
+                    return new ActionResult<IEnumerable<string>>(dtos);
+                }
 
-            return null;
+                return null;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         // GET api/values/5
@@ -45,52 +55,88 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost("{roleName}")]
         public async Task<ActionResult<bool>> Create(string roleName)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                return await _roleManager.CreateAsync(roleName);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    return await _roleManager.CreateAsync(roleName);
+                }
 
-            return false;
+                return false;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "RoleManagerCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClaim(string roleName, string nomeTela, string tipoPermissao)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                return await _roleManager.AddRoleClaim(roleName, nomeTela, tipoPermissao);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    return await _roleManager.AddRoleClaim(roleName, nomeTela, tipoPermissao);
+                }
 
-            return false;
+                return false;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "RoleManagerCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> CreateScreenClaims(string roleName, string nomeTela)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                var success = await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Create);
-                success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Read);
-                success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Update);
-                success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Delete );
-                return success;
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    var success = await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Create);
+                    success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Read);
+                    success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Update);
+                    success = success && await _roleManager.AddRoleClaim(roleName, nomeTela, ServerCommands.Delete);
+                    return success;
+                }
 
-            return false;
+                return false;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "RoleManagerRead")]
         [HttpGet]
         public async Task<ActionResult<MatrizRolePermission>> GetRoleClaims(string roleName)
         {
-            if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+            try
             {
-                return await _roleManager.GetRolePermissions(roleName);
-            }
+                if (ZZApiMain.VerifyUserAuthorize(User.Identity.Name))
+                {
+                    return await _roleManager.GetRolePermissions(roleName);
+                }
 
-            return null;
+                return null;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
     }
 }

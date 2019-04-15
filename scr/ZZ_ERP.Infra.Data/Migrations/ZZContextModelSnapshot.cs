@@ -182,6 +182,41 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("CondicaoPagamentos");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Endereco", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Bairro")
+                        .IsRequired();
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(8);
+
+                    b.Property<long>("CidadeId");
+
+                    b.Property<string>("Complemento");
+
+                    b.Property<int>("GIACode");
+
+                    b.Property<int>("Ibge");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Logradouro")
+                        .IsRequired();
+
+                    b.Property<int>("Numero");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CidadeId");
+
+                    b.ToTable("Enderecos");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Estado", b =>
                 {
                     b.Property<long>("Id")
@@ -202,6 +237,37 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Estados");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Funcionario", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CNPJ");
+
+                    b.Property<string>("CPF");
+
+                    b.Property<string>("Codigo");
+
+                    b.Property<string>("Email");
+
+                    b.Property<long>("EnderecoId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("NomeFantasia");
+
+                    b.Property<string>("RazaoSocial");
+
+                    b.Property<string>("Telefone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.PermissaoTela", b =>
@@ -461,6 +527,22 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasOne("ZZ_ERP.Domain.Entities.Estado", "Estado")
                         .WithMany()
                         .HasForeignKey("EstadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Endereco", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Cidade", "Cidade")
+                        .WithMany()
+                        .HasForeignKey("CidadeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Funcionario", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

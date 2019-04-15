@@ -23,6 +23,8 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<TabelaCusto> TabelasCusto { get; set; }
         public DbSet<Servico> Servicos { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +42,7 @@ namespace ZZ_ERP.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new EstadoConfig());
             modelBuilder.ApplyConfiguration(new TabelaCustoConfig());
             modelBuilder.ApplyConfiguration(new ServicoConfig());
+            modelBuilder.ApplyConfiguration(new EnderecoConfig());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -63,16 +63,52 @@ namespace ZZ_ERP.DataApplication.Clients
                                 await Connection.WriteServer(Cmd);
                             }
                         }
-                        else if (command.Cmd.Equals(ServerCommands.UpdateEstados))
+
+                        #region Localization
+
+                        else if (command.Cmd.Equals(ServerCommands.UpdateStates))
                         {
                             Cmd = await LocalizationManager.UpdateEstados(command);
                             await Connection.WriteServer(Cmd);
                         }
-                        else if (command.Cmd.Equals(ServerCommands.UpdateCidades))
+                        else if (command.Cmd.Equals(ServerCommands.GetAllStates))
+                        {
+                            Cmd = await LocalizationManager.GetAllStates(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.UpdateCities))
                         {
                             Cmd = await LocalizationManager.UpdateCidades(command);
                             await Connection.WriteServer(Cmd);
                         }
+                        else if (command.Cmd.Equals(ServerCommands.GetCityByUf))
+                        {
+                            Cmd = await LocalizationManager.GetCityByUf(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.GetAddressByZipCode))
+                        {
+                            Cmd = await LocalizationManager.GetAddressByZipCode(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.GetAddress))
+                        {
+                            Cmd = await LocalizationManager.GetAddress(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.SaveAddress))
+                        {
+                            Cmd = await LocalizationManager.SaveAddress(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+                        else if (command.Cmd.Equals(ServerCommands.EditAddress))
+                        {
+                            Cmd = await LocalizationManager.EditAddress(command);
+                            await Connection.WriteServer(Cmd);
+                        }
+
+                        #endregion
+
                     }
                 }
             }
@@ -111,6 +147,9 @@ namespace ZZ_ERP.DataApplication.Clients
                         break;
                     case ServerCommands.TabelaCusto:
                         manager = new TabelaCustoManager();
+                        break;
+                    case ServerCommands.Funcionario:
+                        manager = new FuncionarioManager();
                         break;
                     default:
                         manager = null;

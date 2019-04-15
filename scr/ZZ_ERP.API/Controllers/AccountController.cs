@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
+using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 using ZZ_ERP.Infra.CrossCutting.DTO.IdentityDTO;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 
@@ -31,27 +32,54 @@ namespace ZZ_ERP.API.Controllers
         [HttpPost]
         public async Task<ActionResult<LoginResultDto>> Login(LoginDto dto)
         {
-            var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
+            try
+            {
+                var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
 
-            await ZZApiMain.AddUserConnection(resultDto);
-            return resultDto;
+                await ZZApiMain.AddUserConnection(resultDto);
+                return resultDto;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult<bool>> Logout()
         {
-            await ZZApiMain.RemoveUserConnection(this.User.Identity.Name);
-            return true;
+            try
+            {
+                await ZZApiMain.RemoveUserConnection(this.User.Identity.Name);
+                return true;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         public async Task<ActionResult<LoginResultDto>> LoginTeste()
         {
-            var dto = new LoginDto{Password = "admin", Username = "admin"};
-            var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
+            try
+            {
+                var dto = new LoginDto { Password = "admin", Username = "admin" };
+                var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
 
-            await ZZApiMain.AddUserConnection(resultDto);
-            return resultDto;
+                await ZZApiMain.AddUserConnection(resultDto);
+                return resultDto;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }  
     }
 }

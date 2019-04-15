@@ -22,117 +22,286 @@ namespace ZZ_ERP.API.Controllers
     {
         public static string Tela = ServerCommands.Localization;
 
-        [Authorize(Policy = "LocalizationUpdate")]
+        [Authorize(Policy = "LocalizationRead")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> UpdateEstados()
+        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> GetAllStates()
         {
-            var myUsername = User.Identity.Name;
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command{Cmd = ServerCommands.UpdateEstados});
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetAllStates });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
+                        }
                     }
                 }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
+        }
+
+        [Authorize(Policy = "LocalizationRead")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> GetCityByUf(TipoSiglaDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetCityByUf, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
+        }
+
+        [Authorize(Policy = "LocalizationRead")]
+        [HttpGet]
+        public async Task<ActionResult<EnderecoDto>> GetAddressByZipCode(EnderecoDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetAddressByZipCode, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJson<EnderecoDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
+        }
+
+        [Authorize(Policy = "LocalizationRead")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EnderecoDto>>> GetAddress(EnderecoDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetAddress, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<EnderecoDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
         }
 
         [Authorize(Policy = "LocalizationUpdate")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> UpdateCidades()
+        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> UpdateStates()
         {
-            var myUsername = User.Identity.Name;
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.UpdateCidades });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.UpdateStates });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
+                        }
                     }
                 }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
+        }
+
+        [Authorize(Policy = "LocalizationUpdate")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TipoSiglaDto>>> UpdateCities()
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.UpdateCities });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<TipoSiglaDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "LocalizationCreate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Create(ServicoDto dto)
+        public async Task<ActionResult<long>> SaveAddress(EnderecoDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(dto)});
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Cmd = ServerCommands.SaveAddress, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return responseCommand.EntityId;
+                        }
                     }
                 }
+                return -1;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "LocalizationUpdate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Edit(ServicoDto dto)
+        public async Task<ActionResult<bool>> EditAddress(EnderecoDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
-                    }
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Cmd = ServerCommands.EditAddress, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
+                    } 
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "LocalizationDelete")]
         [HttpDelete]
         public async Task<ActionResult<bool>> Delete(ServicoDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
     }

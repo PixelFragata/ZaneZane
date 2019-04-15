@@ -19,6 +19,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
     public class LocalizationManager
     {
         private const string EstadosUrl = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+        private const String BaseUrl = "https://viacep.com.br";
 
         public static async Task<Command> UpdateEstados(Command command)
         {
@@ -30,7 +31,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     var rep = new Repository<Estado>(context);
                     var entities = await rep.Get();
                     var list = entities.ToList();
-                    var ibgeList = await SearchAsync();
+                    var ibgeList = await SearchEstadoAsync();
 
                     if (list.Any() && ibgeList.Any())
                     {
@@ -73,6 +74,38 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             return cmd;
         }
 
+
+        public static async Task<Command> GetAllStates(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                using (var context = new ZZContext())
+                {
+                    var rep = new Repository<Estado>(context);
+                    var entities = await rep.Get();
+                    var list = entities.ToList();
+
+                    if (list.Any())
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        var dtos = list.Select(t => t.ConvertDto()).ToList();
+                        cmd.Json = await SerializerAsync.SerializeJsonList(dtos);
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.LogResultDeny;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
         public static async Task<Command> UpdateCidades(Command command)
         {
             Command cmd = new Command(command);
@@ -137,11 +170,223 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
         }
 
 
+
+        public static async Task<Command> GetCityByUf(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                using (var context = new ZZContext())
+                {
+                    var dto = await SerializerAsync.DeserializeJson<TipoSiglaDto>(cmd.Json); 
+                    var repEstado = new Repository<Estado>(context);
+                    var repCity = new Repository<Cidade>(context);
+                    var list = await repEstado.Get(e => e.Sigla.Equals(dto.Sigla));
+                    var entity = list.FirstOrDefault();
+                    var cidades = await repCity.Get(c => c.EstadoId == entity.Id);
+                    var cidadeList = cidades.ToList();
+
+                    if (cidadeList.Any())
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        var dtos = cidadeList.Select(t => t.ConvertDto(dto.Sigla)).ToList();
+                        
+                        cmd.Json = await SerializerAsync.SerializeJsonList(dtos);
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.LogResultDeny;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
+        public static async Task<Command> GetAddressByZipCode(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                using (var context = new ZZContext())
+                {
+                    var dto = await SerializerAsync.DeserializeJson<EnderecoDto>(cmd.Json);
+
+                    var repCity = new Repository<Cidade>(context);
+                    var address = await SearchAddressAsync(dto.Cep, CancellationToken.None);
+                    var cidades = await repCity.Get(c => c.Descricao.Contains(address.City) && c.Estado.Sigla.Equals(address.StateInitials),null, "Estado");
+                    var cidade = cidades.FirstOrDefault();
+
+                    if (cidade != null)
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        var entity = new EnderecoDto
+                        {
+                            Cep = address.ZipCode,
+                            Bairro = address.Neighborhood,
+                            CidadeId = cidade.Id,
+                            Cidade = cidade.Descricao,
+                            Estado = cidade.Estado.Sigla,
+                            Logradouro = address.Street,
+                            Complemento = address.Complement,
+                            Ibge = address.IBGECode,
+                            GIACode = address.GIACode
+                        };
+                        cmd.Json = await SerializerAsync.SerializeJson(entity);
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.LogResultDeny;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
+        public static async Task<Command> GetAddress(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                using (var context = new ZZContext())
+                {
+                    var dto = await SerializerAsync.DeserializeJson<EnderecoDto>(cmd.Json);
+                    var addressList = await SearchAddressAsync(dto.Estado, dto.Cidade, dto.Logradouro, CancellationToken.None);
+
+                    var viaCepResults = addressList.ToList();
+                    if (viaCepResults.Any())
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        var dtos = viaCepResults.Select(d => new EnderecoDto{
+                            Cep = d.ZipCode,
+                            Bairro = d.Neighborhood,
+                            Cidade = d.City,
+                            Estado = d.StateInitials,
+                            Logradouro = d.Street,
+                            Complemento = d.Complement,
+                            Ibge = d.IBGECode,
+                            GIACode = d.GIACode
+                        });
+                        cmd.Json = await SerializerAsync.SerializeJsonList<EnderecoDto>(dtos.ToList());
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.LogResultDeny;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
+        public static async Task<Command> SaveAddress(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                using (var context = new ZZContext())
+                {
+                    var dto = await SerializerAsync.DeserializeJson<EnderecoDto>(cmd.Json);
+                    var repAddress = new Repository<Endereco>(context);
+                    var repCity = new Repository<Cidade>(context);
+                    var cidades = await repCity.Get(c => c.Descricao.Contains(dto.Cidade) && c.Estado.Sigla.Equals(dto.Estado), null, "Estado");
+                    var cidade = cidades.FirstOrDefault();
+                    if (cidade != null)
+                    {
+                        dto.CidadeId = cidade.Id;
+                        if (dto.Ibge <= 0)
+                        {
+                            var viacep = await SearchAddressAsync(dto.Cep, CancellationToken.None);
+                            dto.Ibge = viacep.IBGECode;
+                            dto.GIACode = viacep.GIACode;
+                        }
+                        var address = await repAddress.Get(e =>
+                            e.Logradouro.Equals(dto.Logradouro) && e.Numero == dto.Numero);
+
+                        if (!address.Any())
+                        {
+                            cmd.Cmd = ServerCommands.LogResultOk;
+                            var entity = new Endereco();
+                            entity.UpdateEntity(dto);
+                            await repAddress.Insert(entity);
+                            await repAddress.Save();
+                            cmd.EntityId = entity.Id;
+                        }
+                        else
+                        {
+                            cmd.Cmd = ServerCommands.LogResultDeny;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
+        public static async Task<Command> EditAddress(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                using (var context = new ZZContext())
+                {
+                    var dto = await SerializerAsync.DeserializeJson<EnderecoDto>(cmd.Json);
+                    var repAddress = new Repository<Endereco>(context);
+                    var repCity = new Repository<Cidade>(context);
+                    var cidades = await repCity.Get(c => c.Descricao.Contains(dto.Cidade) && c.Estado.Sigla.Equals(dto.Estado), null, "Estado");
+                    var cidade = cidades.FirstOrDefault();
+                    if (cidade != null)
+                    {
+                        dto.CidadeId = cidade.Id;
+                        var address = await repAddress.GetById(dto.Id);
+                        if (address != null)
+                        {
+                            cmd.Cmd = ServerCommands.LogResultOk;
+                            address.UpdateEntity(dto);
+                            await repAddress.Save();
+                        }
+                        else
+                        {
+                            cmd.Cmd = ServerCommands.LogResultDeny;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
         private static async Task<List<Cidade>> SearchMunicipioAsync(int uf, long ufId)
         {
             using (var client = new HttpClient())
             {
-                var url = EstadosUrl + "/" + uf+"/municipios";
+                var url = EstadosUrl + "/" + uf + "/municipios";
                 var response = await client.GetAsync(url, CancellationToken.None).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
                 var jsonContent = await response.Content.ReadAsStringAsync();
@@ -156,11 +401,11 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                 return cidades;
             }
         }
-        private static async Task<List<Estado>> SearchAsync()
+        private static async Task<List<Estado>> SearchEstadoAsync()
         {
             using (var client = new HttpClient())
             {
-                var response = await client.GetAsync(EstadosUrl, CancellationToken.None).ConfigureAwait(false);
+                var response = await client.GetAsync(EstadosUrl, CancellationToken.  None).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
                 var jsonContent = await response.Content.ReadAsStringAsync();
                 var jsonList = await SerializerAsync.DeserializeJsonList<EstadoIbge>(jsonContent);
@@ -175,13 +420,54 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             }
         }
 
+        /// <summary>
+        /// Searches the asynchronous.
+        /// </summary>
+        /// <param name="zipCode">The zip code.</param>
+        /// <param name="token">The token.</param>
+        /// <returns></returns>
+        public static async Task<ViaCEPResult> SearchAddressAsync(String zipCode, CancellationToken token)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                var response = await client.GetAsync($"/ws/{zipCode}/json", token).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                var jsonContent = await response.Content.ReadAsStringAsync();
+                return await SerializerAsync.DeserializeJson<ViaCEPResult>(jsonContent);
+            }
+        }
+
+        /// <summary>
+        /// Searches the asynchronous.
+        /// </summary>
+        /// <param name="stateInitials">The state initials.</param>
+        /// <param name="city">The city.</param>
+        /// <param name="address">The address.</param> 
+        /// <param name="token">The token.</param>
+        /// <returns></returns>
+        public static async Task<IEnumerable<ViaCEPResult>> SearchAddressAsync(
+            String stateInitials,
+            String city,
+            String address,
+            CancellationToken token)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                var response = await client.GetAsync($"/ws/{stateInitials}/{city}/{address}/json", token).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                var jsonContent = await response.Content.ReadAsStringAsync();
+                return await SerializerAsync.DeserializeJsonList<ViaCEPResult>(jsonContent);
+            }
+        }
 
         public class EstadoIbge
         {
             public int Id { get; set; }
             public string Nome { get; set; }
             public string Sigla { get; set; }
-            public RegiaoIbge Regiao { get; set; }
+            public RegiaoIbge Regiao { get; set; } 
         }
 
         public class CidadeIbge
@@ -210,6 +496,36 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             public int Id { get; set; }
             public string Nome { get; set; }
             public MesorregiaoIbge Mesorregiao { get; set; }
+        }
+
+        public sealed class ViaCEPResult
+        {
+            [JsonProperty("cep")]
+            public String ZipCode { get; set; }
+
+            [JsonProperty("logradouro")]
+            public String Street { get; set; }
+
+            [JsonProperty("complemento")]
+            public String Complement { get; set; }
+
+            [JsonProperty("bairro")]
+            public String Neighborhood { get; set; }
+
+            [JsonProperty("localidade")]
+            public String City { get; set; }
+
+            [JsonProperty("uf")]
+            public String StateInitials { get; set; }
+
+            [JsonProperty("unidade")]
+            public String Unit { get; set; }
+
+            [JsonProperty("ibge")]
+            public Int32 IBGECode { get; set; }
+
+            [JsonProperty("gia")]
+            public Int32 GIACode { get; set; }
         }
     }
 }

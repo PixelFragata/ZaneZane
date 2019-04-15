@@ -26,91 +26,127 @@ namespace ZZ_ERP.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TabelaDto>>> GetAll()
         {
-            var myUsername = User.Identity.Name;
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command{Tela = Tela, Cmd = ServerCommands.GetAll});
-
-                   var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return await SerializerAsync.DeserializeJsonList<TabelaDto>(responseCommand.Json);
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.GetAll });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJsonList<TabelaDto>(responseCommand.Json);
+                        }
                     }
                 }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "TabelaCustoCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Create(TabelaDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(dto)});
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Add, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "TabelaCustoUpdate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Edit(TabelaDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Edit, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
         [Authorize(Policy = "TabelaCustoDelete")]
         [HttpDelete]
         public async Task<ActionResult<bool>> Delete(TabelaDto dto)
         {
-            var myUsername = User.Identity.Name;
-
-            if (ZZApiMain.VerifyUserAuthorize(myUsername))
+            try
             {
-                if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                var myUsername = User.Identity.Name;
+
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
                 {
-                    var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command {Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
-
-                    var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                    if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
                     {
-                        return true;
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Tela = Tela, Cmd = ServerCommands.Disable, EntityId = dto.Id, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+            
         }
 
     }

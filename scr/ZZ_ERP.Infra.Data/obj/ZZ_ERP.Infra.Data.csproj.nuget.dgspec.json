@@ -1,0 +1,280 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.Data\\ZZ_ERP.Infra.Data.csproj": {}
+  },
+  "projects": {
+    "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj",
+        "projectName": "ZZ_ERP.Domain",
+        "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj",
+        "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
+        "outputPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\renat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj": {
+                "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj",
+        "projectName": "ZZ_ERP.Infra.CrossCutting.Connections",
+        "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj",
+        "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
+        "outputPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\renat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[2.0.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj",
+        "projectName": "ZZ_ERP.Infra.CrossCutting.DTO",
+        "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj",
+        "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
+        "outputPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\renat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj": {
+                "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.Data\\ZZ_ERP.Infra.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.Data\\ZZ_ERP.Infra.Data.csproj",
+        "projectName": "ZZ_ERP.Infra.Data",
+        "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.Data\\ZZ_ERP.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
+        "outputPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\renat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj": {
+                "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Domain\\ZZ_ERP.Domain.csproj"
+              },
+              "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj": {
+                "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.Conections\\ZZ_ERP.Infra.CrossCutting.Connections.csproj"
+              },
+              "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj": {
+                "projectPath": "C:\\Fragata\\ZaneZane\\scr\\ZZ_ERP.Infra.CrossCutting.DTO\\ZZ_ERP.Infra.CrossCutting.DTO.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

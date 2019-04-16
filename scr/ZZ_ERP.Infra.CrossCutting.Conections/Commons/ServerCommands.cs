@@ -58,6 +58,8 @@
         public const string Servico = "Servico";
         public const string Localization = "Localization";
         public const string Funcionario = "Funcionario";
+        public const string Fornecedor = "Fornecedor";
+        public const string Cliente = "Cliente";
         #endregion
 
     }

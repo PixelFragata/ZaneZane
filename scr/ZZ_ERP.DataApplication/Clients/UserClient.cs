@@ -151,6 +151,12 @@ namespace ZZ_ERP.DataApplication.Clients
                     case ServerCommands.Funcionario:
                         manager = new FuncionarioManager();
                         break;
+                    case ServerCommands.Fornecedor:
+                        manager = new FornecedorManager();
+                        break;
+                    case ServerCommands.Cliente:
+                        manager = new ClienteManager();
+                        break;
                     default:
                         manager = null;
                         break;

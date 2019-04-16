@@ -166,6 +166,38 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("Cidades");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Cliente", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<string>("Documento")
+                        .IsRequired();
+
+                    b.Property<string>("Email");
+
+                    b.Property<long>("EnderecoId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("NomeFantasia");
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired();
+
+                    b.Property<string>("Telefone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("Clientes");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.CondicaoPagamento", b =>
                 {
                     b.Property<long>("Id")
@@ -239,17 +271,17 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("Estados");
                 });
 
-            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Funcionario", b =>
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Fornecedor", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CNPJ");
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
-                    b.Property<string>("CPF");
-
-                    b.Property<string>("Codigo");
+                    b.Property<string>("Documento")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
@@ -259,7 +291,40 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<string>("NomeFantasia");
 
-                    b.Property<string>("RazaoSocial");
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired();
+
+                    b.Property<string>("Telefone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("Fornecedores");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Funcionario", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<string>("Documento")
+                        .IsRequired();
+
+                    b.Property<string>("Email");
+
+                    b.Property<long>("EnderecoId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("NomeFantasia");
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired();
 
                     b.Property<string>("Telefone");
 
@@ -530,11 +595,27 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Cliente", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Endereco", b =>
                 {
                     b.HasOne("ZZ_ERP.Domain.Entities.Cidade", "Cidade")
                         .WithMany()
                         .HasForeignKey("CidadeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Fornecedor", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

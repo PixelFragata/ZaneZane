@@ -7,7 +7,7 @@ using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 
 namespace ZZ_ERP.Domain.Entities
 {
-    public class Funcionario : Entity
+    public class Fornecedor : Entity
     {
         [Required]
         public string Codigo { get; set; }

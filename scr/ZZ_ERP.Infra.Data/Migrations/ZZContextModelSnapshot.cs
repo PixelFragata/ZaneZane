@@ -271,6 +271,22 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("Estados");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Estoque", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Estoques");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Fornecedor", b =>
                 {
                     b.Property<long>("Id")

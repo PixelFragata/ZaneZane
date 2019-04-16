@@ -60,6 +60,7 @@
         public const string Funcionario = "Funcionario";
         public const string Fornecedor = "Fornecedor";
         public const string Cliente = "Cliente";
+        public const string Estoque = "Estoque";
         #endregion
 
     }

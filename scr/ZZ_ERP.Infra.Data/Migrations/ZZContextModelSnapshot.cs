@@ -135,6 +135,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
                     b.Property<string>("Descricao")
                         .IsRequired();
 
@@ -150,6 +153,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
                     b.Property<string>("Descricao");
 
@@ -204,6 +210,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
                     b.Property<string>("Descricao")
                         .IsRequired();
 
@@ -228,6 +237,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .HasMaxLength(8);
 
                     b.Property<long>("CidadeId");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
                     b.Property<string>("Complemento");
 
@@ -255,6 +267,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
                     b.Property<string>("Descricao")
                         .HasMaxLength(2147483647);
 
@@ -276,6 +291,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
                     b.Property<string>("Descricao")
                         .IsRequired();
@@ -357,6 +375,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
                     b.Property<bool>("IsActive");
 
                     b.Property<string>("NomeTela")
@@ -380,8 +401,11 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<string>("DescricaoCompleta")
-                        .HasMaxLength(2147483647);
+                    b.Property<bool>("ControlaEstoque")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("DescricaoCompleta");
 
                     b.Property<string>("DescricaoResumida")
                         .IsRequired()
@@ -389,8 +413,7 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<string>("Observacoes")
-                        .HasMaxLength(2147483647);
+                    b.Property<string>("Observacoes");
 
                     b.Property<long>("TipoServicoId");
 
@@ -412,6 +435,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
                     b.Property<DateTime>("DataTabela");
 
@@ -438,6 +464,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
                     b.Property<string>("Descricao")
                         .IsRequired();
 
@@ -453,6 +482,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -471,6 +503,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
                     b.Property<string>("Descricao")
                         .IsRequired();
 
@@ -486,6 +521,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(2147483647);

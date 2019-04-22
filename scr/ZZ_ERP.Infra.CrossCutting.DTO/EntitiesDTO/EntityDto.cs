@@ -3,6 +3,6 @@
     public abstract class EntityDto
     {
         public long Id { get; set; }
-
+        public string Codigo { get; set; }
     }
 }

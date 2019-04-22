@@ -16,7 +16,7 @@ namespace ZZ_ERP.Domain.Entities
         {
             try
             {
-                var dto = new TipoSiglaDto {Id = Ibge, Sigla = Sigla, Description = Descricao};
+                var dto = new TipoSiglaDto {Id = Ibge, Sigla = Sigla, Description = Descricao, Codigo = Codigo};
 
                 return dto;
             }
@@ -35,6 +35,7 @@ namespace ZZ_ERP.Domain.Entities
                 Descricao = tipoDto.Description;
                 Sigla = tipoDto.Sigla;
                 Ibge = (int)tipoDto.Id;
+                Codigo = tipoDto.Codigo;
             }
             catch (Exception e)
             {

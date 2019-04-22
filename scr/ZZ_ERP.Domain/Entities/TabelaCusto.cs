@@ -20,7 +20,7 @@ namespace ZZ_ERP.Domain.Entities
         { 
             try
             {
-                var dto = new TabelaDto {Id = Id, Description = Descricao, Price = Preco, TableDate = DataTabela};
+                var dto = new TabelaDto {Id = Id, Description = Descricao, Price = Preco, TableDate = DataTabela, Codigo = Codigo};
 
                 return dto;
             }
@@ -39,6 +39,7 @@ namespace ZZ_ERP.Domain.Entities
                 Descricao = tipoDto.Description;
                 Preco = tipoDto.Price;
                 DataTabela = tipoDto.TableDate;
+                Codigo = tipoDto.Codigo;
             }
             catch (Exception e)
             {

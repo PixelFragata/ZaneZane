@@ -9,10 +9,10 @@ namespace ZZ_ERP.Domain.Entities
 {
     public class Servico : Entity
     {
-        public string Codigo { get; set; }
         public string DescricaoCompleta { get; set; }
         public string DescricaoResumida { get; set; }
         public string Observacoes { get; set; }
+        public bool ControlaEstoque { get; set; }
 
         public long TipoServicoId { get; set; }
         public virtual TipoServico TipoServico { get; set; }
@@ -24,6 +24,7 @@ namespace ZZ_ERP.Domain.Entities
         public virtual CentroCustoSintetico CentroCusto { get; set; }
 
         public virtual ICollection<TabelaCusto> TabelasCusto { get; set; }
+
 
         public Servico()
         {

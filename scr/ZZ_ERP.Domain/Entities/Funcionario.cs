@@ -10,8 +10,6 @@ namespace ZZ_ERP.Domain.Entities
     public class Funcionario : Entity
     {
         [Required]
-        public string Codigo { get; set; }
-        [Required]
         public string Documento { get; set; }
         public string NomeFantasia { get; set; }
         [Required]

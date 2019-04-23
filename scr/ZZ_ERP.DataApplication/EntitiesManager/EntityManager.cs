@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ZZ_ERP.Domain.Entities;
 using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
+using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 using ZZ_ERP.Infra.Data.Contexts;
 using ZZ_ERP.Infra.Data.Repositories;
 
@@ -51,9 +52,62 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
             return cmd;
         }
-       
 
-         public async Task<Command> Delete(Command command)
+        public async Task<Command> GetById(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                var entity = await MyRepository.GetById(cmd.EntityId);
+
+                if (entity != null)
+                {
+                    cmd.Cmd = ServerCommands.LogResultOk;
+                    cmd.Json = await SerializerAsync.SerializeJson(entity.ConvertDto());
+                }
+                else
+                {
+                    cmd.Cmd = ServerCommands.LogResultDeny;
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
+        public async Task<Command> GetByHumanCode(Command command)
+        {
+            Command cmd = new Command(command);
+            try
+            {
+                var dto = await SerializerAsync.DeserializeJson<EntityDto>(cmd.Json);
+                var entity = await MyRepository.GetByHumanCode(dto.Codigo);
+
+                if (entity != null)
+                {
+                    cmd.Cmd = ServerCommands.LogResultOk;
+                    cmd.Json = await SerializerAsync.SerializeJson(entity.ConvertDto());
+                }
+                else
+                {
+                    cmd.Cmd = ServerCommands.LogResultDeny;
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+
+            }
+
+            return cmd;
+        }
+
+
+        public async Task<Command> Delete(Command command)
          {
              Command cmd = new Command(command);
              try

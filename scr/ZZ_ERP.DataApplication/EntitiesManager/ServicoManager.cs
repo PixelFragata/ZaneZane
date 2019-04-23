@@ -38,12 +38,25 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                     if (unidadeMedida != null && tipoServico != null && centroCusto != null)
                     {
-                        cmd.Cmd = ServerCommands.LogResultOk;
-                        var servico = new Servico{UnidadeMedida = unidadeMedida, TipoServico = tipoServico, CentroCusto = centroCusto};
-                        servico.UpdateEntity(dto);
-                        await MyRepository.Insert(servico);
-                        cmd.Json = await SerializerAsync.SerializeJson(true);
-                        await MyRepository.Save();
+                        var entity = new Servico();
+                        entity.UpdateEntity(dto);
+                        entity.UnidadeMedida = unidadeMedida;
+                        entity.TipoServico = tipoServico;
+                        entity.CentroCusto = centroCusto;
+
+                        var insertEntity = await MyRepository.Insert(entity);
+                        if (insertEntity != null)
+                        {
+                            cmd.Cmd = ServerCommands.LogResultOk;
+                            cmd.Json = await SerializerAsync.SerializeJson(true);
+                            await MyRepository.Save();
+                            cmd.EntityId = entity.Id;
+                        }
+                        else
+                        {
+                            cmd.Cmd = ServerCommands.RepeatedHumanCode;
+                            ConsoleEx.WriteLine(ServerCommands.RepeatedHumanCode);
+                        }
                     }
                     
                 }

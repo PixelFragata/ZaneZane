@@ -27,10 +27,21 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                 if (tipos != null && !tipos.Any())
                 {
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    await MyRepository.Insert(new TipoServico {Descricao = dto.Description });
-                    cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await MyRepository.Save();
+                    var entity = new TipoServico();
+                    entity.UpdateEntity(dto);
+                    var insertEntity = await MyRepository.Insert(entity);
+                    if (insertEntity != null)
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        cmd.Json = await SerializerAsync.SerializeJson(true);
+                        await MyRepository.Save();
+                        cmd.EntityId = entity.Id;
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.RepeatedHumanCode;
+                        ConsoleEx.WriteLine(ServerCommands.RepeatedHumanCode);
+                    }
                 }
                 else
                 {

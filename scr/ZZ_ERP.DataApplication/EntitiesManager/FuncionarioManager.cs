@@ -54,14 +54,22 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                 if (funcionarios != null && !funcionarios.Any())
                 {
+                    var entity = new Funcionario();
+                    entity.UpdateEntity(dto);
+                    var insertEntity = await MyRepository.Insert(entity);
+                    if (insertEntity != null)
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        cmd.Json = await SerializerAsync.SerializeJson(true);
+                        await MyRepository.Save();
+                        cmd.EntityId = entity.Id;
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.RepeatedHumanCode;
+                        ConsoleEx.WriteLine(ServerCommands.RepeatedHumanCode);
+                    }
 
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    var funcionario = new Funcionario();
-                    funcionario.UpdateEntity(dto);
-                    await MyRepository.Insert(funcionario);
-                    cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await MyRepository.Save();
-                    
                 }
                 else
                 {

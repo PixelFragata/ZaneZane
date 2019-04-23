@@ -18,11 +18,11 @@ namespace ZZ_ERP.API.Controllers
     [Route("[controller]/[action]")]
     [ApiController]
     [Authorize("Bearer")]
-    public class CentroCustoSinteticoController : ControllerBase
+    public class TipoEntradaController : ControllerBase
     {
-        public static string Tela = ServerCommands.CentroCustoSintetico;
+        public static string Tela = ServerCommands.TipoEntrada;
 
-        [Authorize(Policy = "CentroCustoSinteticoRead")]
+        [Authorize(Policy = "TipoEntradaRead")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TipoDto>>> GetAll()
         {
@@ -53,72 +53,10 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
-        [Authorize(Policy = "CentroCustoSinteticoRead")]
-        [HttpGet]
-        public async Task<ActionResult<TipoDto>> GetById(TipoDto dto)
-        {
-            try
-            {
-                var myUsername = User.Identity.Name;
-                if (ZZApiMain.VerifyUserAuthorize(myUsername))
-                {
-                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
-                    {
-                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetById, EntityId = dto.Id, Tela = Tela, Json = await SerializerAsync.SerializeJson(dto) });
-
-                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
-                        {
-                            return await SerializerAsync.DeserializeJson<TipoDto>(responseCommand.Json);
-                        }
-                    }
-                }
-                return NotFound();
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteError(e);
-                return NotFound();
-            }
-
-        }
-
-        [Authorize(Policy = "CentroCustoSinteticoRead")]
-        [HttpGet]
-        public async Task<ActionResult<TipoDto>> GetByHumanCode(TipoDto dto)
-        {
-            try
-            {
-                var myUsername = User.Identity.Name;
-                if (ZZApiMain.VerifyUserAuthorize(myUsername))
-                {
-                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
-                    {
-                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetById, EntityId = dto.Id, Tela = Tela, Json = await SerializerAsync.SerializeJson(dto) });
-
-                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
-
-                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
-                        {
-                            return await SerializerAsync.DeserializeJson<TipoDto>(responseCommand.Json);
-                        }
-                    }
-                }
-                return NotFound();
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteError(e);
-                return NotFound();
-            }
-
-        }
-
-        [Authorize(Policy = "CentroCustoSinteticoCreate")]
+        [Authorize(Policy = "TipoEntradaCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Create(TipoDto dto)
-        {  
+        {
             try
             {
                 var myUsername = User.Identity.Name;
@@ -147,7 +85,7 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
-        [Authorize(Policy = "CentroCustoSinteticoUpdate")]
+        [Authorize(Policy = "TipoEntradaUpdate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Edit(TipoDto dto)
         {
@@ -179,7 +117,7 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
-        [Authorize(Policy = "CentroCustoSinteticoDelete")]
+        [Authorize(Policy = "TipoEntradaDelete")]
         [HttpDelete]
         public async Task<ActionResult<bool>> Delete(TipoDto dto)
         {

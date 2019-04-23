@@ -13,21 +13,22 @@ using ZZ_ERP.Infra.Data.Repositories;
 
 namespace ZZ_ERP.DataApplication.EntitiesManager
 {
-    public class UnidadeMedidaManager : EntityManager<UnidadeMedida>
-    {
+    public class TipoEntradaManager : EntityManager<TipoEntrada>
+    { 
 
         public override async Task<Command> Add(Command command)
         {
             Command cmd = new Command(command);
             try
             {
-                var dto = await SerializerAsync.DeserializeJson<TipoSiglaDto>(command.Json);
+                var dto = await SerializerAsync.DeserializeJson<TipoDto>(command.Json);
 
-                var unidadeMedidas = await MyRepository.Get(t => t.Sigla.Equals(dto.Sigla));
+                var tipos = await MyRepository.Get(t => t.Descricao.Equals(dto.Description));
 
-                if (unidadeMedidas != null && !unidadeMedidas.Any())
+                if (tipos != null && !tipos.Any())
                 {
-                    var entity = new UnidadeMedida();
+                    
+                    var entity = new TipoEntrada();
                     entity.UpdateEntity(dto);
                     var insertEntity = await MyRepository.Insert(entity);
                     if (insertEntity != null)
@@ -62,14 +63,13 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             Command cmd = new Command(command);
             try
             {
-                var dto = await SerializerAsync.DeserializeJson<TipoSiglaDto>(command.Json);
+                var dto = await SerializerAsync.DeserializeJson<TipoDto>(command.Json);
 
-                var entity = await MyRepository.GetById(cmd.EntityId);
+                var tipoEntrada = await MyRepository.GetById(cmd.EntityId);
 
-                if (entity != null)
+                if (tipoEntrada != null)
                 {
-                    if (dto.Sigla != null) entity.Sigla = dto.Sigla;
-                    if (dto.Description != null) entity.Descricao = dto.Description;
+                    tipoEntrada.Descricao = dto.Description;
                     cmd.Cmd = ServerCommands.LogResultOk;
                     cmd.Json = await SerializerAsync.SerializeJson(true);
                     await MyRepository.Save();

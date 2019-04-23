@@ -54,14 +54,22 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                 if (clientes != null && !clientes.Any())
                 {
+                    var entity = new Cliente();
+                    entity.UpdateEntity(dto);
+                    var insertEntity = await MyRepository.Insert(entity);
+                    if (insertEntity != null)
+                    {
+                        cmd.Cmd = ServerCommands.LogResultOk;
+                        cmd.Json = await SerializerAsync.SerializeJson(true);
+                        await MyRepository.Save();
+                        cmd.EntityId = entity.Id;
+                    }
+                    else
+                    {
+                        cmd.Cmd = ServerCommands.RepeatedHumanCode;
+                        ConsoleEx.WriteLine(ServerCommands.RepeatedHumanCode);
+                    }
 
-                    cmd.Cmd = ServerCommands.LogResultOk;
-                    var cliente = new Cliente();
-                    cliente.UpdateEntity(dto);
-                    await MyRepository.Insert(cliente);
-                    cmd.Json = await SerializerAsync.SerializeJson(true);
-                    await MyRepository.Save();
-                    
                 }
                 else
                 {

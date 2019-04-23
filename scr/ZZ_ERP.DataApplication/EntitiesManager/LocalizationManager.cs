@@ -42,6 +42,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                                 var est = list.Find(e => e.Ibge == estado.Ibge);
                                 est.Ibge = estado.Ibge;
                                 est.Descricao = estado.Descricao;
+                                est.Sigla = estado.Sigla;
                             }
                             
                         }
@@ -235,7 +236,8 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                             Logradouro = address.Street,
                             Complemento = address.Complement,
                             Ibge = address.IBGECode,
-                            GIACode = address.GIACode
+                            GIACode = address.GIACode,
+                            Numero = dto.Numero
                         };
                         cmd.Json = await SerializerAsync.SerializeJson(entity);
                     }
@@ -276,9 +278,10 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                             Logradouro = d.Street,
                             Complemento = d.Complement,
                             Ibge = d.IBGECode,
-                            GIACode = d.GIACode
+                            GIACode = d.GIACode,
+                            Numero = dto.Numero
                         });
-                        cmd.Json = await SerializerAsync.SerializeJsonList<EnderecoDto>(dtos.ToList());
+                        cmd.Json = await SerializerAsync.SerializeJsonList(dtos.ToList());
                     }
                     else
                     {
@@ -316,17 +319,33 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                             dto.Ibge = viacep.IBGECode;
                             dto.GIACode = viacep.GIACode;
                         }
+
+                        if (String.IsNullOrWhiteSpace(dto.Codigo))
+                        {
+                            dto.Codigo = dto.Ibge.ToString() + dto.Numero.ToString() + dto.Logradouro;
+                        }
                         var address = await repAddress.Get(e =>
                             e.Logradouro.Equals(dto.Logradouro) && e.Numero == dto.Numero);
 
                         if (!address.Any())
                         {
-                            cmd.Cmd = ServerCommands.LogResultOk;
+
                             var entity = new Endereco();
                             entity.UpdateEntity(dto);
-                            await repAddress.Insert(entity);
-                            await repAddress.Save();
-                            cmd.EntityId = entity.Id;
+
+                            var insertEntity = await repAddress.Insert(entity);
+                            if (insertEntity != null)
+                            {
+                                cmd.Cmd = ServerCommands.LogResultOk;
+                                cmd.Json = await SerializerAsync.SerializeJson(true);
+                                await repAddress.Save();
+                                cmd.EntityId = entity.Id;
+                            }
+                            else
+                            {
+                                cmd.Cmd = ServerCommands.RepeatedHumanCode;
+                                ConsoleEx.WriteLine(ServerCommands.RepeatedHumanCode);
+                            }
                         }
                         else
                         {
@@ -395,7 +414,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                 foreach (var ibge in jsonList)
                 {
                     cidades.Add(new Cidade
-                        { Ibge = ibge.Id, Descricao = ibge.Nome, EstadoId = ufId, IsActive = true });
+                        { Ibge = ibge.Id, Descricao = ibge.Nome, EstadoId = ufId, IsActive = true, Codigo = ibge.Id.ToString()});
                 }
 
                 return cidades;
@@ -413,7 +432,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                 foreach (var ibge in jsonList)
                 {
                     estadoList.Add(new Estado
-                        {Ibge = ibge.Id, Descricao = ibge.Nome, Sigla = ibge.Sigla, IsActive = true});
+                        {Ibge = ibge.Id, Descricao = ibge.Nome, Sigla = ibge.Sigla, IsActive = true, Codigo = ibge.Id.ToString()});
                 }
 
                 return estadoList;

@@ -53,7 +53,7 @@ namespace ZZ_ERP.DataApplication
             //{
             //    var permissaoRep = new Repository<PermissaoTela>(context);
 
-            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.Estoque });
+            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE"});
             //    await permissaoRep.Save();
             //}
 
@@ -133,20 +133,21 @@ namespace ZZ_ERP.DataApplication
         {
             var permissaoRep = new Repository<PermissaoTela>(context);
             var permissaoList = new List<PermissaoTela>();
-            permissaoList.Add(new PermissaoTela { NomeTela = "UserManager" });
-            permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager" });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoServico });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.UnidadeMedida });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoOS });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CondicaoPagamento });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CentroCustoSintetico });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TabelaCusto });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Servico });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Localization });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Funcionario });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Fornecedor });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Cliente });
-            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Estoque });
+            permissaoList.Add(new PermissaoTela { NomeTela = "UserManager", Codigo = "UM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager", Codigo = "RM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoServico, Codigo = "TS" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.UnidadeMedida, Codigo = "Un" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoOS, Codigo = "TOS" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CondicaoPagamento, Codigo = "CP" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CentroCustoSintetico, Codigo = "CCS" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TabelaCusto, Codigo = "TC" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Servico, Codigo = "S" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Localization, Codigo = "L" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Funcionario, Codigo = "Fun" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Fornecedor, Codigo = "For" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Cliente, Codigo = "Cli" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Estoque, Codigo = "E" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE" });
 
             await permissaoRep.InsertList(permissaoList);
             await permissaoRep.Save();

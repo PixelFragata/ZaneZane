@@ -62,6 +62,16 @@ namespace ZZ_ERP.DataApplication.Clients
                                 Cmd = await manager.Delete(command);
                                 await Connection.WriteServer(Cmd);
                             }
+                            else if (command.Cmd.Equals(ServerCommands.GetById))
+                            {
+                                Cmd = await manager.GetById(command);
+                                await Connection.WriteServer(Cmd);
+                            }
+                            else if (command.Cmd.Equals(ServerCommands.GetByHumanCode))
+                            {
+                                Cmd = await manager.GetByHumanCode(command);
+                                await Connection.WriteServer(Cmd);
+                            }
                         }
 
                         #region Localization
@@ -159,6 +169,9 @@ namespace ZZ_ERP.DataApplication.Clients
                         break;
                     case ServerCommands.Estoque:
                         manager = new EstoqueManager();
+                        break;
+                    case ServerCommands.TipoEntrada:
+                        manager = new TipoEntradaManager();
                         break;
                     default:
                         manager = null;

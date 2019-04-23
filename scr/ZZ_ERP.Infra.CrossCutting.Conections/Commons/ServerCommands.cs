@@ -24,10 +24,12 @@
         public static string IsController = "IsController";
         public static string AddClientAuthorized = "AddClientAuthorized";
         public static string RemoveClientAuthorized = "RemoveClientAuthorized";
-
+        public static string RepeatedHumanCode = "RepeatedHumanCode";
 
         #region Actions
         public static string GetAll = "GetAll";
+        public static string GetByHumanCode = "GetByHumanCode";
+        public static string GetById = "GetById";
         public static string Add = "Add";
         public static string Edit = "Edit";
         public static string Disable = "Disable";
@@ -61,6 +63,7 @@
         public const string Fornecedor = "Fornecedor";
         public const string Cliente = "Cliente";
         public const string Estoque = "Estoque";
+        public const string TipoEntrada = "TipoEntrada";
         #endregion
 
     }

@@ -88,13 +88,35 @@ namespace ZZ_ERP.Infra.Data.Repositories
             return entity;
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public virtual async Task<TEntity> GetByHumanCode(string code)
+        {
+            IQueryable<TEntity> query = DbSet;
+            query = query.Where(e => e.Codigo.Equals(code));
+
+            var entity = await query.FirstOrDefaultAsync();
+            return entity;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="entity"></param>
         public virtual async Task<TEntity> Insert(TEntity entity)
         {
+            IQueryable<TEntity> query = DbSet;
+            query = query.Where(e => e.Codigo.Equals(entity.Codigo));
+
+            var qry = await query.ToListAsync();
+            if (qry.Any())
+            {
+                return null;
+            }
+
             await DbSet.AddAsync(entity);
             return entity;
         }

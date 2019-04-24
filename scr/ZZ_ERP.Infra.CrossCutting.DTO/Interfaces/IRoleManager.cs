@@ -13,5 +13,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.Interfaces
         List<IdentityRole> ListAll();
         Task<bool> AddRoleClaim(string roleName, string nomeTela, string tipoPermissao);
         Task<MatrizRolePermission> GetRolePermissions(string roleName);
+        Task InitializeAdminRole();
     }
 }

@@ -19,7 +19,7 @@ namespace ZZ_ERP.Domain.Entities
 
         public long UnidadeMedidaId { get; set; }
         public virtual UnidadeMedida UnidadeMedida { get; set; }
-
+         
         public long CentroCustoId { get; set; }
         public virtual CentroCustoSintetico CentroCusto { get; set; }
 

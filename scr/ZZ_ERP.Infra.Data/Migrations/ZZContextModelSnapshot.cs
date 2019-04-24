@@ -458,6 +458,25 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("TabelasCusto");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoEntrada", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoEntradas");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.TipoOS", b =>
                 {
                     b.Property<long>("Id")

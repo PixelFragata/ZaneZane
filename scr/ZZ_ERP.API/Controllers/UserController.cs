@@ -45,7 +45,7 @@ namespace ZZ_ERP.API.Controllers
             }
             catch (Exception e)
             {
-                ConsoleEx.WriteError(e);
+                ConsoleEx.WriteError(e); 
                 return NotFound();
             }
             
@@ -96,6 +96,32 @@ namespace ZZ_ERP.API.Controllers
                 return NotFound();
             }
             
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<bool>> CreateAdmin()
+        {
+            try
+            {
+                var dto = new UserDto();
+                dto.Role = "Admin";
+                dto.Username = "admin";
+                dto.Password = "admin";
+                dto.Email = "admin@admin.com";
+
+                if (await _manager.CreateAsync(dto.Username, dto.Email, dto.Password, dto.Role))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
         }
 
         [Authorize(Policy = "UserManagerRead")]

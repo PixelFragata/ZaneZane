@@ -28,11 +28,12 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
+        public DbSet<TipoEntrada> TipoEntradas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             const string connection =
-                "Server=dbfragata.cmcait8irl6a.us-east-2.rds.amazonaws.com,1433;Database=ZZ_ERP_Test;User Id=melchior;Password=Otiagoehfoda";
+                "Server=zanedb.database.windows.net;Database=ZaneERP;User Id=zanesa;Password=zane$server1406";
             optionsBuilder.UseSqlServer(connection);
             base.OnConfiguring(optionsBuilder);
         }

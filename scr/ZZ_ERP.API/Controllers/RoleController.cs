@@ -16,7 +16,7 @@ namespace ZZ_ERP.API.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleManager _roleManager;
@@ -69,7 +69,6 @@ namespace ZZ_ERP.API.Controllers
                 ConsoleEx.WriteError(e);
                 return NotFound();
             }
-            
         }
 
         [Authorize(Policy = "RoleManagerCreate")]
@@ -135,9 +134,27 @@ namespace ZZ_ERP.API.Controllers
             {
                 ConsoleEx.WriteError(e);
                 return NotFound();
-            }
+            } 
             
         }
+
+        [HttpGet]
+        public async Task<ActionResult<bool>> CreateAdminRole()
+        {
+            try
+            {
+                await _roleManager.CreateAsync("Admin");
+                await _roleManager.InitializeAdminRole();
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+        }
+
     }
 }
  

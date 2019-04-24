@@ -126,5 +126,25 @@ namespace ZZ_ERP.Infra.Data.Identity
                 return null;
             }
         }
+
+        public async Task InitializeAdminRole()
+        {
+            var permissaoRep = new Repository<TipoPermissao>(_dbContext);
+            var telasRep = new Repository<PermissaoTela>(_dbContext);
+
+            var permissaoList = permissaoRep.Get().Result;
+            var telasList = telasRep.Get().Result;
+            var tipoPermissaos = permissaoList.ToList();
+
+  
+            foreach (var tela in telasList)
+            {
+                foreach (var permissao in tipoPermissaos)
+                {
+                    await AddRoleClaim("Admin", tela.NomeTela, permissao.Descricao);
+                }
+            }
+            
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using ZZ_ERP.Domain.Entities;
+using ZZ_ERP.Infra.CrossCutting.Connections.Commons;
 using ZZ_ERP.Infra.CrossCutting.DTO.Interfaces;
 using ZZ_ERP.Infra.Data.Contexts;
 using ZZ_ERP.Infra.Data.Identity;
@@ -21,6 +25,11 @@ namespace ZZ_ERP.DependencyInjection
 
         public static void Configure(IServiceCollection services)
         {
+            //var context = new ZZContext();
+
+            //InitializeTipoPermissao(context);
+            //InitializePermissaoTelas(context);
+
             services.AddDbContext<ZZContext>();
             services.AddIdentity<UserAccount, IdentityRole>(config =>
                 {
@@ -86,6 +95,69 @@ namespace ZZ_ERP.DependencyInjection
                 //auth.AddPolicy("UserManagerRead", p => p.RequireClaim("UserManager", "Read").AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
             });
         }
-         
+
+
+        private static void InitializeTipoPermissao(ZZContext context)
+        {
+            var permissaoRep = new Repository<TipoPermissao>(context);
+            var permissaoList = new List<TipoPermissao>();
+            permissaoList.Add(new TipoPermissao { Descricao = "Create", Codigo = "Create"});
+            permissaoList.Add(new TipoPermissao { Descricao = "Read", Codigo = "Read" });
+            permissaoList.Add(new TipoPermissao { Descricao = "Update", Codigo = "Update" });
+            permissaoList.Add(new TipoPermissao { Descricao = "Delete", Codigo = "Delete" });
+
+
+            permissaoRep.InsertList(permissaoList);
+            permissaoRep.Save();
+
+        }
+
+        private static void InitializePermissaoTelas(ZZContext context)
+        {
+            var permissaoRep = new Repository<PermissaoTela>(context);
+            var permissaoList = new List<PermissaoTela>();
+            permissaoList.Add(new PermissaoTela { NomeTela = "UserManager", Codigo = "UserM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager", Codigo = "RoleM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoServico, Codigo = "TS" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.UnidadeMedida, Codigo = "Un" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoOS, Codigo = "TOS" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CondicaoPagamento, Codigo = "CP" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CentroCustoSintetico, Codigo = "CCS" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TabelaCusto, Codigo = "TC" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Servico, Codigo = "S" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Localization, Codigo = "L" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Funcionario, Codigo = "Fun" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Fornecedor, Codigo = "For" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Cliente, Codigo = "Cli" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Estoque, Codigo = "E" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE" });
+
+            permissaoRep.InsertList(permissaoList);
+            permissaoRep.Save();
+        }
+
+        private static void InitializeAdminUser(RoleManager roleManager)
+        {
+            var context = new ZZContext();
+
+            var permissaoRep = new Repository<TipoPermissao>(context);
+            var telasRep = new Repository<PermissaoTela>(context);
+
+            var permissaoList = permissaoRep.Get().Result;
+            var telasList = telasRep.Get().Result;
+            var tipoPermissaos = permissaoList.ToList();
+
+            if (roleManager.CreateAsync("Admin").Result)
+            {
+                
+                foreach (var tela in telasList)
+                {
+                    foreach (var permissao in tipoPermissaos)
+                    {
+                        roleManager.AddRoleClaim("Admin", tela.NomeTela, permissao.Descricao);
+                    }
+                }
+            }
+        }
     }
 }

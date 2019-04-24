@@ -29,13 +29,14 @@ namespace ZZ_ERP.DataApplication
             _port = port;
             _authorizedUserList = new List<string>();
             _authorizedClients = new Dictionary<string, ZZClientManager>();
+
         }
 
         public void Start()
         {
             try
             {
-               
+                
                 StartServer().GetAwaiter().GetResult();
 
             }
@@ -51,10 +52,12 @@ namespace ZZ_ERP.DataApplication
 
             //using (var context = new ZZContext())
             //{
-            //    var permissaoRep = new Repository<PermissaoTela>(context);
+            //    //var permissaoRep = new Repository<PermissaoTela>(context);
 
-            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE"});
-            //    await permissaoRep.Save();
+            //    //await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE" });
+            //    //await permissaoRep.Save();
+            //    await InitializeTipoPermissao(context);
+            //    await InitializePermissaoTelas(context);
             //}
 
             ServerConn = new TcpListener(IPAddress.Parse(AdressPool.ZZ_EF_APK.Ip), AdressPool.ZZ_EF_APK.Port);
@@ -133,8 +136,8 @@ namespace ZZ_ERP.DataApplication
         {
             var permissaoRep = new Repository<PermissaoTela>(context);
             var permissaoList = new List<PermissaoTela>();
-            permissaoList.Add(new PermissaoTela { NomeTela = "UserManager", Codigo = "UM" });
-            permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager", Codigo = "RM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = "UserManager", Codigo = "UserM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = "RoleManager", Codigo = "RoleM" });
             permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoServico, Codigo = "TS" });
             permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.UnidadeMedida, Codigo = "Un" });
             permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoOS, Codigo = "TOS" });

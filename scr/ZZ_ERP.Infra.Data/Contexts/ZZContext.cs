@@ -29,6 +29,7 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
         public DbSet<TipoEntrada> TipoEntradas { get; set; }
+        public DbSet<FuncionarioEstoque> FuncionarioEstoques { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using ZZ_ERP.Infra.CrossCutting.Connections.Functions;
 using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
@@ -20,6 +21,16 @@ namespace ZZ_ERP.Domain.Entities
         public long EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
 
+        public virtual List<FuncionarioEstoque> FuncionarioEstoques { get; set; }
+        [NotMapped]
+        public virtual List<Estoque> Estoques { get; set; }
+
+        public Funcionario()
+        {
+            FuncionarioEstoques = new List<FuncionarioEstoque>();
+            Estoques = new List<Estoque>();
+        }
+         
         public override EntityDto ConvertDto()
         {
             try

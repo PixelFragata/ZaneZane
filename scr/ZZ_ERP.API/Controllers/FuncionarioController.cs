@@ -53,6 +53,68 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
+        [Authorize(Policy = "FuncionarioRead")]
+        [HttpGet]
+        public async Task<ActionResult<UserDadosDto>> GetById(UserDadosDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetById, EntityId = dto.Id, Tela = Tela, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJson<UserDadosDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
+        }
+
+        [Authorize(Policy = "FuncionarioRead")]
+        [HttpGet]
+        public async Task<ActionResult<UserDadosDto>> GetByHumanCode(UserDadosDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetById, EntityId = dto.Id, Tela = Tela, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJson<UserDadosDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
+        }
+
         [Authorize(Policy = "FuncionarioCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Create(UserDadosDto dto)

@@ -53,6 +53,68 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
+        [Authorize(Policy = "TabelaCustoRead")]
+        [HttpGet]
+        public async Task<ActionResult<TabelaDto>> GetById(TabelaDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetById, EntityId = dto.Id, Tela = Tela, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJson<TabelaDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
+        }
+
+        [Authorize(Policy = "TabelaCustoRead")]
+        [HttpGet]
+        public async Task<ActionResult<TabelaDto>> GetByHumanCode(TabelaDto dto)
+        {
+            try
+            {
+                var myUsername = User.Identity.Name;
+                if (ZZApiMain.VerifyUserAuthorize(myUsername))
+                {
+                    if (ZZApiMain.UsersConnections.TryGetValue(myUsername, out var myConn))
+                    {
+                        var myId = await myConn.Zz.ApiWriteServer(myUsername, new Command { Cmd = ServerCommands.GetById, EntityId = dto.Id, Tela = Tela, Json = await SerializerAsync.SerializeJson(dto) });
+
+                        var responseCommand = await myConn.Zz.GetApiWaitCommand(myId);
+
+                        if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
+                        {
+                            return await SerializerAsync.DeserializeJson<TabelaDto>(responseCommand.Json);
+                        }
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return NotFound();
+            }
+
+        }
+
         [Authorize(Policy = "TabelaCustoCreate")]
         [HttpPost]
         public async Task<ActionResult<bool>> Create(TabelaDto dto)

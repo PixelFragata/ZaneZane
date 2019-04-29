@@ -10,7 +10,8 @@ namespace ZZ_ERP.Domain.Entities
     public class TipoEntrada : Entity
     {
         [Required]
-        public string Descricao { get; set; } 
+        public string Descricao { get; set; }
+        public bool ControlaEstoque { get; set; }
 
         public override EntityDto ConvertDto()
         {

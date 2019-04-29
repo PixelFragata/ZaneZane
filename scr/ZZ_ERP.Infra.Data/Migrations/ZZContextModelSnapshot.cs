@@ -369,6 +369,30 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("Funcionarios");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.FuncionarioEstoque", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<long>("EstoqueId");
+
+                    b.Property<long>("FuncionarioId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstoqueId");
+
+                    b.HasIndex("FuncionarioId");
+
+                    b.ToTable("FuncionarioEstoques");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.PermissaoTela", b =>
                 {
                     b.Property<long>("Id")
@@ -466,6 +490,8 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<string>("Codigo")
                         .IsRequired();
+
+                    b.Property<bool>("ControlaEstoque");
 
                     b.Property<string>("Descricao")
                         .IsRequired();
@@ -697,6 +723,19 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.FuncionarioEstoque", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Estoque", "Estoque")
+                        .WithMany()
+                        .HasForeignKey("EstoqueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.Funcionario", "Funcionario")
+                        .WithMany("FuncionarioEstoques")
+                        .HasForeignKey("FuncionarioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

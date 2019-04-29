@@ -43,12 +43,14 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
             return cmd;
         }
+
         public override async Task<Command> Add(Command command)
         {
             Command cmd = new Command(command);
             try
             {
                 var dto = await SerializerAsync.DeserializeJson<UserDadosDto>(command.Json);
+                
 
                 var funcionarios = await MyRepository.Get(t => t.Codigo.Equals(dto.Codigo));
 

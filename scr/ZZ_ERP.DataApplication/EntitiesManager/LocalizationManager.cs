@@ -30,7 +30,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                 {
                     var rep = new Repository<Estado>(context);
                     var entities = await rep.Get();
-                    var list = entities.ToList();
+                    var list = entities.ToList(); 
                     var ibgeList = await SearchEstadoAsync();
 
                     if (list.Any() && ibgeList.Any())
@@ -432,7 +432,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                 foreach (var ibge in jsonList)
                 {
                     estadoList.Add(new Estado
-                        {Ibge = ibge.Id, Descricao = ibge.Nome, Sigla = ibge.Sigla, IsActive = true, Codigo = ibge.Id.ToString()});
+                        {Ibge = ibge.Id, Descricao = ibge.Nome, Sigla = ibge.Sigla, IsActive = true, Codigo = ibge.Sigla});
                 }
 
                 return estadoList;

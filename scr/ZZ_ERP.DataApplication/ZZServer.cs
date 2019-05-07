@@ -164,8 +164,7 @@ namespace ZZ_ERP.DataApplication
         {
             var context = new ZZContext();
 
-            await LocalizationManager.UpdateEstados(new Command());
-            await LocalizationManager.UpdateCidades(new Command());
+
 
             var unidadeRep = new Repository<UnidadeMedida>(context);
             var unidadeList = new List<UnidadeMedida>();

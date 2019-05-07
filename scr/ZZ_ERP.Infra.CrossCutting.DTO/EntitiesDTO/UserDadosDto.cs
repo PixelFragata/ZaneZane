@@ -22,6 +22,11 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
 
         public EnderecoDto Endereco { get; set; }
 
+        public UserDadosDto()
+        {
+            Endereco = new EnderecoDto();
+        }
+
         public void ValidatorDocument(string document)
         {
             var cpfValidator = new Regex("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$");

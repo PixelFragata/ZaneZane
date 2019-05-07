@@ -51,13 +51,44 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             {
                 var dto = await SerializerAsync.DeserializeJson<UserDadosDto>(command.Json);
                 
-
                 var funcionarios = await MyRepository.Get(t => t.Codigo.Equals(dto.Codigo));
 
                 if (funcionarios != null && !funcionarios.Any())
                 {
                     var entity = new Funcionario();
                     entity.UpdateEntity(dto);
+                    var myCmd = new Command();
+                    if (entity.EnderecoId <= 0) 
+                    {
+                        var enderecoCmd = new Command { Json = await SerializerAsync.SerializeJson(dto.Endereco) };
+
+                        if (string.IsNullOrEmpty(entity.Endereco.Cep))
+                        {
+                            myCmd = await LocalizationManager.GetAddress(enderecoCmd);
+                            //entity.Endereco.UpdateEntity(SerializerAsync.DeserializeJsonList<EnderecoDto>(cmd.Json).Result.FirstOrDefault());
+                        }
+                        else
+                        {
+                            myCmd = await LocalizationManager.GetAddressByZipCode(enderecoCmd);
+                            //entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(cmd.Json));
+                        }
+                        entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(myCmd.Json));
+                        entity.EnderecoId = entity.Endereco.Id;
+                    }
+
+                    //if (entity.EnderecoId <= 0)
+                    //{
+                    //    cmd = await LocalizationManager.SaveAddress(myCmd);
+                    //    entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(myCmd.Json));
+                    //    entity.EnderecoId = myCmd.EntityId;
+                    //}
+                    //myCmd.Json = await SerializerAsync.SerializeJson(entity.Endereco.ConvertDto());      
+                    //entity.Documento = new String(entity.Documento.Where(Char.IsDigit).ToArray());
+                    if (entity.EnderecoId > 0)
+                    {
+                        entity.Endereco = null;
+                    }
+
                     var insertEntity = await MyRepository.Insert(entity);
                     if (insertEntity != null)
                     {
@@ -104,7 +135,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                     if (endereco != null)
                     {
-                        funcionario.Endereco = endereco;
+                        endereco = funcionario.Endereco;
                     }
 
                     cmd.Cmd = ServerCommands.LogResultOk;

@@ -17,7 +17,7 @@ namespace ZZ_ERP.Infra.Data.Config
                 builder.HasKey(p => p.Id);
                 builder.Property(p => p.Codigo).HasMaxLength(20).IsRequired();
                 builder.Property(p => p.DescricaoResumida).HasMaxLength(200).IsRequired();
-                builder.Property(p => p.ControlaEstoque).IsRequired().HasDefaultValue(true);
+                builder.Property(p => p.ControlaEstoque).IsRequired();
 
                 builder.HasOne(s => s.UnidadeMedida);
                 builder.HasOne(s => s.TipoServico);

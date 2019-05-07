@@ -27,8 +27,10 @@ namespace ZZ_ERP.Domain.Entities
 
         public Funcionario()
         {
+            Endereco = new Endereco();
             FuncionarioEstoques = new List<FuncionarioEstoque>();
             Estoques = new List<Estoque>();
+            
         }
          
         public override EntityDto ConvertDto()
@@ -46,7 +48,6 @@ namespace ZZ_ERP.Domain.Entities
                 };
 
                 dto.ValidatorDocument(Documento);
-                dto.Endereco = new EnderecoDto();
                 dto.Endereco = (EnderecoDto) Endereco.ConvertDto();
 
                 return dto;
@@ -77,11 +78,8 @@ namespace ZZ_ERP.Domain.Entities
                 Email = tipoDto.Email;
                 Telefone = tipoDto.Telefone;
                 EnderecoId = tipoDto.Endereco.Id;
-                if (EnderecoId <= 0)
-                {
-                    Endereco = new Endereco();
-                    Endereco.UpdateEntity(tipoDto.Endereco);
-                }
+                Endereco.UpdateEntity(tipoDto.Endereco);
+
             }
             catch (Exception e)
             {

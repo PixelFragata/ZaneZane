@@ -21,9 +21,6 @@ namespace ZZ_ERP.Infra.Data.Config
                 builder.Property(p => p.Bairro).IsRequired();
                 builder.Property(p => p.Complemento).IsRequired(false);
                 builder.Property(p => p.Ibge).IsRequired();
-
-
-                builder.HasOne(s => s.Cidade);
             }
             catch (Exception e)
             {

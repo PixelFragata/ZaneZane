@@ -6,7 +6,7 @@ using ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO;
 
 namespace ZZ_ERP.Domain.Entities
 {
-    public class Endereco : Entity
+    public class  Endereco : Entity
     {
 
         public string Cep { get; set; }
@@ -17,8 +17,8 @@ namespace ZZ_ERP.Domain.Entities
         public int Ibge { get; set; }
         public int GIACode { get; set; }
 
-        public long CidadeId { get; set; }
-        public virtual Cidade Cidade { get; set; }
+        public string CidadeDescricao { get; set; }
+        public string Uf { get; set; }
 
 
         public override EntityDto ConvertDto()
@@ -26,7 +26,7 @@ namespace ZZ_ERP.Domain.Entities
             try
             {
                 var dto = new EnderecoDto {Id = Id, Cep = Cep, Logradouro = Logradouro, Complemento = Complemento, Bairro = Bairro,
-                    Cidade = Cidade.Descricao, Estado = Cidade.Estado.Sigla, CidadeId = CidadeId, GIACode = GIACode, Ibge = Ibge, Numero = Numero};
+                    Cidade = CidadeDescricao, Estado = Uf, GIACode = GIACode, Ibge = Ibge, Numero = Numero, Codigo = Codigo};
 
                 return dto;
             }
@@ -42,6 +42,7 @@ namespace ZZ_ERP.Domain.Entities
             try
             {
                 var tipoDto = (EnderecoDto)dto;
+                Codigo = tipoDto.Codigo;
                 Cep = tipoDto.Cep;
                 Ibge = tipoDto.Ibge;
                 Numero = tipoDto.Numero;
@@ -49,7 +50,8 @@ namespace ZZ_ERP.Domain.Entities
                 Complemento = tipoDto.Complemento;
                 Bairro = tipoDto.Bairro;
                 GIACode = tipoDto.GIACode;
-                CidadeId = tipoDto.CidadeId;
+                CidadeDescricao = tipoDto.Cidade;
+                Uf = tipoDto.Estado;
                 Id = tipoDto.Id;
             }
             catch (Exception e)

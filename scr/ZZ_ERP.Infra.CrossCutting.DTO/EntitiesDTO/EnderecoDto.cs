@@ -18,7 +18,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
         public int GIACode { get; set; }
         [MinLength(3)]
         public string Cidade { get; set; } 
-        public long CidadeId { get; set; }
         [MinLength(2)]
         [MaxLength(2)]
         public string Estado { get; set; }

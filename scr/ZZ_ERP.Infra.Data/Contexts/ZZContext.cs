@@ -19,8 +19,6 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<TipoOS> TiposOS { get; set; }
         public DbSet<CondicaoPagamento> CondicaoPagamentos { get; set; }
         public DbSet<CentroCustoSintetico> CentrosCustoSintetico { get; set; }
-        public DbSet<Estado> Estados { get; set; }
-        public DbSet<Cidade> Cidades { get; set; }
         public DbSet<TabelaCusto> TabelasCusto { get; set; }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
@@ -48,6 +46,7 @@ namespace ZZ_ERP.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new TabelaCustoConfig());
             modelBuilder.ApplyConfiguration(new ServicoConfig());
             modelBuilder.ApplyConfiguration(new EnderecoConfig());
+            modelBuilder.ApplyConfiguration(new FuncionarioConfig());
 
             base.OnModelCreating(modelBuilder);
         }

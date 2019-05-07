@@ -148,30 +148,6 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("CentrosCustoSintetico");
                 });
 
-            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Cidade", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Codigo")
-                        .IsRequired();
-
-                    b.Property<string>("Descricao");
-
-                    b.Property<long>("EstadoId");
-
-                    b.Property<int>("Ibge");
-
-                    b.Property<bool>("IsActive");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EstadoId");
-
-                    b.ToTable("Cidades");
-                });
-
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Cliente", b =>
                 {
                     b.Property<long>("Id")
@@ -236,7 +212,7 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(8);
 
-                    b.Property<long>("CidadeId");
+                    b.Property<string>("CidadeDescricao");
 
                     b.Property<string>("Codigo")
                         .IsRequired();
@@ -254,9 +230,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<int>("Numero");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Uf");
 
-                    b.HasIndex("CidadeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Enderecos");
                 });
@@ -283,7 +259,7 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Estados");
+                    b.ToTable("Estado");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Estoque", b =>
@@ -425,9 +401,7 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<bool>("ControlaEstoque")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("ControlaEstoque");
 
                     b.Property<string>("DescricaoCompleta");
 
@@ -686,27 +660,11 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Cidade", b =>
-                {
-                    b.HasOne("ZZ_ERP.Domain.Entities.Estado", "Estado")
-                        .WithMany()
-                        .HasForeignKey("EstadoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Cliente", b =>
                 {
                     b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Endereco", b =>
-                {
-                    b.HasOne("ZZ_ERP.Domain.Entities.Cidade", "Cidade")
-                        .WithMany()
-                        .HasForeignKey("CidadeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

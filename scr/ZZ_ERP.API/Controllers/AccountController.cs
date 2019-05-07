@@ -64,23 +64,23 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
-        public async Task<ActionResult<LoginResultDto>> LoginTeste()
-        {
-            try
-            {
-                var dto = new LoginDto { Password = "admin", Username = "admin" };
-                var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
+        //public async Task<ActionResult<LoginResultDto>> LoginTeste()
+        //{
+        //    try
+        //    {
+        //        var dto = new LoginDto { Password = "admin", Username = "admin" };
+        //        var resultDto = await _authentication.Authenticate(dto.Username, dto.Password);
 
-                await ZZApiMain.AddUserConnection(resultDto);
-                return resultDto;
-            }
-            catch (Exception e)
-            {
-                ConsoleEx.WriteError(e);
-                return NotFound();
-            }
+        //        await ZZApiMain.AddUserConnection(resultDto);
+        //        return resultDto;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ConsoleEx.WriteError(e);
+        //        return NotFound();
+        //    }
             
-        }  
+        //}  
     }
 }
  

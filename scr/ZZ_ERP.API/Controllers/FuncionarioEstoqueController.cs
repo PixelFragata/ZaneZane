@@ -18,13 +18,13 @@ namespace ZZ_ERP.API.Controllers
     [Route("[controller]/[action]")]
     [ApiController]
     [Authorize("Bearer")]
-    public class EstoqueController : ControllerBase
+    public class FuncionarioEstoqueController : ControllerBase
     {
-        public static string Tela = ServerCommands.Estoque;
+        public static string Tela = ServerCommands.FuncionarioEstoque;
 
-        [Authorize(Policy = "EstoqueRead")]
+        [Authorize(Policy = "FuncionarioEstoqueRead")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<DtoLigacao>>> GetAll()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace ZZ_ERP.API.Controllers
 
                         if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                         {
-                            return await SerializerAsync.DeserializeJsonList<TipoDto>(responseCommand.Json);
+                            return await SerializerAsync.DeserializeJsonList<DtoLigacao>(responseCommand.Json);
                         }
                     }
                 }
@@ -52,9 +52,9 @@ namespace ZZ_ERP.API.Controllers
             }
         }
 
-        [Authorize(Policy = "EstoqueRead")]
+        [Authorize(Policy = "FuncionarioEstoqueRead")]
         [HttpGet]
-        public async Task<ActionResult<TipoDto>> GetById(TipoDto dto)
+        public async Task<ActionResult<DtoLigacao>> GetById(DtoLigacao dto)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace ZZ_ERP.API.Controllers
 
                         if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                         {
-                            return await SerializerAsync.DeserializeJson<TipoDto>(responseCommand.Json);
+                            return await SerializerAsync.DeserializeJson<DtoLigacao>(responseCommand.Json);
                         }
                     }
                 }
@@ -82,9 +82,9 @@ namespace ZZ_ERP.API.Controllers
             }
         }
 
-        [Authorize(Policy = "EstoqueRead")]
+        [Authorize(Policy = "FuncionarioEstoqueRead")]
         [HttpGet]
-        public async Task<ActionResult<TipoDto>> GetByHumanCode(TipoDto dto)
+        public async Task<ActionResult<DtoLigacao>> GetByHumanCode(DtoLigacao dto)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace ZZ_ERP.API.Controllers
 
                         if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                         {
-                            return await SerializerAsync.DeserializeJson<TipoDto>(responseCommand.Json);
+                            return await SerializerAsync.DeserializeJson<DtoLigacao>(responseCommand.Json);
                         }
                     }
                 }
@@ -113,9 +113,9 @@ namespace ZZ_ERP.API.Controllers
 
         }
 
-        [Authorize(Policy = "EstoqueCreate")]
+        [Authorize(Policy = "FuncionarioEstoqueCreate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Create(TipoDto dto)
+        public async Task<ActionResult<bool>> Create(DtoLigacao dto)
         {
             try
             {
@@ -145,9 +145,9 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
-        [Authorize(Policy = "EstoqueUpdate")]
+        [Authorize(Policy = "FuncionarioEstoqueUpdate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Edit(TipoDto dto)
+        public async Task<ActionResult<bool>> Edit(DtoLigacao dto)
         {
             try
             {
@@ -177,9 +177,9 @@ namespace ZZ_ERP.API.Controllers
             
         }
 
-        [Authorize(Policy = "EstoqueDelete")]
+        [Authorize(Policy = "FuncionarioEstoqueDelete")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(TipoDto dto)
+        public async Task<ActionResult<bool>> Delete(DtoLigacao dto)
         {
             try
             {

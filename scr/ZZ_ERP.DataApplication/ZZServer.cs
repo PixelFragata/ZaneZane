@@ -54,12 +54,10 @@ namespace ZZ_ERP.DataApplication
 
             //using (var context = new ZZContext())
             //{
-            //    //var permissaoRep = new Repository<PermissaoTela>(context);
+            //    var permissaoRep = new Repository<PermissaoTela>(context);
 
-            //    //await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE" });
-            //    //await permissaoRep.Save();
-            //    await InitializeTipoPermissao(context);
-            //    await InitializePermissaoTelas(context);
+            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.FuncionarioEstoque, Codigo = "FE" });
+            //    await permissaoRep.Save();
             //}
 
             ServerConn = new TcpListener(IPAddress.Parse(AdressPool.ZZ_EF_APK.Ip), AdressPool.ZZ_EF_APK.Port);
@@ -204,7 +202,7 @@ namespace ZZ_ERP.DataApplication
 
             var tipoEntradaRep = new Repository<TipoEntrada>(context);
             var tipoEntradaList = new List<TipoEntrada>();
-            //tipoEntradaList.Add(new TipoEntrada { Descricao = "NOTA FISCAL", Codigo = "NF" });
+            tipoEntradaList.Add(new TipoEntrada { Descricao = "NOTA FISCAL", Codigo = "NF" });
             tipoEntradaList.Add(new TipoEntrada { Descricao = "NOTINHA", Codigo = "NT", ControlaEstoque = true});
             tipoEntradaList.Add(new TipoEntrada { Descricao = "REEMBOLSO", Codigo = "RB", ControlaEstoque = true});
 
@@ -249,6 +247,7 @@ namespace ZZ_ERP.DataApplication
         {
             var servicoRep = new Repository<Servico>(context);
             var servicoList = new List<Servico>();
+
             servicoList.Add(new Servico
             {
                 DescricaoResumida = "CLIMATIZADOR", Codigo = "CLIMAT", ControlaEstoque = false,

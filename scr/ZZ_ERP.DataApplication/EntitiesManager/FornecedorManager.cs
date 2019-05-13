@@ -21,7 +21,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             Command cmd = new Command(command);
             try
             {
-                var entities = await MyRepository.Get(null,null,"Endereco,Endereco.Cidade,Endereco.Cidade.Estado");
+                var entities = await MyRepository.Get(null,null,"Endereco");
                 var list = entities.ToList();
 
                 if (list.Any())
@@ -57,6 +57,28 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                     var entity = new Fornecedor();
                     entity.UpdateEntity(dto);
+
+                    var myCmd = new Command();
+                    if (entity.EnderecoId <= 0)
+                    {
+                        var enderecoCmd = new Command { Json = await SerializerAsync.SerializeJson(dto.Endereco) };
+
+                        if (string.IsNullOrEmpty(entity.Endereco.Cep))
+                        {
+                            myCmd = await LocalizationManager.GetAddress(enderecoCmd);
+                        }
+                        else
+                        {
+                            myCmd = await LocalizationManager.GetAddressByZipCode(enderecoCmd);
+                        }
+                        entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(myCmd.Json));
+                        entity.EnderecoId = entity.Endereco.Id;
+                    }
+
+                    if (entity.EnderecoId > 0)
+                    {
+                        entity.Endereco = null;
+                    }
                     var insertEntity = await MyRepository.Insert(entity);
                     if (insertEntity != null)
                     {
@@ -102,6 +124,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                     if (endereco != null)
                     {
+                        endereco.UpdateEntity(dto.Endereco);
                         fornecedor.Endereco = endereco;
                     }
 

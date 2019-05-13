@@ -20,6 +20,11 @@ namespace ZZ_ERP.Domain.Entities
         public long EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
 
+        public Cliente()
+        {
+            Endereco = new Endereco();
+        }
+
         public override EntityDto ConvertDto()
         {
             try
@@ -35,8 +40,7 @@ namespace ZZ_ERP.Domain.Entities
                 };
 
                 dto.ValidatorDocument(Documento);
-                dto.Endereco = new EnderecoDto();
-                dto.Endereco = (EnderecoDto) Endereco.ConvertDto();
+                dto.Endereco = (EnderecoDto)Endereco.ConvertDto();
 
                 return dto;
             }
@@ -66,11 +70,8 @@ namespace ZZ_ERP.Domain.Entities
                 Email = tipoDto.Email;
                 Telefone = tipoDto.Telefone;
                 EnderecoId = tipoDto.Endereco.Id;
-                if (EnderecoId <= 0)
-                {
-                    Endereco = new Endereco();
-                    Endereco.UpdateEntity(tipoDto.Endereco);
-                }
+                Endereco.UpdateEntity(tipoDto.Endereco);
+                
             }
             catch (Exception e)
             {

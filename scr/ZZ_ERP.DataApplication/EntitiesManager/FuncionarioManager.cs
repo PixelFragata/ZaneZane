@@ -21,7 +21,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             Command cmd = new Command(command);
             try
             {
-                var entities = await MyRepository.Get(null,null,"Endereco,Endereco.Cidade,Endereco.Cidade.Estado");
+                var entities = await MyRepository.Get(null,null,"Endereco");
                 var list = entities.ToList();
 
                 if (list.Any())
@@ -65,25 +65,15 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                         if (string.IsNullOrEmpty(entity.Endereco.Cep))
                         {
                             myCmd = await LocalizationManager.GetAddress(enderecoCmd);
-                            //entity.Endereco.UpdateEntity(SerializerAsync.DeserializeJsonList<EnderecoDto>(cmd.Json).Result.FirstOrDefault());
                         }
                         else
                         {
                             myCmd = await LocalizationManager.GetAddressByZipCode(enderecoCmd);
-                            //entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(cmd.Json));
                         }
                         entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(myCmd.Json));
                         entity.EnderecoId = entity.Endereco.Id;
                     }
 
-                    //if (entity.EnderecoId <= 0)
-                    //{
-                    //    cmd = await LocalizationManager.SaveAddress(myCmd);
-                    //    entity.Endereco.UpdateEntity(await SerializerAsync.DeserializeJson<EnderecoDto>(myCmd.Json));
-                    //    entity.EnderecoId = myCmd.EntityId;
-                    //}
-                    //myCmd.Json = await SerializerAsync.SerializeJson(entity.Endereco.ConvertDto());      
-                    //entity.Documento = new String(entity.Documento.Where(Char.IsDigit).ToArray());
                     if (entity.EnderecoId > 0)
                     {
                         entity.Endereco = null;
@@ -115,7 +105,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
             }
 
-            return cmd;
+            return cmd; 
         }
 
         public override async Task<Command> Edit(Command command)
@@ -135,7 +125,8 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
 
                     if (endereco != null)
                     {
-                        endereco = funcionario.Endereco;
+                        endereco.UpdateEntity(dto.Endereco);
+                        funcionario.Endereco = endereco;
                     }
 
                     cmd.Cmd = ServerCommands.LogResultOk;

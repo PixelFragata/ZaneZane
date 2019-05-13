@@ -64,6 +64,7 @@
         public const string Cliente = "Cliente";
         public const string Estoque = "Estoque";
         public const string TipoEntrada = "TipoEntrada";
+        public const string FuncionarioEstoque = "FuncionarioEstoque";
         #endregion
 
     }

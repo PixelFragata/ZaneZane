@@ -52,7 +52,10 @@ namespace ZZ_ERP.Domain.Entities
                 GIACode = tipoDto.GIACode;
                 CidadeDescricao = tipoDto.Cidade;
                 Uf = tipoDto.Estado;
-                Id = tipoDto.Id;
+                if (tipoDto.Id > 0)
+                {
+                    Id = tipoDto.Id;
+                }
             }
             catch (Exception e)
             {

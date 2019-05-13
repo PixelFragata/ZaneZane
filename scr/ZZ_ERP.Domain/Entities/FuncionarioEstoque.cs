@@ -18,15 +18,53 @@ namespace ZZ_ERP.Domain.Entities
         public long EstoqueId { get; set; }
         public virtual Estoque Estoque { get; set; }
 
+        public FuncionarioEstoque()
+        {
+            Funcionario = new Funcionario();
+            Estoque = new Estoque();
+        }
 
         public override EntityDto ConvertDto()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dto = new DtoLigacao
+                {
+                    Id = Id, Codigo = Codigo, FirstDtoId = FuncionarioId, FirstDto = Funcionario.ConvertDto(),
+                    SecondDtoId = EstoqueId, SecondDto = Estoque.ConvertDto()
+                };
+
+                return dto;
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+                return null;
+            }
         }
 
         public override void UpdateEntity(EntityDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dtoLigacao = (DtoLigacao)dto;
+                Codigo = dtoLigacao.Codigo;
+                FuncionarioId = dtoLigacao.FirstDtoId;
+                if (dtoLigacao.FirstDto != null)
+                {
+                    Funcionario.UpdateEntity(dtoLigacao.FirstDto);
+                }
+                EstoqueId = dtoLigacao.SecondDtoId;
+                if (dtoLigacao.SecondDto != null)
+                {
+                    Estoque.UpdateEntity(dtoLigacao.SecondDto);
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleEx.WriteError(e);
+            }
+
         }
     }
 }

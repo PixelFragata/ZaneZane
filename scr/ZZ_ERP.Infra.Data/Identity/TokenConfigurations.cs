@@ -25,7 +25,7 @@
         {
             Audience = "ZZAudience";
             Issuer = "ZZIssuer";
-            Seconds = 600;
+            Seconds = 3600;
         }
     }
 }

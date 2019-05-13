@@ -173,6 +173,9 @@ namespace ZZ_ERP.DataApplication.Clients
                     case ServerCommands.TipoEntrada:
                         manager = new TipoEntradaManager();
                         break;
+                    case ServerCommands.FuncionarioEstoque:
+                        manager = new FuncionarioEstoqueManager();
+                        break;
                     default:
                         manager = null;
                         break;

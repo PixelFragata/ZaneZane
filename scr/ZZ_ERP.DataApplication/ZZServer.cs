@@ -38,7 +38,6 @@ namespace ZZ_ERP.DataApplication
         {
             try
             {
-                
                 StartServer().GetAwaiter().GetResult();
 
             }
@@ -56,7 +55,7 @@ namespace ZZ_ERP.DataApplication
             //{
             //    var permissaoRep = new Repository<PermissaoTela>(context);
 
-            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.FuncionarioEstoque, Codigo = "FE" });
+            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.Planta, Codigo = "PL" });
             //    await permissaoRep.Save();
             //}
 
@@ -239,6 +238,22 @@ namespace ZZ_ERP.DataApplication
 
             await centroRep.InsertList(centroList);
             await centroRep.Save();
+
+            var plantaRep = new Repository<Planta>(context);
+            var planta = new Planta
+            {
+                Codigo = "ZANE",
+                Documento = "97.547.310/0001-62",
+                Email = "patricia@zanezane.com",
+                InscricaoEstadual = "587.151.010.112",
+                Telefone = "30233580",
+                RazaoSocial = "ZANE & ZANE INSTALACAO DE CALHAS LTDA",
+                NomeFantasia = "ZANE & ZANE",
+            };
+
+
+            await plantaRep.Insert(planta);
+            await plantaRep.Save();
 
             await InitilizeServicos(context, tipoServicoList, unidadeList, centroList); 
         }

@@ -389,6 +389,40 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.ToTable("PermissaoTelas");
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Planta", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<string>("Documento")
+                        .IsRequired();
+
+                    b.Property<string>("Email");
+
+                    b.Property<long>("EnderecoId");
+
+                    b.Property<string>("InscricaoEstadual");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("NomeFantasia");
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired();
+
+                    b.Property<string>("Telefone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.ToTable("Plantas");
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Servico", b =>
                 {
                     b.Property<long>("Id")
@@ -471,6 +505,9 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Property<bool>("IsActive");
+
+                    b.Property<string>("NomeTabela")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -694,6 +731,14 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasOne("ZZ_ERP.Domain.Entities.Funcionario", "Funcionario")
                         .WithMany("FuncionarioEstoques")
                         .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.Planta", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

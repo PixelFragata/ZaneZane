@@ -12,13 +12,14 @@ namespace ZZ_ERP.Domain.Entities
         [Required]
         public string Descricao { get; set; }
         public bool ControlaEstoque { get; set; }
+        [Required]
+        public string NomeTabela { get; set; }
 
         public override EntityDto ConvertDto()
         {
-            
             try
             {
-                var dto = new TipoDto {Id = Id, Description = Descricao, Codigo = Codigo};
+                var dto = new TipoEntradaDto { Id = Id, Description = Descricao, Codigo = Codigo, NomeTabela = NomeTabela};
 
                 return dto;
             }
@@ -33,9 +34,10 @@ namespace ZZ_ERP.Domain.Entities
         {
             try
             {
-                var tipoDto = (TipoDto)dto;
-                Descricao = tipoDto.Description;
-                Codigo = tipoDto.Codigo;
+                var tipoEntradaDto = (TipoEntradaDto)dto;
+                Descricao = tipoEntradaDto.Description;
+                NomeTabela = tipoEntradaDto.NomeTabela;
+                Codigo = tipoEntradaDto.Codigo;
             }
             catch (Exception e)
             {

@@ -24,7 +24,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoEntradaRead")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TipoEntradaDto>>> GetAll()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace ZZ_ERP.API.Controllers
 
                         if (responseCommand != null && responseCommand.Cmd.Equals(ServerCommands.LogResultOk))
                         {
-                            return await SerializerAsync.DeserializeJsonList<TipoDto>(responseCommand.Json);
+                            return await SerializerAsync.DeserializeJsonList<TipoEntradaDto>(responseCommand.Json);
                         }
                     }
                 }
@@ -55,7 +55,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoEntradaCreate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Create(TipoDto dto)
+        public async Task<ActionResult<bool>> Create(TipoEntradaDto dto)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoEntradaUpdate")]
         [HttpPost]
-        public async Task<ActionResult<bool>> Edit(TipoDto dto)
+        public async Task<ActionResult<bool>> Edit(TipoEntradaDto dto)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace ZZ_ERP.API.Controllers
 
         [Authorize(Policy = "TipoEntradaDelete")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(TipoDto dto)
+        public async Task<ActionResult<bool>> Delete(TipoEntradaDto dto)
         {
             try
             {

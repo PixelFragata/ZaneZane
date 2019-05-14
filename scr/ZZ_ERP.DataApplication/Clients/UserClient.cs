@@ -176,6 +176,9 @@ namespace ZZ_ERP.DataApplication.Clients
                     case ServerCommands.FuncionarioEstoque:
                         manager = new FuncionarioEstoqueManager();
                         break;
+                    case ServerCommands.Planta:
+                        manager = new PlantaManager();
+                        break;
                     default:
                         manager = null;
                         break;

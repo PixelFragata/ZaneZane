@@ -10,6 +10,7 @@
     <Compile Remove="Migrations\20190315234911_AddCondicaoPagamento.cs" />
     <Compile Remove="Migrations\20190318182049_AddEstados.cs" />
     <Compile Remove="Migrations\20190422141105_AddCodigo.cs" />
+    <Compile Remove="Migrations\20190514125442_AddPlanta.cs" />
   </ItemGroup>
 
   <ItemGroup>

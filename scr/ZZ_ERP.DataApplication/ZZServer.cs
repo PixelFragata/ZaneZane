@@ -55,7 +55,7 @@ namespace ZZ_ERP.DataApplication
             //{
             //    var permissaoRep = new Repository<PermissaoTela>(context);
 
-            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.Planta, Codigo = "PL" });
+            //    await permissaoRep.Insert(new PermissaoTela { NomeTela = ServerCommands.MovimentoEstoque, Codigo = "ME" });
             //    await permissaoRep.Save();
             //}
 

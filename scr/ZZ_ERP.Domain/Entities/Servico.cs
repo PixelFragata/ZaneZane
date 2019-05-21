@@ -38,7 +38,7 @@ namespace ZZ_ERP.Domain.Entities
                 var dto = new ServicoDto
                 {
                     Id = Id, DescricaoCompleta = DescricaoCompleta, Codigo = Codigo, DescricaoResumida = DescricaoResumida, Observacoes = Observacoes,
-                    TipoServicoId = TipoServicoId, UnidadeMedidaId = UnidadeMedidaId, CentroCustoId = CentroCustoId
+                    TipoServicoId = TipoServicoId, UnidadeMedidaId = UnidadeMedidaId, CentroCustoId = CentroCustoId, ControlaEstoque = ControlaEstoque
                 };
 
                 return dto;
@@ -59,6 +59,10 @@ namespace ZZ_ERP.Domain.Entities
                 DescricaoResumida = tipoDto.DescricaoResumida;
                 DescricaoCompleta = tipoDto.DescricaoCompleta;
                 Observacoes = tipoDto.Observacoes;
+                TipoServicoId = tipoDto.TipoServicoId;
+                UnidadeMedidaId = tipoDto.UnidadeMedidaId;
+                CentroCustoId = tipoDto.CentroCustoId;
+                ControlaEstoque = tipoDto.ControlaEstoque;
             }
             catch (Exception e)
             {

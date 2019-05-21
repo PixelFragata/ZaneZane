@@ -164,6 +164,8 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<long>("EnderecoId");
 
+                    b.Property<string>("InscricaoEstadual");
+
                     b.Property<bool>("IsActive");
 
                     b.Property<string>("NomeFantasia");
@@ -178,6 +180,40 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasIndex("EnderecoId");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.CompraManual", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<bool>("ControlaEstoque");
+
+                    b.Property<DateTime>("DataEmissao");
+
+                    b.Property<long>("FornecedorId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<bool>("MovimentouEstoque");
+
+                    b.Property<string>("Observacao");
+
+                    b.Property<long>("TipoEntradaId");
+
+                    b.Property<float>("ValorTotal");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.HasIndex("TipoEntradaId");
+
+                    b.ToTable("ComprasManuais");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.CondicaoPagamento", b =>
@@ -297,6 +333,8 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<long>("EnderecoId");
 
+                    b.Property<string>("InscricaoEstadual");
+
                     b.Property<bool>("IsActive");
 
                     b.Property<string>("NomeFantasia");
@@ -367,6 +405,82 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasIndex("FuncionarioId");
 
                     b.ToTable("FuncionarioEstoques");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.ItemCompra", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<long>("CompraManualId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Observacao");
+
+                    b.Property<float>("Quantidade");
+
+                    b.Property<long>("ServicoId");
+
+                    b.Property<long>("UnidadeId");
+
+                    b.Property<float>("ValorTotal");
+
+                    b.Property<float>("ValorUnitario");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompraManualId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.HasIndex("UnidadeId");
+
+                    b.ToTable("ItensCompras");
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.MovimentoEstoque", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Data");
+
+                    b.Property<DateTime>("DataMovimento");
+
+                    b.Property<long>("DocumentoId");
+
+                    b.Property<long>("EstoqueId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<bool>("IsEntrada");
+
+                    b.Property<string>("Observacao");
+
+                    b.Property<int>("Quantidade");
+
+                    b.Property<long>("ServicoId");
+
+                    b.Property<long>("TipoEntradaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstoqueId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.HasIndex("TipoEntradaId");
+
+                    b.ToTable("MovimentosEstoque");
                 });
 
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.PermissaoTela", b =>
@@ -506,8 +620,7 @@ namespace ZZ_ERP.Infra.Data.Migrations
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<string>("NomeTabela")
-                        .IsRequired();
+                    b.Property<string>("NomeEntity");
 
                     b.HasKey("Id");
 
@@ -705,6 +818,19 @@ namespace ZZ_ERP.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.CompraManual", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Fornecedor", "Fornecedor")
+                        .WithMany()
+                        .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.TipoEntrada", "TipoEntrada")
+                        .WithMany()
+                        .HasForeignKey("TipoEntradaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("ZZ_ERP.Domain.Entities.Fornecedor", b =>
                 {
                     b.HasOne("ZZ_ERP.Domain.Entities.Endereco", "Endereco")
@@ -731,6 +857,42 @@ namespace ZZ_ERP.Infra.Data.Migrations
                     b.HasOne("ZZ_ERP.Domain.Entities.Funcionario", "Funcionario")
                         .WithMany("FuncionarioEstoques")
                         .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.ItemCompra", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.CompraManual", "CompraManual")
+                        .WithMany("Itens")
+                        .HasForeignKey("CompraManualId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.UnidadeMedida", "Unidade")
+                        .WithMany()
+                        .HasForeignKey("UnidadeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZZ_ERP.Domain.Entities.MovimentoEstoque", b =>
+                {
+                    b.HasOne("ZZ_ERP.Domain.Entities.Estoque", "Estoque")
+                        .WithMany()
+                        .HasForeignKey("EstoqueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZZ_ERP.Domain.Entities.TipoEntrada", "TipoEntrada")
+                        .WithMany()
+                        .HasForeignKey("TipoEntradaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

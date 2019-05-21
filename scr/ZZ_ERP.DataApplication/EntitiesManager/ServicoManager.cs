@@ -34,7 +34,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     var tipoServico = await tipoServicoRep.GetById(dto.TipoServicoId);
 
                     var centroCustoRep = new Repository<CentroCustoSintetico>(Context);
-                    var centroCusto = await centroCustoRep.GetById(dto.UnidadeMedidaId);
+                    var centroCusto = await centroCustoRep.GetById(dto.CentroCustoId);
 
                     if (unidadeMedida != null && tipoServico != null && centroCusto != null)
                     {
@@ -102,7 +102,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     }
 
                     var centroCustoRep = new Repository<CentroCustoSintetico>(Context);
-                    var centroCusto = await centroCustoRep.GetById(dto.UnidadeMedidaId);
+                    var centroCusto = await centroCustoRep.GetById(dto.CentroCustoId);
 
                     if (centroCusto != null)
                     {

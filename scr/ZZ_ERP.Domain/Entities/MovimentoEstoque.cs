@@ -14,8 +14,10 @@ namespace ZZ_ERP.Domain.Entities
         public bool IsEntrada { get; set; }
         [Required]
         public int Quantidade { get; set; }
+        public string Observacao { get; set; }
         [Required]
         public DateTime Data { get; set; }
+        public DateTime DataMovimento { get; set; }
         [Required]
         public long ServicoId { get; set; }
         public virtual Servico Servico { get; set; }
@@ -25,7 +27,6 @@ namespace ZZ_ERP.Domain.Entities
         [Required]
         public long TipoEntradaId { get; set; }
         public virtual TipoEntrada TipoEntrada { get; set; }
-        [Required]
         public long DocumentoId { get; set; }
 
 
@@ -47,7 +48,9 @@ namespace ZZ_ERP.Domain.Entities
                     ServicoId = ServicoId,
                     EstoqueId = EstoqueId,
                     TipoEntradaId = TipoEntradaId,
-                    DocumentoId = DocumentoId
+                    DataMovimento = DataMovimento,
+                    DocumentoId = DocumentoId,
+                    Observacao = Observacao
                 };
                 if (Servico != null)
                 {
@@ -79,9 +82,11 @@ namespace ZZ_ERP.Domain.Entities
                 Codigo = movimentoEstoqueDto.Codigo;
                 IsEntrada = movimentoEstoqueDto.IsEntrada;
                 Quantidade = movimentoEstoqueDto.Quantidade;
+                Observacao = movimentoEstoqueDto.Observacao;
                 ServicoId = movimentoEstoqueDto.ServicoId;
                 EstoqueId = movimentoEstoqueDto.EstoqueId;
                 TipoEntradaId = movimentoEstoqueDto.TipoEntradaId;
+                DataMovimento = movimentoEstoqueDto.DataMovimento;
                 DocumentoId = movimentoEstoqueDto.DocumentoId;
 
                 if (movimentoEstoqueDto.Servico != null)

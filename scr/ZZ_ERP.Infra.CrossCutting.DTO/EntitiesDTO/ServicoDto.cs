@@ -13,5 +13,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
         public long TipoServicoId { get; set; }
         public long UnidadeMedidaId { get; set; }
         public long CentroCustoId { get; set; }
+        public bool ControlaEstoque { get; set; }
     }
 }

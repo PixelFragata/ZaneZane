@@ -11,6 +11,10 @@
     <Compile Remove="Migrations\20190318182049_AddEstados.cs" />
     <Compile Remove="Migrations\20190422141105_AddCodigo.cs" />
     <Compile Remove="Migrations\20190514125442_AddPlanta.cs" />
+    <Compile Remove="Migrations\20190516190054_AddCompraManual.cs" />
+    <Compile Remove="Migrations\20190516190525_EditCodigo.cs" />
+    <Compile Remove="Migrations\20190516192025_AddCompraManual.cs" />
+    <Compile Remove="Migrations\20190520180200_AddMovimentoEstoque.cs" />
   </ItemGroup>
 
   <ItemGroup>

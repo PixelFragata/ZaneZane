@@ -12,6 +12,7 @@ namespace ZZ_ERP.Domain.Entities
         [Required]
         public string Documento { get; set; }
         public string NomeFantasia { get; set; }
+        public string InscricaoEstadual { get; set; }
         [Required]
         public string RazaoSocial { get; set; }
         public string Email { get; set; }
@@ -36,7 +37,8 @@ namespace ZZ_ERP.Domain.Entities
                     NomeFantasia = NomeFantasia,
                     RazaoSocial = RazaoSocial,
                     Email = Email,
-                    Telefone = Telefone
+                    Telefone = Telefone,
+                    IE = InscricaoEstadual
                 };
 
                 dto.ValidatorDocument(Documento);
@@ -71,7 +73,8 @@ namespace ZZ_ERP.Domain.Entities
                 Telefone = tipoDto.Telefone;
                 EnderecoId = tipoDto.Endereco.Id;
                 Endereco.UpdateEntity(tipoDto.Endereco);
-                
+                InscricaoEstadual = tipoDto.IE;
+
             }
             catch (Exception e)
             {

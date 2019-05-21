@@ -133,7 +133,8 @@ namespace ZZ_ERP.DependencyInjection
             permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.TipoEntrada, Codigo = "TE" });
             permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.FuncionarioEstoque, Codigo = "FE" });
             permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.Planta, Codigo = "PL" });
-           
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.CompraManual, Codigo = "CM" });
+            permissaoList.Add(new PermissaoTela { NomeTela = ServerCommands.MovimentoEstoque, Codigo = "ME" });
 
             permissaoRep.InsertList(permissaoList);
             permissaoRep.Save();

@@ -25,6 +25,7 @@
         public static string AddClientAuthorized = "AddClientAuthorized";
         public static string RemoveClientAuthorized = "RemoveClientAuthorized";
         public static string RepeatedHumanCode = "RepeatedHumanCode";
+        public static string NaoControlaEstoque = "NaoControlaEstoque";
 
         #region Actions
         public static string GetAll = "GetAll";
@@ -66,6 +67,8 @@
         public const string TipoEntrada = "TipoEntrada";
         public const string FuncionarioEstoque = "FuncionarioEstoque";
         public const string Planta = "Planta";
+        public const string CompraManual = "CompraManual";
+        public const string MovimentoEstoque = "MovimentoEstoque";
         #endregion
 
     }

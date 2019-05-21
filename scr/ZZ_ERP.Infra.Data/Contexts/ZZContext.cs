@@ -29,6 +29,9 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<TipoEntrada> TipoEntradas { get; set; }
         public DbSet<FuncionarioEstoque> FuncionarioEstoques { get; set; }
         public DbSet<Planta> Plantas { get; set; }
+        public DbSet<ItemCompra> ItensCompras { get; set; }
+        public DbSet<CompraManual> ComprasManuais { get; set; }
+        public DbSet<MovimentoEstoque> MovimentosEstoque { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,6 +51,9 @@ namespace ZZ_ERP.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new ServicoConfig());
             modelBuilder.ApplyConfiguration(new EnderecoConfig());
             modelBuilder.ApplyConfiguration(new FuncionarioConfig());
+            modelBuilder.ApplyConfiguration(new CompraManualConfig());
+            modelBuilder.ApplyConfiguration(new TipoEntradaConfig());
+            modelBuilder.ApplyConfiguration(new MovimentoEstoqueConfig());
 
             base.OnModelCreating(modelBuilder);
         }

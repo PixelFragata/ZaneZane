@@ -21,9 +21,12 @@ namespace ZZ_ERP.Domain.Entities
         public long EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
 
+        public virtual List<Planta> Plantas { get; set; }
+
         public Planta()
         {
             Endereco = new Endereco();
+            Plantas = new List<Planta>();
         }
 
         public override EntityDto ConvertDto()

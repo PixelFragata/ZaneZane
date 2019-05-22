@@ -11,7 +11,7 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
         [Required]
         public bool IsEntrada { get; set; }
         [Required]
-        public int Quantidade { get; set; }
+        public float Quantidade { get; set; }
         public string Observacao { get; set; }
         [Required]
         public long ServicoId { get; set; }

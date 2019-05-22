@@ -20,6 +20,9 @@ namespace ZZ_ERP.Domain.Entities
 
         public long EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
+        [Required]
+        public long PlantaId { get; set; }
+        public virtual Planta Planta { get; set; }
 
         public virtual List<FuncionarioEstoque> FuncionarioEstoques { get; set; }
         [NotMapped]

@@ -32,6 +32,8 @@ namespace ZZ_ERP.Infra.Data.Contexts
         public DbSet<ItemCompra> ItensCompras { get; set; }
         public DbSet<CompraManual> ComprasManuais { get; set; }
         public DbSet<MovimentoEstoque> MovimentosEstoque { get; set; }
+        public DbSet<SaldoEstoque> SaldosEstoques { get; set; }
+        public DbSet<UserPlanta> UserPlantas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -13,7 +13,7 @@ namespace ZZ_ERP.Domain.Entities
         [Required]
         public bool IsEntrada { get; set; }
         [Required]
-        public int Quantidade { get; set; }
+        public float Quantidade { get; set; }
         public string Observacao { get; set; }
         [Required]
         public DateTime Data { get; set; }
@@ -28,6 +28,9 @@ namespace ZZ_ERP.Domain.Entities
         public long TipoEntradaId { get; set; }
         public virtual TipoEntrada TipoEntrada { get; set; }
         public long DocumentoId { get; set; }
+        [Required]
+        public long PlantaId { get; set; }
+        public virtual Planta Planta { get; set; }
 
 
         public MovimentoEstoque()

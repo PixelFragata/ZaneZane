@@ -22,6 +22,9 @@ namespace ZZ_ERP.Domain.Entities
         public float ValorIPI { get; set; }
         public float ICMS { get; set; }
         public float IPI { get; set; }
+        [Required]
+        public long PlantaId { get; set; }
+        public virtual Planta Planta { get; set; }
 
         public override EntityDto ConvertDto()
         {

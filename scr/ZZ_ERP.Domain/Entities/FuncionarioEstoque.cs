@@ -17,6 +17,9 @@ namespace ZZ_ERP.Domain.Entities
         [Required]
         public long EstoqueId { get; set; }
         public virtual Estoque Estoque { get; set; }
+        [Required]
+        public long PlantaId { get; set; }
+        public virtual Planta Planta { get; set; }
 
         public FuncionarioEstoque()
         {

@@ -21,6 +21,9 @@ namespace ZZ_ERP.Domain.Entities
 
         public long FornecedorId { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
+        [Required]
+        public long PlantaId { get; set; }
+        public virtual Planta Planta { get; set; }
 
         public virtual List<ItemCompra> Itens { get; set; }
 

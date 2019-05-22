@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZZ_ERP.Infra.CrossCutting.DTO.Interfaces
 {

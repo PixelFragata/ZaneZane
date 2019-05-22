@@ -55,13 +55,13 @@ namespace ZZ_ERP.Domain.Entities
             try
             {
                 var tipoDto = (ServicoDto)dto;
-                Codigo = tipoDto.Codigo;
-                DescricaoResumida = tipoDto.DescricaoResumida;
-                DescricaoCompleta = tipoDto.DescricaoCompleta;
-                Observacoes = tipoDto.Observacoes;
-                TipoServicoId = tipoDto.TipoServicoId;
-                UnidadeMedidaId = tipoDto.UnidadeMedidaId;
-                CentroCustoId = tipoDto.CentroCustoId;
+                if (tipoDto.Codigo != null) Codigo = tipoDto.Codigo;
+                if (tipoDto.DescricaoResumida != null) DescricaoResumida = tipoDto.DescricaoResumida;
+                if (tipoDto.DescricaoCompleta != null) DescricaoCompleta = tipoDto.DescricaoCompleta;
+                if (tipoDto.Observacoes != null) Observacoes = tipoDto.Observacoes;
+                if(tipoDto.TipoServicoId > 0) TipoServicoId = tipoDto.TipoServicoId;
+                if (tipoDto.UnidadeMedidaId > 0) UnidadeMedidaId = tipoDto.UnidadeMedidaId;
+                if (tipoDto.CentroCustoId > 0) CentroCustoId = tipoDto.CentroCustoId;
                 ControlaEstoque = tipoDto.ControlaEstoque;
             }
             catch (Exception e)

@@ -24,6 +24,7 @@ namespace ZZ_ERP.DataApplication
         private int _port;
         private List<string> _authorizedUserList;
         private Dictionary<string, ZZClientManager> _authorizedClients;
+        public const DayOfWeek DayUpdateSaldo = DayOfWeek.Sunday;
 
         public ZZServer(string ip, int port)
         {

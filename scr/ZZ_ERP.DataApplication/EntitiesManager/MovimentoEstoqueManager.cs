@@ -96,7 +96,6 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                         cmd.Cmd = ServerCommands.RepeatedHumanCode;
                         ConsoleEx.WriteLine(ServerCommands.RepeatedHumanCode);
                     }
-
                 }
                 else
                 {
@@ -148,6 +147,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                 {
                     return false;
                 }
+
                 if (tipoEntrada == null || estoque == null || servico == null)
                 {
                     ConsoleEx.WriteLine(ServerCommands.RequisitoNaoCadastrado);
@@ -176,6 +176,7 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                     multiplicadorSaldo = -1;
                 }
 
+
                 if (mySaldo == null || mySaldo.Quantidade + (multiplicadorSaldo * entity.Quantidade) <= 0)
                 {
                     ConsoleEx.WriteLine(ServerCommands.SaldoInsuficiente);
@@ -196,41 +197,47 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
             try
             {
                 var updateDate = DateTime.Now;
+                var saldo = new SaldoEstoque
+                {
+                    Data = updateDate,
+                    EstoqueId = estoque.Id,
+                    Estoque = estoque,
+                    Servico = servico,
+                    ServicoId = servico.Id,
+                    Codigo = servico.Codigo + estoque.Codigo + updateDate.ToString(),
+                    Quantidade = 0
+                };
+
                 var saldoRep = new Repository<SaldoEstoque>(Context);
-                LastDateUpdate = saldoRep.Get(null, o => o.OrderByDescending(s => s.Id)).Result.FirstOrDefault().Data;
+                var lastRegister = saldoRep.Get(null, o => o.OrderByDescending(s => s.Id)).Result.FirstOrDefault();
+
+                LastDateUpdate = lastRegister == null ? DateTime.MinValue : lastRegister.Data;
 
                 var lastSaldos = await saldoRep.Get(s =>
                     s.Data == LastDateUpdate && s.EstoqueId == estoque.Id && s.ServicoId == servico.Id);
-                var movimentos = await MyRepository.Get(m => 
-                    m.Data > LastDateUpdate && m.EstoqueId == estoque.Id && m.ServicoId == servico.Id);
 
-                var movimentoEstoques = movimentos.ToList();
-                var saldoEstoques = lastSaldos.ToList();
-
-                if (movimentoEstoques?.Count() > 0)
+                if (lastSaldos != null)
                 {
-                    var saldo = new SaldoEstoque
-                    {
-                        Data = updateDate,
-                        EstoqueId = estoque.Id,
-                        Estoque = estoque,
-                        Servico = servico,
-                        ServicoId = servico.Id,
-                        Codigo = servico.Codigo + estoque.Codigo + updateDate.ToString()
-                    };
+                    var saldoEstoques = lastSaldos.ToList();
 
-                    var lastSaldo = saldoEstoques
+                    var lastSaldo = saldoEstoques?
                         .Find(s => s.EstoqueId == estoque.Id && s.ServicoId == servico.Id);
 
                     if (lastSaldo != null)
                     {
                         saldo.Quantidade = lastSaldo.Quantidade;
                     }
-                    else
-                    {
-                        saldo.Quantidade = 0;
-                    }
+                }
 
+                var movimentos = await MyRepository.Get(m =>
+                    m.Data > LastDateUpdate && m.EstoqueId == estoque.Id && m.ServicoId == servico.Id);
+
+                if (movimentos == null) return saldo;
+
+                var movimentoEstoques = movimentos.ToList();
+
+                if (movimentoEstoques?.Count > 0)
+                {
                     var servicoMovimentos = movimentoEstoques
                         .FindAll(m => m.ServicoId == servico.Id && m.EstoqueId == estoque.Id);
 
@@ -244,20 +251,16 @@ namespace ZZ_ERP.DataApplication.EntitiesManager
                         }
 
                         saldo.Quantidade += movimento.Quantidade * multiplicadorSaldo;
-                    }
-
-                    return saldo;
+                    }   
                 }
-                      
-                
+
+                return saldo;
             }
             catch (Exception e)
             {
                 ConsoleEx.WriteError(e);
-                throw;
+                return null;
             }
-
-            return null;
         }
 
         public async Task<List<SaldoEstoque>> UpdateSaldoEstoque()

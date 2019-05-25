@@ -24,5 +24,6 @@ namespace ZZ_ERP.Infra.CrossCutting.DTO.EntitiesDTO
         public virtual TipoDto TipoEntrada { get; set; }
         public DateTime DataMovimento { get; set; }
         public long DocumentoId { get; set; }
+        public long PlantaId { get; set; }
     }
 }

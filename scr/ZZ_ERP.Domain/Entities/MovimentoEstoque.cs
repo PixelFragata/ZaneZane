@@ -53,7 +53,8 @@ namespace ZZ_ERP.Domain.Entities
                     TipoEntradaId = TipoEntradaId,
                     DataMovimento = DataMovimento,
                     DocumentoId = DocumentoId,
-                    Observacao = Observacao
+                    Observacao = Observacao,
+                    PlantaId = PlantaId
                 };
                 if (Servico != null)
                 {
@@ -91,6 +92,7 @@ namespace ZZ_ERP.Domain.Entities
                 TipoEntradaId = movimentoEstoqueDto.TipoEntradaId;
                 DataMovimento = movimentoEstoqueDto.DataMovimento;
                 DocumentoId = movimentoEstoqueDto.DocumentoId;
+                PlantaId = movimentoEstoqueDto.PlantaId;
 
                 if (movimentoEstoqueDto.Servico != null)
                 {

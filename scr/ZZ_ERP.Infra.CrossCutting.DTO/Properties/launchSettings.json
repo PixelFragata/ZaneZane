@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "ZZ_ERP.Infra.CrossCutting.DTO": {
+      "commandName": "Executable"
+    }
+  }
+}
